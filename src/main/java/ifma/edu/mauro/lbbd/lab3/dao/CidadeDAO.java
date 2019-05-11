@@ -72,4 +72,17 @@ public class CidadeDAO implements DAO<Cidade> {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    public Cidade buscaPor(int codigo){
+        String sql = "select * from cidade where codigo_cidade = codigo";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            Cidade c = monta(resultSet);
+            return c;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

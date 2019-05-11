@@ -28,7 +28,7 @@ public class CidadeDAO implements DAO<Cidade> {
 
             try(ResultSet keys = statement.getGeneratedKeys()){
                 keys.next();
-                cidade.setCodigo_cidade(keys.getInt("codigo"));
+                cidade.setCodigo_cidade(keys.getInt(1));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -42,15 +42,16 @@ public class CidadeDAO implements DAO<Cidade> {
         String sql = "select * from cidades";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            ResultSet resultSet = statement.executeQuery(sql);
+            try(ResultSet resultSet = statement.executeQuery(sql)) {
 
-            final List<Cidade> cidades = new ArrayList<>();
+                final List<Cidade> cidades = new ArrayList<>();
 
-            while(resultSet.next()){
-                Cidade cidade = monta(resultSet);
-                cidades.add(cidade);
+                while (resultSet.next()) {
+                    Cidade cidade = monta(resultSet);
+                    cidades.add(cidade);
+                }
+                return cidades;
             }
-            return cidades;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -77,10 +78,11 @@ public class CidadeDAO implements DAO<Cidade> {
         String sql = "select * from cidade where codigo_cidade = codigo";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            Cidade c = monta(resultSet);
-            return c;
+            try(ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                Cidade c = monta(resultSet);
+                return c;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }

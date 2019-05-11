@@ -40,15 +40,16 @@ public class ClienteDAO implements DAO<Cliente>{
         String sql = "select * from cliente";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            ResultSet resultSet = statement.executeQuery(sql);
+            try(ResultSet resultSet = statement.executeQuery(sql)) {
 
-            final List<Cliente> clientes = new ArrayList<>();
+                final List<Cliente> clientes = new ArrayList<>();
 
-            while(resultSet.next()){
-                Cliente cliente = monta(resultSet);
-                clientes.add(cliente);
+                while (resultSet.next()) {
+                    Cliente cliente = monta(resultSet);
+                    clientes.add(cliente);
+                }
+                return clientes;
             }
-            return clientes;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -74,11 +75,12 @@ public class ClienteDAO implements DAO<Cliente>{
         String sql = "select * from cliente where codigo_cliente = codigo";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            ResultSet resultSet = statement.executeQuery();
+            try(ResultSet resultSet = statement.executeQuery()) {
 
-            resultSet.next();
-            Cliente c = monta(resultSet);
-            return c;
+                resultSet.next();
+                Cliente c = monta(resultSet);
+                return c;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }

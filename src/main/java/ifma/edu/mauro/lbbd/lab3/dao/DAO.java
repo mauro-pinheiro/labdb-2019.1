@@ -1,4 +1,4 @@
-package ifma.edu.mauro.lbbd.lp3.dao;
+package ifma.edu.mauro.lbbd.lab3.dao;
 
 import java.util.List;
 import java.util.Optional;

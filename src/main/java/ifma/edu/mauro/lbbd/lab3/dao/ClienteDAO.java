@@ -1,6 +1,6 @@
-package ifma.edu.mauro.lbbd.lp3.dao;
+package ifma.edu.mauro.lbbd.lab3.dao;
 
-import ifma.edu.mauro.lbbd.lp3.entidades.Cliente;
+import ifma.edu.mauro.lbbd.lab3.entidades.Cliente;
 
 import java.util.ArrayList;
 import java.util.List;

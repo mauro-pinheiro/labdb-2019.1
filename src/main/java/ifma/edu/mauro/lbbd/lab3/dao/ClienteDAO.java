@@ -2,53 +2,71 @@ package ifma.edu.mauro.lbbd.lab3.dao;
 
 import ifma.edu.mauro.lbbd.lab3.entidades.Cliente;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
-public class ClienteDAO implements DAO<Cliente> {
-    private List<Cliente> clientes = new ArrayList<>();
+public class ClienteDAO implements DAO<Cliente>{
+    private Connection conexao;
 
-    public ClienteDAO(){
-
+    public ClienteDAO(Connection conexao){
+        this.conexao = conexao;
     }
 
     @Override
-    public Optional<Cliente> get(long id) {
-        return Optional.ofNullable(clientes.get((int)id));
+    public Cliente salva(Cliente cliente) {
+        String sql = "insert into clientes(nome,endereco,telefone" +
+                " values(?,?,?)";
+        try(PreparedStatement statement = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            statement.setString(1,cliente.getNome());
+            statement.setString(2,cliente.getEndereco());
+            statement.setString(3,cliente.getTelefone());
+
+            statement.execute();
+
+            try(ResultSet keys = statement.getGeneratedKeys()){
+                keys.next();
+                cliente.setCodigo_cliente(keys.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return cliente;
     }
 
     @Override
     public List<Cliente> getAll() {
-        return clientes;
-    }
+        String sql = "select * from clientes";
 
-    @Override
-    public void save(Cliente cliente) {
-        clientes.add(cliente);
-    }
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            ResultSet resultSet = statement.executeQuery(sql);
 
-    @Override
-    public void update(Cliente cliente, String[] params) {
-        int i = clientes.indexOf(cliente);
-        if(i != -1) {
-            cliente = clientes.get(i);
-        } else {
-            clientes.add(cliente);
+            final List<Cliente> clientes = new ArrayList<>();
+
+            while(resultSet.next()){
+                Cliente cliente = monta(resultSet);
+                clientes.add(cliente);
+            }
+            return clientes;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        cliente.setNome(Objects.requireNonNull(
-                params[0], "Nome não pode ser nulo."));
-        cliente.setEndereco(Objects.requireNonNull(
-                params[1], "Endereco não pode ser nulo."));
-        cliente.setTelefone(Objects.requireNonNull(
-                params[2], "Telefone nao pode ser nulo."));
     }
 
     @Override
-    public void delete(Cliente cliente) {
-        clientes.remove(cliente);
+    public Cliente monta(ResultSet resultSet) {
+        try {
+            String nome = resultSet.getString("nome");
+            String endereco = resultSet.getString("endereco");
+            String telefone = resultSet.getString("telefone");
+            int id = resultSet.getInt("codigo");
+
+            Cliente c = new Cliente(nome,endereco,telefone);
+            c.setCodigo_cliente(id);
+            return c;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
-
-
 }

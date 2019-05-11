@@ -15,7 +15,7 @@ public class ClienteDAO implements DAO<Cliente>{
 
     @Override
     public Cliente salva(Cliente cliente) {
-        String sql = "insert into clientes(nome,endereco,telefone" +
+        String sql = "insert into cliente(nome,endereco,telefone" +
                 " values(?,?,?)";
         try(PreparedStatement statement = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             statement.setString(1,cliente.getNome());
@@ -37,7 +37,7 @@ public class ClienteDAO implements DAO<Cliente>{
 
     @Override
     public List<Cliente> getAll() {
-        String sql = "select * from clientes";
+        String sql = "select * from cliente";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             ResultSet resultSet = statement.executeQuery(sql);
@@ -64,6 +64,20 @@ public class ClienteDAO implements DAO<Cliente>{
 
             Cliente c = new Cliente(nome,endereco,telefone);
             c.setCodigo_cliente(id);
+            return c;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public Cliente buscaPor(int codigo){
+        String sql = "select * from cliente where codigo_cliente = codigo";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            ResultSet resultSet = statement.executeQuery();
+
+            resultSet.next();
+            Cliente c = monta(resultSet);
             return c;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

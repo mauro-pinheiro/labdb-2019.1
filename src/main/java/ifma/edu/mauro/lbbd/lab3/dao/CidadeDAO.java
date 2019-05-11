@@ -33,6 +33,8 @@ public class CidadeDAO implements DAO<Cidade> {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        return cidade;
     }
 
     @Override

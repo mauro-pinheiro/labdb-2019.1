@@ -17,5 +17,10 @@ dependencies{
   compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 mainClassName = 'ifma.edu.mauro.lbbd.lab3.Main'

@@ -76,4 +76,53 @@ public class FreteDAO implements DAO<Frete> {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    public List<Frete> buscaPor(Cliente cliente){
+        String sql = "select * from frete where codigo_cliente = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, cliente.getCodigo_cliente());
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                List<Frete> fretes = new ArrayList<>();
+                while(resultSet.next()){
+                    Cidade cidade = new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
+                    String descricao = resultSet.getString("descricao");
+                    float peso = resultSet.getFloat("peso");
+                    float valor = resultSet.getFloat("valor");
+                    Frete frete = new Frete(cidade, cliente, descricao, peso, valor);
+                    fretes.add(frete);
+                }
+                return fretes;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public float maiorValor(){
+        String sql = "select max(valor) from frete";
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return resultSet.getFloat("Valor");
+            } 
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public Cidade cidadeMaisFretes(){
+        String sql = "select codigo_cidade, count(*) as num_fretes from frete " +
+        "group by cidade order by num_fretes limit 1";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
+            } 
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

@@ -61,7 +61,7 @@ public class ClienteDAO implements DAO<Cliente>{
             String nome = resultSet.getString("nome");
             String endereco = resultSet.getString("endereco");
             String telefone = resultSet.getString("telefone");
-            int id = resultSet.getInt("codigo");
+            int id = resultSet.getInt(1);
 
             Cliente c = new Cliente(nome,endereco,telefone);
             c.setCodigo_cliente(id);

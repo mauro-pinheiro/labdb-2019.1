@@ -18,4 +18,4 @@ dependencies{
 }
 
 
-mainClassName = 'ifma.edu.mauro.lbbd.lab3.gui.FreteApp'
+mainClassName = 'ifma.edu.mauro.lbbd.lab3.Main'

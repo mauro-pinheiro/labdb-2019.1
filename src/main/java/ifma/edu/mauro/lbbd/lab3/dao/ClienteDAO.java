@@ -72,7 +72,7 @@ public class ClienteDAO implements DAO<Cliente>{
     }
 
     public Cliente buscaPor(int codigo){
-        String sql = "select * from cliente where codigo_cliente = codigo";
+        String sql = "select * from cliente where codigo_cliente = codigo_cliente";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet resultSet = statement.executeQuery()) {

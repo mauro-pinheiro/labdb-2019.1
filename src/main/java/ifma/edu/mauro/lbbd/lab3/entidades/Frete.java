@@ -95,8 +95,4 @@ public class Frete {
     public int hashCode() {
         return Objects.hash(getCodigo_frete(), getCidade(), getCliente(), getDescricao(), getPeso(), getValor());
     }
-
-    public float calculaValor(){
-        return peso*valor + cidade.getTaxa();
-    }
 }

@@ -62,6 +62,7 @@ public class FreteDAO implements DAO<Frete> {
     @Override
     public Frete monta(ResultSet resultSet) {
         try {
+            int codigo_frete = resultSet.getInt("codigo_frete");
             int codigo_cidade = resultSet.getInt("codigo_cidade");
             int codigo_cliente = resultSet.getInt("codigo_cliente");
             String descricao = resultSet.getString("descricao");
@@ -71,6 +72,7 @@ public class FreteDAO implements DAO<Frete> {
             Cidade c = new CidadeDAO(conexao).buscaPor(codigo_cidade);
             Cliente cl = new ClienteDAO(conexao).buscaPor(codigo_cliente);
             Frete f = new Frete(c, cl, descricao, peso, valor);
+            f.setCodigo_frete(codigo_frete);
             return f;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -101,11 +103,11 @@ public class FreteDAO implements DAO<Frete> {
     }
 
     public float maiorValor(){
-        String sql = "select max(valor) from frete";
+        String sql = "select max(valor) as max_valor from frete";
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet resultSet = statement.executeQuery()){
                 resultSet.next();
-                return resultSet.getFloat("Valor");
+                return resultSet.getFloat("max_valor");
             } 
         }catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -114,7 +116,7 @@ public class FreteDAO implements DAO<Frete> {
 
     public Cidade cidadeMaisFretes(){
         String sql = "select codigo_cidade, count(*) as num_fretes from frete " +
-        "group by cidade order by num_fretes limit 1";
+        "group by codigo_cidade order by num_fretes limit 1";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet resultSet = statement.executeQuery()){
@@ -122,6 +124,21 @@ public class FreteDAO implements DAO<Frete> {
                 return new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
             } 
         }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public float buscaValor(int codigo_frete){
+        String sql = "select valor from frete where codigo_frete = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, codigo_frete);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return resultSet.getFloat("valor");
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }

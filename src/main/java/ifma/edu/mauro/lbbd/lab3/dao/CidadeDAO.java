@@ -15,7 +15,7 @@ public class CidadeDAO implements DAO<Cidade> {
 
     @Override
     public Cidade salva(Cidade cidade) {
-        String sql = "insert into cidades(nome,uf,taxa) values(?,?,?)";
+        String sql = "insert into cidade(nome,uf,taxa) values(?,?,?)";
 
         try(PreparedStatement statement = conexao.prepareStatement(
                 sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -39,7 +39,7 @@ public class CidadeDAO implements DAO<Cidade> {
 
     @Override
     public List<Cidade> getAll() {
-        String sql = "select * from cidades";
+        String sql = "select * from cidade";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet resultSet = statement.executeQuery(sql)) {
@@ -63,7 +63,7 @@ public class CidadeDAO implements DAO<Cidade> {
             String nome = resultSet.getString("nome");
             String uf = resultSet.getString("uf");
             float taxa = resultSet.getFloat("taxa");
-            int codigo = resultSet.getInt("codigo");
+            int codigo = resultSet.getInt("codigo_cidade");
 
             Cidade c = new Cidade(nome,uf,taxa);
             c.setCodigo_cidade(codigo);

@@ -1,38 +1,35 @@
 package ifma.edu.mauro.lbbd.lab3.gui.fx;
 
 
-import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
-public class ClienteForm extends Application {
+public class ClienteForm extends VBox {
+    private Label lbNome = new Label("Nome");
+    private Label lbEndereco = new Label("Endereco");
+    private Label lbTelefone = new Label("Telefone");
+    
+    private TextField tfNome = new TextField();
+    private TextField tfEndereco = new TextField();
+    private TextField tfTelefone = new TextField();
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Label lbNome, lbEndereco, lbTelefone;
-        TextField tfNome, tfEndereco, tfTelefone;
-        
-        Button btnCadastrar = new Button("Cadastrar");
-        Button btnLimpar = new Button("Limpar");
+    private Button btnCadastrar = new Button("Cadastrar");
+    private Button btnLimpar = new Button("Limpar");
 
-        lbNome = new Label("Nome");
-        lbEndereco = new Label("Endereco");
-        lbTelefone = new Label("Telefone");
-        tfNome = new TextField();
-        tfEndereco = new TextField();
-        tfTelefone = new TextField();
+    private GridPane pane = new GridPane();
+    private HBox buttonBox = new HBox(5);
 
+    public ClienteForm() {
         btnLimpar.setOnAction(e -> {
             tfNome.setText("");
             tfEndereco.setText("");
@@ -43,7 +40,6 @@ public class ClienteForm extends Application {
             alerta.showAndWait();
         });
 
-        GridPane pane = new GridPane();
         ColumnConstraints coluna1 = new ColumnConstraints(75);
         ColumnConstraints coluna2 = new ColumnConstraints(100);
         pane.setHgap(5);
@@ -68,20 +64,13 @@ public class ClienteForm extends Application {
         GridPane.setHalignment(tfTelefone, HPos.RIGHT);
         pane.add(tfTelefone,1,2);
 
-        GridPane.setHalignment(btnCadastrar, HPos.RIGHT);
-        pane.add(btnCadastrar,0,3);
+        buttonBox.getChildren().addAll(btnCadastrar, btnLimpar);
 
-        GridPane.setHalignment(btnLimpar, HPos.CENTER);
-        pane.add(btnLimpar,1,3);
+        this.setSpacing(5);
+        this.setPadding(new Insets(10));
+        this.getChildren().addAll(pane,buttonBox);
 
-        BorderPane root = new BorderPane(pane);
-        root.setPadding(new Insets(10));
 
-        Scene scene = new Scene(root);
-        stage.setTitle("Cliente");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.show();
     }
     
 }

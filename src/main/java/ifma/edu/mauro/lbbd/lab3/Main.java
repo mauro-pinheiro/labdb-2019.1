@@ -8,7 +8,9 @@ import ifma.edu.mauro.lbbd.lab3.dao.FreteDAO;
 import ifma.edu.mauro.lbbd.lab3.entidades.Cidade;
 import ifma.edu.mauro.lbbd.lab3.entidades.Cliente;
 import ifma.edu.mauro.lbbd.lab3.entidades.Frete;
+import ifma.edu.mauro.lbbd.lab3.gui.fx.FreteApp;
 import ifma.edu.mauro.lbbd.lab3.infra.Database;
+import javafx.application.Application;
 
 public class Main {
     //testa cliente dao
@@ -29,26 +31,26 @@ public class Main {
     //     cidades.forEach(System.out::println);
     // }
 
-    public static void main(String[] args) {
-        FreteDAO dao = new FreteDAO(Database.getConexao());
-        // ClienteDAO cdao = new ClienteDAO(Database.getConexao());
-        // Cliente cliente = cdao.buscaPor(1);
-
-        // float valor = dao.maiorValor();
-
-        // System.out.println(valor);
-
-        Cidade cidade = dao.cidadeMaisFretes();
-        System.out.println(cidade);
-
-        // ArrayList<Frete> fretes = (ArrayList<Frete>) new FreteDAO(
-        //     Database.getConexao()).buscaPor(cliente);
-
-        // fretes.forEach(System.out::println);
-
-    }
-
     // public static void main(String[] args) {
-    //     Application.launch(ClienteForm.class, args);
+    //     FreteDAO dao = new FreteDAO(Database.getConexao());
+    //     // ClienteDAO cdao = new ClienteDAO(Database.getConexao());
+    //     // Cliente cliente = cdao.buscaPor(1);
+
+    //     // float valor = dao.maiorValor();
+
+    //     // System.out.println(valor);
+
+    //     Cidade cidade = dao.cidadeMaisFretes();
+    //     System.out.println(cidade);
+
+    //     // ArrayList<Frete> fretes = (ArrayList<Frete>) new FreteDAO(
+    //     //     Database.getConexao()).buscaPor(cliente);
+
+    //     // fretes.forEach(System.out::println);
+
     // }
+
+    public static void main(String[] args) {
+        Application.launch(FreteApp.class, args);
+    }
 }

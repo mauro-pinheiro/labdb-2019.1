@@ -85,4 +85,18 @@ public class ClienteDAO implements DAO<Cliente>{
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    public Cliente buscaPor(String nome){
+        String sql = "select * from cliente where nome = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setString(1, nome);
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return monta(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

@@ -3,7 +3,7 @@ package ifma.edu.mauro.lbbd.lab3.entidades;
 import java.util.Objects;
 
 public class Cliente {
-    private int codigo_cliente;
+    private int codigo_cliente = -1;
     private String nome;
     private String endereco;
     private String telefone;

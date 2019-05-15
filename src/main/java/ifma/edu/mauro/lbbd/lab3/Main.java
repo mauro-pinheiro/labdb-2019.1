@@ -1,15 +1,6 @@
 package ifma.edu.mauro.lbbd.lab3;
 
-import java.util.ArrayList;
-
-import ifma.edu.mauro.lbbd.lab3.dao.CidadeDAO;
-import ifma.edu.mauro.lbbd.lab3.dao.ClienteDAO;
-import ifma.edu.mauro.lbbd.lab3.dao.FreteDAO;
-import ifma.edu.mauro.lbbd.lab3.entidades.Cidade;
-import ifma.edu.mauro.lbbd.lab3.entidades.Cliente;
-import ifma.edu.mauro.lbbd.lab3.entidades.Frete;
 import ifma.edu.mauro.lbbd.lab3.gui.fx.FreteApp;
-import ifma.edu.mauro.lbbd.lab3.infra.Database;
 import javafx.application.Application;
 
 public class Main {

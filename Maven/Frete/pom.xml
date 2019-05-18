@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ifma.edu.mauro.lbbd.lab3</groupId>
+    <groupId>lbbd.lab3</groupId>
     <artifactId>Frete</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -42,7 +42,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.2</version>
                 <configuration>
-                <mainClass>ifma.edu.mauro.lbbd.lab3.Main</mainClass>
+                <mainClass>lbbd.lab3.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

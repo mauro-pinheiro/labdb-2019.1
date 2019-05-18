@@ -62,16 +62,94 @@ public class FreteDAO implements DAO<Frete> {
     @Override
     public Frete monta(ResultSet resultSet) {
         try {
+            int codigo_frete = resultSet.getInt("codigo_frete");
             int codigo_cidade = resultSet.getInt("codigo_cidade");
             int codigo_cliente = resultSet.getInt("codigo_cliente");
             String descricao = resultSet.getString("descricao");
             float peso = resultSet.getFloat("peso");
-            float valor = resultSet.getFloat("valor");
 
             Cidade c = new CidadeDAO(conexao).buscaPor(codigo_cidade);
             Cliente cl = new ClienteDAO(conexao).buscaPor(codigo_cliente);
-            Frete f = new Frete(c, cl, descricao, peso, valor);
+            Frete f = new Frete(c, cl, descricao, peso);
+            f.setCodigo_frete(codigo_frete);
             return f;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public Frete buscaPor(int codigo_frete){
+        String sql = "select * from frete where codigo_frete = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, codigo_frete);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next())
+                    return monta(resultSet);
+                return null;
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<Frete> buscaPor(Cliente cliente){
+        String sql = "select * from frete where codigo_cliente = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, cliente.getCodigo_cliente());
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                List<Frete> fretes = new ArrayList<>();
+                while(resultSet.next()){
+                    Frete frete = monta(resultSet);
+                    fretes.add(frete);
+                }
+                return fretes;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public float maiorValor(){
+        String sql = "select max(valor) as max_valor from frete";
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next())
+                    return resultSet.getFloat("max_valor");
+                return -1;
+            } 
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public Cidade cidadeMaisFretes(){
+        String sql = "select codigo_cidade, count(*) as num_fretes from frete " +
+        "group by codigo_cidade order by num_fretes limit 1";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
+            } 
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public float buscaValor(int codigo_frete){
+        String sql = "select valor from frete where codigo_frete = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, codigo_frete);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next())
+                    return resultSet.getFloat("valor");
+                return -1;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }

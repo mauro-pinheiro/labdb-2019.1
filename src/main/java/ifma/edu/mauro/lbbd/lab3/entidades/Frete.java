@@ -8,14 +8,12 @@ public class Frete {
     private Cliente cliente;
     private String descricao;
     private float peso;
-    private float valor;
 
-    public Frete(Cidade cidade, Cliente cliente, String descricao, float peso, float valor) {
+    public Frete(Cidade cidade, Cliente cliente, String descricao, float peso) {
         this.cidade = cidade;
         this.cliente = cliente;
         this.descricao = descricao;
         this.peso = peso;
-        this.valor = valor;
     }
 
     public int getCodigo_frete() {
@@ -59,11 +57,12 @@ public class Frete {
     }
 
     public float getValor() {
-        return valor;
+        return peso * 10 + cidade.getTaxa();
     }
 
-    public void setValor(float valor) {
-        this.valor = valor;
+    public static float getValor(float peso, float taxa){
+        return peso * 10 + taxa;
+
     }
 
     @Override
@@ -74,7 +73,6 @@ public class Frete {
                 ", cliente=" + cliente +
                 ", descricao='" + descricao + '\'' +
                 ", peso=" + peso +
-                ", valor=" + valor +
                 '}';
     }
 

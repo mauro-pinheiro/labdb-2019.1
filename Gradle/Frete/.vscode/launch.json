@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "lbbd.lab3.Main",
+            "projectName": "Frete"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - CadastroCidade",
             "request": "launch",
             "mainClass": "ifma.edu.mauro.lbbd.lab3.funcionalidades.CadastroCidade",

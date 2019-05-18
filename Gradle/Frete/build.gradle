@@ -26,4 +26,4 @@ tasks.withType(JavaCompile) {
 group = 'ifma.edu.mauro.lbbd.lab3'
 version = '1.0-SNAPSHOT'
 
-mainClassName = 'ifma.edu.mauro.lbbd.lab3.Main'
+mainClassName = 'lbbd.lab3.Main'

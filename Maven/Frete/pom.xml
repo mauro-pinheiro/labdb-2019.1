@@ -5,7 +5,7 @@
     <groupId>lbbd.lab3</groupId>
     <artifactId>Frete</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>Frete</name>
     <properties>
@@ -35,6 +35,14 @@
                 <version>3.8.1</version>
                 <configuration>
                     <release>12</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>lbbd.lab3.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>

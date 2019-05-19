@@ -116,27 +116,13 @@ public class FreteDAO implements DAO<Frete> {
         }
     }
 
-    public float maiorValor(){
-        String sql = "select max(valor) as max_valor from frete";
+    public Frete maiorValor(){
+        String sql = "select * from frete order by valor desc limit 1";
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet resultSet = statement.executeQuery()){
                 if(resultSet.next())
-                    return resultSet.getFloat("max_valor");
-                return -1;
-            } 
-        }catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-    public Cidade cidadeMaisFretes(){
-        String sql = "select codigo_cidade, count(*) as num_fretes from frete " +
-        "group by codigo_cidade order by num_fretes limit 1";
-
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            try(ResultSet resultSet = statement.executeQuery()){
-                resultSet.next();
-                return new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
+                    return monta(resultSet);
+                return null;
             } 
         }catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

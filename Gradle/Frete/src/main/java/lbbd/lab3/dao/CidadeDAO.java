@@ -108,6 +108,32 @@ public class CidadeDAO implements DAO<Cidade> {
         }
     }
 
+    public class MaisFretes{
+        public Cidade cidade;
+        public int fretes;
+        
+        MaisFretes(Cidade cidade, int fretes){
+            this.cidade = cidade;
+            this.fretes = fretes;
+        }
+    }
+
+    public MaisFretes cidadeMaisFretes(){
+        String sql = "select codigo_cidade, count(*) as num_fretes from frete " +
+        "group by codigo_cidade order by num_fretes desc limit 1";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                var fretes = resultSet.getInt("num_fretes");
+                var cidade = new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
+                return new MaisFretes(cidade, fretes);
+            } 
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     public Cidade atualizar(Cidade cidade){
         String sql = "update cidade set nome = ?, uf = ?, taxa = ? where codigo_cidade = ?";
 

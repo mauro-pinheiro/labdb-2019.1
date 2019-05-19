@@ -2,6 +2,9 @@ package lbbd.lab3.entidades;
 
 import java.util.Objects;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+
 public class Frete {
     private int codigo_frete;
     private Cidade cidade;
@@ -92,5 +95,13 @@ public class Frete {
     @Override
     public int hashCode() {
         return Objects.hash(getCodigo_frete(), getCidade(), getCliente(), getDescricao(), getPeso(), getValor());
+    }
+
+    public ObservableValue<String> clienteProperty(){
+        return new SimpleObjectProperty<String>(cliente.getNome());
+    }
+
+    public ObservableValue<String> cidadeProperty(){
+        return new SimpleObjectProperty<String>(cidade.getNome());
     }
 }

@@ -4,7 +4,7 @@ create user 'freteApp'@'localhost' identified with mysql_native_password by '123
 drop database if exists fretedb;
 create database fretedb;
 use fretedb;
-grant select, insert, update,delete on fretedb.* to 'javaApp'@'localhost';
+grant select, insert, update,delete on fretedb.* to 'freteApp'@'localhost';
 
 create table cliente(
 	codigo_cliente int primary key auto_increment,
@@ -30,6 +30,16 @@ create table frete(
     constraint foreign key(codigo_cidade) references cidade(codigo_cidade),
     constraint foreign key(codigo_cliente) references cliente(codigo_cliente)
 );
+
+delimiter %%
+
+create trigger trg_valor_bi before insert on frete
+for each row
+begin
+	set new.valor = 10*new.peso + (select taxa from cidade where codigo_cidade = new.codigo_cidade);
+end %%
+
+delimiter ;
 
 
 INSERT INTO `cliente` (`nome`,`endereco`,`telefone`) VALUES ("Isaiah Rodgers","303-6881 Mollis St.","(73) 51381-1911"),("Jakeem Baldwin","248-4204 Neque Rd.","(73) 44375-7784"),("Victor Erickson","9309 Quis Road","(52) 83219-3878"),("Tyler Brooks","425-7564 Rutrum St.","(28) 29398-6129"),("Matthew Koch","1052 Dapibus St.","(35) 48776-4281"),("Ashton Haney","7262 A St.","(18) 38766-3963"),("Axel Delgado","5591 Mus. St.","(98) 87425-5139"),("Fletcher Tyson","P.O. Box 668, 6825 Tincidunt Rd.","(28) 82521-4479"),("Octavius Gaines","5776 Sem St.","(26) 17271-2969"),("Moses Phelps","131-3368 Morbi Rd.","(89) 19765-2489");
@@ -85,3 +95,6 @@ INSERT INTO frete (codigo_cidade,codigo_cliente,descricao,peso,valor) VALUES (8,
 INSERT INTO frete (codigo_cidade,codigo_cliente,descricao,peso,valor) VALUES (16,67,"gravida nunc sed","8.36","1.00"),(92,26,"tellus. Phasellus elit pede, malesuada vel, venenatis vel,","9.68","1.00"),(50,92,"metus urna convallis erat, eget tincidunt dui","2.34","1.00"),(81,44,"Nulla interdum.","7.89","1.00"),(80,83,"vitae semper egestas, urna justo faucibus lectus, a sollicitudin","3.81","1.00"),(20,24,"in faucibus orci luctus et ultrices posuere cubilia Curae;","7.65","1.00"),(51,87,"vulputate, risus a ultricies","6.37","1.00"),(90,42,"eu, ligula. Aenean euismod mauris eu elit.","0.86","1.00"),(25,6,"tellus. Nunc","1.83","1.00"),(53,94,"erat semper rutrum. Fusce dolor quam, elementum at, egestas a,","5.51","1.00");
 INSERT INTO frete (codigo_cidade,codigo_cliente,descricao,peso,valor) VALUES (82,60,"quis diam luctus lobortis. Class aptent taciti sociosqu ad litora","5.41","1.00"),(84,40,"Mauris molestie pharetra nibh. Aliquam","9.63","1.00"),(97,27,"Mauris blandit enim consequat purus. Maecenas libero est,","2.06","1.00"),(9,78,"nonummy","5.98","1.00"),(75,93,"vitae risus. Duis a mi","7.55","1.00"),(37,78,"feugiat. Lorem ipsum dolor sit amet, consectetuer","4.91","1.00"),(88,34,"Aliquam gravida mauris ut mi.","3.87","1.00"),(80,68,"feugiat placerat velit. Quisque varius. Nam porttitor scelerisque neque.","5.75","1.00"),(9,70,"nec tellus.","1.28","1.00"),(65,18,"nisl. Nulla eu neque pellentesque","5.78","1.00");
 INSERT INTO frete (codigo_cidade,codigo_cliente,descricao,peso,valor) VALUES (99,12,"sit amet orci. Ut sagittis lobortis","8.35","1.00"),(32,75,"enim. Mauris quis turpis vitae purus gravida sagittis.","6.20","1.00"),(80,50,"tincidunt, nunc ac mattis ornare, lectus","7.73","1.00"),(100,73,"Cras vulputate","7.38","1.00"),(56,7,"ac","2.28","1.00"),(17,76,"In nec orci. Donec nibh. Quisque nonummy","6.54","1.00"),(47,30,"dignissim pharetra. Nam ac nulla. In tincidunt","0.73","1.00"),(35,23,"rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales at,","8.17","1.00"),(25,34,"velit in aliquet lobortis,","7.64","1.00"),(2,10,"aliquet","3.88","1.00");
+
+
+select * from frete;

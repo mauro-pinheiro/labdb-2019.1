@@ -35,7 +35,8 @@ public class FreteForm extends Formulario {
         this.getTextField("Valor").setEditable(false);
         this.getTextField("Cliente").setEditable(false);
         tfCliente_id.setEditable(!readOnly);
-        cbCidade.setEditable(!readOnly);
+        cbCidade.setDisable(true);
+        cbCidade.setStyle("-fx-opacity: 1;");
         taDescricao.setEditable(!readOnly);
         if (isReadOnly()) {
             getButton("Ação").setText("Abrir");
@@ -47,6 +48,10 @@ public class FreteForm extends Formulario {
     }
 
     public FreteForm(boolean readOnly){
+        init(readOnly);
+    }
+
+    private void init(boolean readOnly){
         this.addAllLabels("Código","Cliente","Taxa","Peso","Valor");
         this.addAllTextFields("Código","Cliente","Taxa","Peso","Valor");
         this.addButton("Ação");
@@ -100,6 +105,13 @@ public class FreteForm extends Formulario {
         this.setSpacing(10);
         this.setPadding(new Insets(10));
         this.getChildren().addAll(gridPane, gridPane2);
+    }
+
+    public FreteForm(Frete frete){
+        init(true);
+        getTextField("Código").setEditable(false);
+        getTextField("Código").setText(""+frete.getCodigo_frete());
+        abrir(null);
     }
 
     @Override

@@ -28,6 +28,20 @@ public class CidadeForm extends Formulario {
     }
 
     public CidadeForm(boolean readOnly) {
+        init(readOnly);
+    }
+
+    public CidadeForm(Cidade cidade, int fretes){
+        init(true);
+        getButton("Ação").setDisable(true);
+        getTextField("Código").setText(""+cidade.getCodigo_cidade());
+        abrir(null);
+        lbFeedback.setText("Tem " + fretes + " fretes");
+        setReadOnly(true);
+        getTextField("Código").setEditable(false);
+    }
+
+    private void init(boolean readOnly){
         this.addAllLabels("Código","Nome", "Uf", "Taxa");
         this.addAllTextFields("Código","Nome", "Uf", "Taxa");
         this.addButton("Ação");

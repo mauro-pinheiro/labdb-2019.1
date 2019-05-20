@@ -35,10 +35,10 @@ public class FreteForm extends Formulario {
         this.getTextField("Valor").setEditable(false);
         this.getTextField("Cliente").setEditable(false);
         tfCliente_id.setEditable(!readOnly);
-        cbCidade.setDisable(true);
-        cbCidade.setStyle("-fx-opacity: 1;");
+        cbCidade.setDisable(readOnly);
         taDescricao.setEditable(!readOnly);
         if (isReadOnly()) {
+            cbCidade.setStyle("-fx-opacity: 1;");
             getButton("Ação").setText("Abrir");
             getButton("Ação").setOnAction(e -> abrir(e));
         } else {
@@ -86,6 +86,7 @@ public class FreteForm extends Formulario {
             selecionaCidade(e);
         });
         taDescricao.setWrapText(true);
+        taDescricao.setMaxHeight(100);
         tfCliente_id.textProperty().addListener(
             (observavel, antigo, novo) -> atualizaCliente()
         );

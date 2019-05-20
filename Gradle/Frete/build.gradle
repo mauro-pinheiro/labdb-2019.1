@@ -12,6 +12,12 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'lbbd.lab3.Main'
+    }
+}
+
 dependencies{
   // https://mvnrepository.com/artifact/mysql/mysql-connector-java
   compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'

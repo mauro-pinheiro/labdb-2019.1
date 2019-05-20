@@ -2,17 +2,16 @@ package lbbd.lab3.gui.fx;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lbbd.lab3.dao.CidadeDAO;
 import lbbd.lab3.dao.FreteDAO;
 import lbbd.lab3.infra.Database;
@@ -81,6 +80,7 @@ public class FreteApp extends Application {
             Scene buscaAv = new Scene(new FretesCliente());
             Stage stage2 = new Stage();
             stage2.initModality(Modality.APPLICATION_MODAL);
+            stage2.initStyle(StageStyle.UTILITY);
             stage2.setScene(buscaAv);
             stage2.showAndWait();
         });
@@ -94,11 +94,11 @@ public class FreteApp extends Application {
             stage3.setScene(scene);
             stage3.sizeToScene();
             stage3.initModality(Modality.APPLICATION_MODAL);
+            stage3.initStyle(StageStyle.UTILITY);
             stage3.showAndWait();
         });
         MenuItem menuItemMaisFretes = new MenuItem("Mais Fretes para...");
         menuItemMaisFretes.setOnAction(e -> {
-                var fretes = Integer.valueOf(0);
                 var cidade = new CidadeDAO(Database.getConexao()).cidadeMaisFretes();
                 var stage4 = new Stage();
                 var cidadeForm = new CidadeForm(cidade.cidade, cidade.fretes);
@@ -107,13 +107,26 @@ public class FreteApp extends Application {
                 stage4.setScene(scene);
                 stage4.sizeToScene();
                 stage4.initModality(Modality.APPLICATION_MODAL);
+                stage4.initStyle(StageStyle.UTILITY);
                 stage4.showAndWait();
         });
 
         menuBuscas.getItems().addAll(menuItemFretes, menuItemMaior, menuItemMaisFretes);
 
+        MenuItem menuItemSobre = new MenuItem("Sobre");
+        menuItemSobre.setOnAction(e -> {
+                var stage5 = new Stage();
+                var scene = new Scene(new SobreForm());
+                stage5.setTitle("Sobre");
+                stage5.setScene(scene);
+                stage5.sizeToScene();
+                stage5.initModality(Modality.APPLICATION_MODAL);
+                stage5.initStyle(StageStyle.UTILITY);
+                stage5.showAndWait();
+        });
+
         root.setCenter(tabPane);
-        root.setTop(new MenuBar(menuArquivo, menuBuscas));
+        root.setTop(new MenuBar(menuArquivo, menuBuscas, new Menu("Ajuda", null, menuItemSobre)));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Aplicativo Frete");

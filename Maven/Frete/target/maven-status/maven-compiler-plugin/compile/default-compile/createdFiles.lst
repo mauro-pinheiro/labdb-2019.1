@@ -1,2 +1,16 @@
+lbbd\lab3\dao\DAO.class
+lbbd\lab3\gui\fx\Formulario.class
+lbbd\lab3\entidades\Cliente.class
+lbbd\lab3\dao\ClienteDAO.class
+lbbd\lab3\gui\fx\FreteApp.class
+lbbd\lab3\infra\Database.class
+lbbd\lab3\dao\FreteDAO.class
+lbbd\lab3\gui\fx\FreteForm.class
 lbbd\lab3\dao\CidadeDAO$MaisFretes.class
+lbbd\lab3\dao\CidadeDAO.class
+lbbd\lab3\gui\fx\ClienteForm.class
 lbbd\lab3\gui\fx\FretesCliente.class
+lbbd\lab3\entidades\Frete.class
+lbbd\lab3\Main.class
+lbbd\lab3\gui\fx\CidadeForm.class
+lbbd\lab3\entidades\Cidade.class

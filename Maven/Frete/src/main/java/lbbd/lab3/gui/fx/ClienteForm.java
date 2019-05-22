@@ -3,6 +3,7 @@ package lbbd.lab3.gui.fx;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -33,10 +34,10 @@ public class ClienteForm extends Formulario {
         this.addButton("Ação");
         this.setReadOnly(readOnly);
 
-        var gridPane = new GridPane();
-        var btAcao = getButton("Ação");
-        var coluna1 = new ColumnConstraints(75);
-        var coluna2 = new ColumnConstraints(100);
+        GridPane gridPane = new GridPane();
+        Button btAcao = getButton("Ação");
+        ColumnConstraints coluna1 = new ColumnConstraints(75);
+        ColumnConstraints coluna2 = new ColumnConstraints(100);
 
         gridPane.setHgap(10);
         gridPane.setVgap(10);
@@ -59,14 +60,14 @@ public class ClienteForm extends Formulario {
 
     @Override
     public void salvar(ActionEvent event) {
-        var tfCodigo = getTextField("Código");
-        var tfNome = getTextField("Nome");
-        var tfEndereco = getTextField("Endereço");
-        var tfTelefone = getTextField("Telefone");
+        TextField tfCodigo = getTextField("Código");
+        TextField tfNome = getTextField("Nome");
+        TextField tfEndereco = getTextField("Endereço");
+        TextField tfTelefone = getTextField("Telefone");
 
-        var dao = new ClienteDAO(Database.getConexao());
-        var cliente = new Cliente(tfNome.getText(), tfEndereco.getText(), tfTelefone.getText());
-        if (tfCodigo.getText().isBlank()) {
+        ClienteDAO dao = new ClienteDAO(Database.getConexao());
+        Cliente cliente = new Cliente(tfNome.getText(), tfEndereco.getText(), tfTelefone.getText());
+        if (tfCodigo.getText().equals("")) {
             cliente = dao.salva(cliente);
             tfCodigo.setText("" + cliente.getCodigo_cliente());
             lbFeedback.setText("Salvo");
@@ -80,13 +81,13 @@ public class ClienteForm extends Formulario {
     @Override
     public void abrir(ActionEvent event) {
         try {
-            var tfCodigo = getTextField("Código");
-            var tfNome = getTextField("Nome");
-            var tfEndereco = getTextField("Endereço");
-            var tfTelefone = getTextField("Telefone");
-            var cod = Integer.parseInt(tfCodigo.getText());
-            var dao = new ClienteDAO(Database.getConexao());
-            var cliente = dao.buscaPor(cod);
+            TextField tfCodigo = getTextField("Código");
+            TextField tfNome = getTextField("Nome");
+            TextField tfEndereco = getTextField("Endereço");
+            TextField tfTelefone = getTextField("Telefone");
+            int cod = Integer.parseInt(tfCodigo.getText());
+            ClienteDAO dao = new ClienteDAO(Database.getConexao());
+            Cliente cliente = dao.buscaPor(cod);
             if (cliente == null) {
                 lbFeedback.setText("Cliente nao encontrado");
             } else {

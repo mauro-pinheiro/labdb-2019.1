@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lbbd.lab3.dao.CidadeDAO;
 import lbbd.lab3.dao.FreteDAO;
+import lbbd.lab3.dao.CidadeDAO.MaisFretes;
+import lbbd.lab3.entidades.Frete;
 import lbbd.lab3.infra.Database;
 
 public class FreteApp extends Application {
@@ -22,45 +24,45 @@ public class FreteApp extends Application {
         BorderPane root = new BorderPane();
         TabPane tabPane = new TabPane();
 
-        //Menu Arquivo e seus sub menus
+        // Menu Arquivo e seus sub menus
         Menu menuArquivo = new Menu("_Arquivo");
-        
+
         Menu menuNovo = new Menu("Novo");
         MenuItem menuItemNovoCliente = new MenuItem("Cliente");
         menuItemNovoCliente.setOnAction(e -> {
-            var clienteTab = new Tab("Cliente", new ClienteForm(false));
+            Tab clienteTab = new Tab("Cliente", new ClienteForm(false));
             tabPane.getTabs().add(clienteTab);
             tabPane.getSelectionModel().select(clienteTab);
         });
         MenuItem menuItemNovoCidade = new MenuItem("Cidade");
         menuItemNovoCidade.setOnAction(e -> {
-            var cidadeTab = new Tab("Cidade", new CidadeForm(false));
+            Tab cidadeTab = new Tab("Cidade", new CidadeForm(false));
             tabPane.getTabs().add(cidadeTab);
             tabPane.getSelectionModel().select(cidadeTab);
         });
         MenuItem menuItemNovoFrete = new MenuItem("Frete");
         menuItemNovoFrete.setOnAction(e -> {
-            var freteTab = new Tab("Frete", new FreteForm(false));
+            Tab freteTab = new Tab("Frete", new FreteForm(false));
             tabPane.getTabs().add(freteTab);
             tabPane.getSelectionModel().select(freteTab);
         });
-        
+
         Menu menuAbrir = new Menu("Abrir");
         MenuItem menuItemAbrirCliente = new MenuItem("Cliente");
         menuItemAbrirCliente.setOnAction(e -> {
-            var clienteTab = new Tab("Cliente", new ClienteForm(true));
+            Tab clienteTab = new Tab("Cliente", new ClienteForm(true));
             tabPane.getTabs().add(clienteTab);
             tabPane.getSelectionModel().select(clienteTab);
         });
         MenuItem menuItemAbrirCidade = new MenuItem("Cidade");
         menuItemAbrirCidade.setOnAction(e -> {
-            var cidadeTab = new Tab("Cidade", new CidadeForm(true));
+            Tab cidadeTab = new Tab("Cidade", new CidadeForm(true));
             tabPane.getTabs().add(cidadeTab);
             tabPane.getSelectionModel().select(cidadeTab);
         });
         MenuItem menuItemAbrirFrete = new MenuItem("Frete");
         menuItemAbrirFrete.setOnAction(e -> {
-            var freteTab = new Tab("Frete", new FreteForm(true));
+            Tab freteTab = new Tab("Frete", new FreteForm(true));
             tabPane.getTabs().add(freteTab);
             tabPane.getSelectionModel().select(freteTab);
         });
@@ -73,7 +75,7 @@ public class FreteApp extends Application {
 
         menuArquivo.getItems().addAll(menuNovo, menuAbrir, new SeparatorMenuItem(), menuItemSair);
 
-        //Menu buscas
+        // Menu buscas
         Menu menuBuscas = new Menu("Buscas");
         MenuItem menuItemFretes = new MenuItem("Fretes do Cliente...");
         menuItemFretes.setOnAction(e -> {
@@ -86,10 +88,10 @@ public class FreteApp extends Application {
         });
         MenuItem menuItemMaior = new MenuItem("Maior valor...");
         menuItemMaior.setOnAction(e -> {
-            var stage3 = new Stage();
-            var frete = new FreteDAO(Database.getConexao()).maiorValor();
-            var freteForm = new FreteForm(frete);
-            var scene = new Scene(freteForm);
+            Stage stage3 = new Stage();
+            Frete frete = new FreteDAO(Database.getConexao()).maiorValor();
+            FreteForm freteForm = new FreteForm(frete);
+            Scene scene = new Scene(freteForm);
             stage3.setTitle("Maior Frete");
             stage3.setScene(scene);
             stage3.sizeToScene();
@@ -99,10 +101,10 @@ public class FreteApp extends Application {
         });
         MenuItem menuItemMaisFretes = new MenuItem("Mais Fretes para...");
         menuItemMaisFretes.setOnAction(e -> {
-                var cidade = new CidadeDAO(Database.getConexao()).cidadeMaisFretes();
-                var stage4 = new Stage();
-                var cidadeForm = new CidadeForm(cidade.cidade, cidade.fretes);
-                var scene = new Scene(cidadeForm);
+                MaisFretes cidade = new CidadeDAO(Database.getConexao()).cidadeMaisFretes();
+                Stage stage4 = new Stage();
+                CidadeForm cidadeForm = new CidadeForm(cidade.cidade, cidade.fretes);
+                Scene scene = new Scene(cidadeForm);
                 stage4.setTitle("Mais fretes para...");
                 stage4.setScene(scene);
                 stage4.sizeToScene();
@@ -115,8 +117,8 @@ public class FreteApp extends Application {
 
         MenuItem menuItemSobre = new MenuItem("Sobre");
         menuItemSobre.setOnAction(e -> {
-                var stage5 = new Stage();
-                var scene = new Scene(new SobreForm());
+                Stage stage5 = new Stage();
+                Scene scene = new Scene(new SobreForm());
                 stage5.setTitle("Sobre");
                 stage5.setScene(scene);
                 stage5.sizeToScene();

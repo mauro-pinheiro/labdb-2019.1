@@ -3,6 +3,7 @@ package lbbd.lab3.gui.fx;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -47,10 +48,10 @@ public class CidadeForm extends Formulario {
         this.addButton("Ação");
         this.setReadOnly(readOnly);
 
-        var coluna1 = new ColumnConstraints(75);
-        var coluna2 = new ColumnConstraints(100);
-        var gridPane = new GridPane();
-        var btAcao = getButton("Ação");
+        ColumnConstraints coluna1 = new ColumnConstraints(75);
+        ColumnConstraints coluna2 = new ColumnConstraints(100);
+        GridPane gridPane = new GridPane();
+        Button btAcao = getButton("Ação");
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.getColumnConstraints().addAll(coluna1, coluna2);
@@ -72,13 +73,13 @@ public class CidadeForm extends Formulario {
 
     @Override
     public void salvar(ActionEvent e) {
-        var tfCodigo = getTextField("Código");
-        var tfNome = getTextField("Nome");
-        var tfUf = getTextField("Uf");
-        var tfTaxa = getTextField("Taxa");
+        TextField tfCodigo = getTextField("Código");
+        TextField tfNome = getTextField("Nome");
+        TextField tfUf = getTextField("Uf");
+        TextField tfTaxa = getTextField("Taxa");
 
-        var dao = new CidadeDAO(Database.getConexao());
-        var cliente = new Cidade(tfNome.getText(), tfUf.getText(), Float.parseFloat(tfTaxa.getText()));
+        CidadeDAO dao = new CidadeDAO(Database.getConexao());
+        Cidade cliente = new Cidade(tfNome.getText(), tfUf.getText(), Float.parseFloat(tfTaxa.getText()));
         if (tfCodigo.getText().isBlank()) {
             cliente = dao.salva(cliente);
             tfCodigo.setText("" + cliente.getCodigo_cidade());
@@ -93,13 +94,13 @@ public class CidadeForm extends Formulario {
     @Override
     public void abrir(ActionEvent e) {
         try {
-            var tfCodigo = getTextField("Código");
-            var tfNome = getTextField("Nome");
-            var tfUf = getTextField("Uf");
-            var tfTaxa = getTextField("Taxa");
-            var cod = Integer.parseInt(tfCodigo.getText());
-            var dao = new CidadeDAO(Database.getConexao());
-            var cidade = dao.buscaPor(cod);
+            TextField tfCodigo = getTextField("Código");
+            TextField tfNome = getTextField("Nome");
+            TextField tfUf = getTextField("Uf");
+            TextField tfTaxa = getTextField("Taxa");
+            int cod = Integer.parseInt(tfCodigo.getText());
+            CidadeDAO dao = new CidadeDAO(Database.getConexao());
+            Cidade cidade = dao.buscaPor(cod);
             if (cidade == null) {
                 lbFeedback.setText("Cliente não encontrado");
             } else {

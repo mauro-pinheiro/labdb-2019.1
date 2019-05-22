@@ -125,8 +125,8 @@ public class CidadeDAO implements DAO<Cidade> {
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet resultSet = statement.executeQuery()){
                 resultSet.next();
-                var fretes = resultSet.getInt("num_fretes");
-                var cidade = new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
+                int fretes = resultSet.getInt("num_fretes");
+                Cidade cidade = new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
                 return new MaisFretes(cidade, fretes);
             } 
         }catch (SQLException e) {
@@ -153,7 +153,7 @@ public class CidadeDAO implements DAO<Cidade> {
 
     public List<String> getCidadesNames(){
         String sql = "select nome from cidade group by nome order by nome";
-        var cidades = new ArrayList<String>();
+        ArrayList<String> cidades = new ArrayList<String>();
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             try(ResultSet result = statement.executeQuery()){
                 while(result.next()){

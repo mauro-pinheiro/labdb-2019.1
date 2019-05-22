@@ -13,4 +13,5 @@ lbbd\lab3\gui\fx\FretesCliente.class
 lbbd\lab3\entidades\Frete.class
 lbbd\lab3\Main.class
 lbbd\lab3\gui\fx\CidadeForm.class
+lbbd\lab3\gui\fx\SobreForm.class
 lbbd\lab3\entidades\Cidade.class

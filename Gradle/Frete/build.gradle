@@ -1,6 +1,7 @@
 plugins {
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.7'
+  id 'com.github.johnrengelman.shadow' version '5.0.0'
 }
 
 repositories {
@@ -12,11 +13,11 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'lbbd.lab3.Main'
-    }
-}
+// jar {
+//     manifest {
+//         attributes 'Main-Class': 'lbbd.lab3.Main'
+//     }
+// }
 
 dependencies{
   // https://mvnrepository.com/artifact/mysql/mysql-connector-java
@@ -31,5 +32,8 @@ tasks.withType(JavaCompile) {
 
 group = 'lbbd.lab3'
 version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 8
+targetCompatibility = 8
 
 mainClassName = 'lbbd.lab3.Main'

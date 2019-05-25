@@ -1,5 +1,7 @@
 package lbbd.lab3.gui.fx;
 
+import com.mysql.cj.conf.ConnectionUrlParser.Pair;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -14,7 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lbbd.lab3.dao.CidadeDAO;
 import lbbd.lab3.dao.FreteDAO;
-import lbbd.lab3.dao.CidadeDAO.MaisFretes;
+import lbbd.lab3.entidades.Cidade;
 import lbbd.lab3.entidades.Frete;
 import lbbd.lab3.infra.Database;
 
@@ -101,9 +103,9 @@ public class FreteApp extends Application {
         });
         MenuItem menuItemMaisFretes = new MenuItem("Mais Fretes para...");
         menuItemMaisFretes.setOnAction(e -> {
-                MaisFretes cidade = new CidadeDAO(Database.getConexao()).cidadeMaisFretes();
+                Pair<Cidade,Integer> cidade = new CidadeDAO(Database.getConexao()).cidadeMaisFretes();
                 Stage stage4 = new Stage();
-                CidadeForm cidadeForm = new CidadeForm(cidade.cidade, cidade.fretes);
+                CidadeForm cidadeForm = new CidadeForm(cidade.left, cidade.right);
                 Scene scene = new Scene(cidadeForm);
                 stage4.setTitle("Mais fretes para...");
                 stage4.setScene(scene);

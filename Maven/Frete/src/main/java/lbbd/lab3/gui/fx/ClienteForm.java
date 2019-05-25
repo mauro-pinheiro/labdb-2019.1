@@ -67,7 +67,7 @@ public class ClienteForm extends Formulario {
 
         ClienteDAO dao = new ClienteDAO(Database.getConexao());
         Cliente cliente = new Cliente(tfNome.getText(), tfEndereco.getText(), tfTelefone.getText());
-        if (tfCodigo.getText().equals("")) {
+        if (tfCodigo.getText().isBlank()) {
             cliente = dao.salva(cliente);
             tfCodigo.setText("" + cliente.getCodigo_cliente());
             lbFeedback.setText("Salvo");

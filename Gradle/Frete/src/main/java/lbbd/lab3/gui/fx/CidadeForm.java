@@ -15,6 +15,7 @@ import lbbd.lab3.infra.Database;
 
 public class CidadeForm extends Formulario {
     private Label lbFeedback = new Label("");
+    private GridPane gridPane = new GridPane();
 
     public void setReadOnly(boolean readOnly) {
         super.setReadOnly(readOnly);
@@ -50,7 +51,6 @@ public class CidadeForm extends Formulario {
 
         ColumnConstraints coluna1 = new ColumnConstraints(75);
         ColumnConstraints coluna2 = new ColumnConstraints(100);
-        GridPane gridPane = new GridPane();
         Button btAcao = getButton("Ação");
         gridPane.setHgap(10);
         gridPane.setVgap(10);

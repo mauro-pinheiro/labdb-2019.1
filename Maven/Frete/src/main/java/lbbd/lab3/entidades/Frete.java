@@ -76,6 +76,7 @@ public class Frete {
                 ", cliente=" + cliente +
                 ", descricao='" + descricao + '\'' +
                 ", peso=" + peso +
+                ", valor=" + getValor() +
                 '}';
     }
 

@@ -167,7 +167,7 @@ public class FreteForm extends Formulario {
     public void atualizaValor(){
         String tfPeso = getTextField("Peso").getText();
         String tfTaxa = getTextField("Taxa").getText();
-        if(!tfPeso.equals("") && !tfTaxa.equals("")){
+        if(!tfPeso.isBlank() && !tfTaxa.isBlank()){
             float peso = Float.parseFloat(tfPeso);
             float taxa = Float.parseFloat(tfTaxa);
             float valor = Frete.getValor(peso, taxa);
@@ -178,7 +178,7 @@ public class FreteForm extends Formulario {
     }
 
     public void atualizaCliente(){
-        if(tfCliente_id.getText().equals("")){
+        if(tfCliente_id.getText().isBlank()){
             getTextField("Cliente").setText("");
         }else{
             int cod = Integer.parseInt(tfCliente_id.getText());

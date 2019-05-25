@@ -1,4 +1,4 @@
-package lbbd.lab5.store;
+package lbbd.lab5.store.modelos;
 
 import java.math.BigDecimal;
 import java.util.Objects;

@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.conf.ConnectionUrlParser.Pair;
+
 import lbbd.lab3.entidades.Cidade;
 
 public class CidadeDAO implements DAO<Cidade> {
@@ -26,7 +28,7 @@ public class CidadeDAO implements DAO<Cidade> {
 
             statement.setString(1, cidade.getNome());
             statement.setString(2,cidade.getUf());
-            statement.setFloat(2,cidade.getTaxa());
+            statement.setFloat(3,cidade.getTaxa());
 
             statement.execute();
 
@@ -108,17 +110,7 @@ public class CidadeDAO implements DAO<Cidade> {
         }
     }
 
-    public class MaisFretes{
-        public Cidade cidade;
-        public int fretes;
-        
-        MaisFretes(Cidade cidade, int fretes){
-            this.cidade = cidade;
-            this.fretes = fretes;
-        }
-    }
-
-    public MaisFretes cidadeMaisFretes(){
+    public Pair<Cidade, Integer> cidadeMaisFretes(){
         String sql = "select codigo_cidade, count(*) as num_fretes from frete " +
         "group by codigo_cidade order by num_fretes desc limit 1";
 
@@ -127,7 +119,7 @@ public class CidadeDAO implements DAO<Cidade> {
                 resultSet.next();
                 int fretes = resultSet.getInt("num_fretes");
                 Cidade cidade = new CidadeDAO(conexao).buscaPor(resultSet.getInt("codigo_cidade"));
-                return new MaisFretes(cidade, fretes);
+                return new Pair<Cidade, Integer>(cidade, fretes);
             } 
         }catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

@@ -102,4 +102,15 @@ public class Cliente {
                 ", historicoReservas=" + historicoReservas +
                 '}';
     }
+
+    public boolean possuiReservaAtiva(){
+        return historicoReservas.stream()
+                                .map(reserva -> reserva.getSituacao())
+                                .filter(situacao -> situacao == Reserva.Situacao.ATIVA)
+                                .count() != 0;
+    }
+
+    public boolean possuiHabilitacaoVencida(){
+        return LocalDate.now().isAfter(validadeCNH);
+    }
 }

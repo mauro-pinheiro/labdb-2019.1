@@ -1,13 +1,88 @@
 package lab5.xyzrentalcars.entidades;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Carro {
+    public enum Situacao {
+        DISPONIVEL {
+            @Override
+            Situacao aluga() {
+                return ALUGADO;
+            }
+
+            @Override
+            Situacao devolveOrigem() {
+                throw new IllegalStateException("Carro nao esta alugado");
+            }
+
+            @Override
+            Situacao devolveDiferente() {
+                throw new IllegalStateException("Carro nao esta alugado");
+            }
+
+            @Override
+            Situacao transfere() {
+                throw new IllegalStateException("Carro nao esta fora da origem");
+            }
+
+            @Override
+            public String toString() {
+                return "DISPONÍVEL";
+            }
+        },
+        ALUGADO {
+            @Override
+            Situacao aluga() {
+                throw new IllegalStateException("Carro nao esta disponível");
+            }
+
+            @Override
+            Situacao devolveOrigem() {
+                return DISPONIVEL;
+            }
+
+            @Override
+            Situacao devolveDiferente() {
+                return FORA;
+            }
+
+            @Override
+            Situacao transfere() {
+                throw new IllegalStateException("Carro nao esta fora da origem");
+            }
+        },
+        FORA {
+            @Override
+            Situacao aluga() {
+                throw new IllegalStateException("Carro nao esta disponível");
+            }
+
+            @Override
+            Situacao devolveOrigem() {
+                throw new IllegalStateException("Carro nao esta alugado");
+            }
+
+            @Override
+            Situacao devolveDiferente() {
+                throw new IllegalStateException("Carro nao esta alugado");
+            }
+
+            @Override
+            Situacao transfere() {
+                return DISPONIVEL;
+            }
+        };
+
+        abstract Situacao aluga();
+        abstract Situacao devolveOrigem();
+        abstract Situacao devolveDiferente();
+        abstract Situacao transfere();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,6 +95,9 @@ public class Carro {
     @Column(nullable = false)
     private Integer quilometragem;
     private String descricao;
+
+    @Enumerated(EnumType.STRING)
+    private Situacao situacao;
 
     @ManyToOne
     @JoinColumn(name = "id_classe_carro", nullable = false)

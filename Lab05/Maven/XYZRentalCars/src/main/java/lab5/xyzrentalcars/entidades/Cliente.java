@@ -99,7 +99,6 @@ public class Cliente {
                 ", numeroCNH='" + numeroCNH + '\'' +
                 ", validadeCNH=" + validadeCNH +
                 ", categriaCNH='" + categriaCNH + '\'' +
-                ", historicoReservas=" + historicoReservas +
                 '}';
     }
 

@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1285dc08-ab65-4466-8a48-e758f8efad6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../XYZRentalCars.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Carro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Carro.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/ClasseCarro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/ClasseCarro.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Cliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/EnderecoCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/EnderecoCliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/EnderecoSede.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/EnderecoSede.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Reserva$Situacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Reserva$Situacao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Reserva.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Reserva.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Sede.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Sede.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -80,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="100" column="30" selection-start-line="100" selection-start-column="30" selection-end-line="100" selection-end-column="30" />
+            <state relative-caret-position="1751">
+              <caret line="209" selection-start-line="209" selection-end-line="209" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Situacao#0;class#Carro#0" />
@@ -120,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="1207">
+              <caret line="99" column="13" lean-forward="true" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -136,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1445">
-              <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
+              <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2057#2058#0" expanded="true" />
@@ -170,11 +154,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1241">
-              <caret line="106" column="37" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="37" />
+            <state relative-caret-position="342">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -185,8 +169,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#131#132#0" expanded="true" />
                 <element signature="e#199#200#0" expanded="true" />
@@ -227,17 +211,17 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Reserva.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Endereco.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoCliente.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/enums/TipoLugradouro.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" />
       </list>
     </option>
   </component>
@@ -301,6 +285,21 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="xyzrentalcars" type="462c0819:PsiDirectoryNode" />
               <item name="entidades" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XYZRentalCars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XYZRentalCars" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XYZRentalCars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XYZRentalCars" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -382,7 +381,7 @@
       <workItem from="1561452758541" duration="1511000" />
       <workItem from="1561543764536" duration="68000" />
       <workItem from="1561622960617" duration="2687000" />
-      <workItem from="1561625761610" duration="895000" />
+      <workItem from="1561625761610" duration="1443000" />
     </task>
     <task id="LOCAL-00001" summary="Falta gets/sets/methods das classes apartir de Endereco cliente">
       <created>1561426905951</created>
@@ -391,11 +390,32 @@
       <option name="project" value="LOCAL" />
       <updated>1561426905951</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Mapeamento Objeto Relacional completo">
+      <created>1561626793423</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1561626793423</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Mapeamento Objeto Relacional completo">
+      <created>1561626863837</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1561626863837</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Mapeamento Objeto Relacional completo">
+      <created>1561627052805</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1561627052805</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12502000" />
+    <option name="totallyTimeSpent" value="13050000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -448,7 +468,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Falta gets/sets/methods das classes apartir de Endereco cliente" />
-    <option name="LAST_COMMIT_MESSAGE" value="Falta gets/sets/methods das classes apartir de Endereco cliente" />
+    <MESSAGE value="Mapeamento Objeto Relacional completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mapeamento Objeto Relacional completo" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
@@ -509,7 +531,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1445">
-          <caret line="122" column="20" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="20" />
+          <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2057#2058#0" expanded="true" />
@@ -517,34 +539,6 @@
             <element signature="e#2833#2834#0" expanded="true" />
             <element signature="e#2936#2937#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="106" column="37" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-          <folding>
-            <element signature="e#131#132#0" expanded="true" />
-            <element signature="e#199#200#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="167" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="167" />
         </state>
       </provider>
     </entry>
@@ -596,10 +590,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="99" column="13" lean-forward="true" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#131#132#0" expanded="true" />
+            <element signature="e#199#200#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="167" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="167" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="100" column="30" selection-start-line="100" selection-start-column="30" selection-end-line="100" selection-end-column="30" />
+        <state relative-caret-position="1751">
+          <caret line="209" selection-start-line="209" selection-end-line="209" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Situacao#0;class#Carro#0" />
@@ -637,10 +659,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="342">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

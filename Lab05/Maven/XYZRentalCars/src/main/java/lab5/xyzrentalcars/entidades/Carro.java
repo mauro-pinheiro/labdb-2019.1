@@ -207,7 +207,6 @@ public class Carro {
                 ", classe=" + classe +
                 ", pontoOrigem=" + pontoOrigem +
                 ", atual=" + atual +
-                ", historicoReservas=" + historicoReservas +
                 '}';
     }
 }

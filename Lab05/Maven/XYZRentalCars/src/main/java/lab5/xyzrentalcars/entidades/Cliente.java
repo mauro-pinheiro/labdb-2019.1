@@ -17,9 +17,10 @@ public class Cliente {
     private String cpf;
     @OneToMany(mappedBy = "cliente")
     private Set<EnderecoCliente> enderecos = new HashSet<>();
-    private String numeroCNH;
-    private LocalDate validadeCNH;
-    private String categriaCNH;
+
+    @Embedded
+    private CNH cnh;
+
 
     @OneToMany(mappedBy = "cliente")
     private Set<Reserva> historicoReservas = new HashSet<>();
@@ -36,20 +37,12 @@ public class Cliente {
         return cpf;
     }
 
+    public CNH getCnh() {
+        return cnh;
+    }
+
     public Set<EnderecoCliente> getEnderecos() {
         return enderecos;
-    }
-
-    public String getNumeroCNH() {
-        return numeroCNH;
-    }
-
-    public LocalDate getValidadeCNH() {
-        return validadeCNH;
-    }
-
-    public String getCategriaCNH() {
-        return categriaCNH;
     }
 
     public void setNome(String nome) {
@@ -60,20 +53,8 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public void setEnderecos(Set<EnderecoCliente> enderecos) {
-        this.enderecos = enderecos;
-    }
-
-    public void setNumeroCNH(String numeroCNH) {
-        this.numeroCNH = numeroCNH;
-    }
-
-    public void setValidadeCNH(LocalDate validadeCNH) {
-        this.validadeCNH = validadeCNH;
-    }
-
-    public void setCategriaCNH(String categriaCNH) {
-        this.categriaCNH = categriaCNH;
+    public void setCnh(CNH cnh) {
+        this.cnh = cnh;
     }
 
     @Override
@@ -89,18 +70,6 @@ public class Cliente {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", enderecos=" + enderecos +
-                ", numeroCNH='" + numeroCNH + '\'' +
-                ", validadeCNH=" + validadeCNH +
-                ", categriaCNH='" + categriaCNH + '\'' +
-                '}';
-    }
 
     public boolean possuiReservaAtiva(){
         return historicoReservas.stream()
@@ -110,6 +79,6 @@ public class Cliente {
     }
 
     public boolean possuiHabilitacaoVencida(){
-        return LocalDate.now().isAfter(validadeCNH);
+        return cnh.vencida();
     }
 }

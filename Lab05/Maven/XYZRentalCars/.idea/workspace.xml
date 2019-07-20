@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1285dc08-ab65-4466-8a48-e758f8efad6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../XYZRentalCars.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/CNH.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Carro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Carro.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/ClasseCarro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/ClasseCarro.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/EnderecoSede.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/lab5/xyzrentalcars/entidades/EnderecoSede.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -52,145 +58,41 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="102">
+              <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="209" selection-start-line="209" selection-end-line="209" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="class#Situacao#0;class#Carro#0" />
-                <element signature="e#299#300#0" expanded="true" />
-                <element signature="e#345#346#0" expanded="true" />
-                <element signature="e#407#408#0" expanded="true" />
-                <element signature="e#496#497#0" expanded="true" />
-                <element signature="e#561#562#0" expanded="true" />
-                <element signature="e#650#651#0" expanded="true" />
-                <element signature="e#708#709#0" expanded="true" />
-                <element signature="e#804#805#0" expanded="true" />
+                <element signature="e#240#241#0" expanded="true" />
+                <element signature="e#266#267#0" expanded="true" />
                 <element signature="e#866#867#0" expanded="true" />
-                <element signature="e#917#918#0" expanded="true" />
-                <element signature="e#999#1000#0" expanded="true" />
-                <element signature="e#1091#1092#0" expanded="true" />
-                <element signature="e#1153#1154#0" expanded="true" />
-                <element signature="e#1202#1203#0" expanded="true" />
-                <element signature="e#1267#1268#0" expanded="true" />
-                <element signature="e#1310#1311#0" expanded="true" />
-                <element signature="e#1368#1369#0" expanded="true" />
-                <element signature="e#1464#1465#0" expanded="true" />
-                <element signature="e#1543#1544#0" expanded="true" />
-                <element signature="e#1635#1636#0" expanded="true" />
-                <element signature="e#1697#1698#0" expanded="true" />
-                <element signature="e#1786#1787#0" expanded="true" />
-                <element signature="e#1851#1852#0" expanded="true" />
-                <element signature="e#1940#1941#0" expanded="true" />
-                <element signature="e#1998#1999#0" expanded="true" />
-                <element signature="e#2047#2048#0" expanded="true" />
-                <element signature="e#1173#1174#0" expanded="true" />
-                <element signature="e#1199#1200#0" expanded="true" />
-                <element signature="e#2503#2504#0" expanded="true" />
-                <element signature="e#2542#2543#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="99" column="13" lean-forward="true" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2057#2058#0" expanded="true" />
-                <element signature="e#2083#2084#0" expanded="true" />
-                <element signature="e#2833#2834#0" expanded="true" />
-                <element signature="e#2936#2937#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#187#1612#0" />
-                <element signature="e#366#367#0" expanded="true" />
-                <element signature="e#476#477#0" expanded="true" />
-                <element signature="e#582#583#0" expanded="true" />
-                <element signature="e#754#755#0" expanded="true" />
-                <element signature="e#904#905#0" expanded="true" />
-                <element signature="e#1010#1011#0" expanded="true" />
-                <element signature="e#1182#1183#0" expanded="true" />
-                <element signature="e#1332#1333#0" expanded="true" />
-                <element signature="e#1476#1477#0" expanded="true" />
+                <element signature="e#900#901#0" expanded="true" />
+                <element signature="e#958#959#0" expanded="true" />
+                <element signature="e#1004#1005#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="101" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="858">
+              <caret line="133" column="4" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#Situacao#0;class#Carro#0" />
+                <element signature="e#1124#1125#0" expanded="true" />
+                <element signature="e#1173#1174#0" expanded="true" />
+                <element signature="e#2853#2854#0" expanded="true" />
+                <element signature="e#2889#2890#0" expanded="true" />
+                <element signature="e#2962#2963#0" expanded="true" />
+                <element signature="e#3001#3002#0" expanded="true" />
+                <element signature="e#4316#4317#0" expanded="true" />
+                <element signature="e#4362#4363#0" expanded="true" />
+                <element signature="e#4420#4421#0" expanded="true" />
+                <element signature="e#4470#4471#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#131#132#0" expanded="true" />
-                <element signature="e#199#200#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="167" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="167" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a4af4dc7-bd0c-48aa-941f-911dfcd371ec/console.sql">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -199,6 +101,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -216,12 +119,14 @@
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoCliente.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/enums/TipoLugradouro.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/CNH.java" />
         <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/enums/ClassesCarro.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java" />
       </list>
     </option>
   </component>
@@ -244,6 +149,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -291,6 +197,16 @@
               <item name="XYZRentalCars" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="xyzrentalcars" type="462c0819:PsiDirectoryNode" />
+              <item name="entidades" type="462c0819:PsiDirectoryNode" />
+              <item name="enums" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XYZRentalCars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XYZRentalCars" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -305,7 +221,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -318,8 +233,11 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -328,6 +246,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="lab5.xyzrentalcars.entidades" />
+    </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="lab5.xyzrentalcars.entidades.enums" />
     </key>
@@ -381,7 +302,8 @@
       <workItem from="1561452758541" duration="1511000" />
       <workItem from="1561543764536" duration="68000" />
       <workItem from="1561622960617" duration="2687000" />
-      <workItem from="1561625761610" duration="1443000" />
+      <workItem from="1561625761610" duration="1593000" />
+      <workItem from="1563625870969" duration="4918000" />
     </task>
     <task id="LOCAL-00001" summary="Falta gets/sets/methods das classes apartir de Endereco cliente">
       <created>1561426905951</created>
@@ -411,11 +333,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561627052805</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Mapeamento Objeto Relacional completo">
+      <created>1561627264603</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1561627264603</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13050000" />
+    <option name="totallyTimeSpent" value="18118000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -428,9 +357,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2647504" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27231467" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Persistence" order="3" side_tool="true" />
@@ -439,7 +367,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -494,13 +422,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/enums/TipoLugradouro.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="uml://MODULES/mdl-XYZRentalCars">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -515,53 +436,6 @@
           <SelectedNodes />
           <Categories />
           <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2057#2058#0" expanded="true" />
-            <element signature="e#2083#2084#0" expanded="true" />
-            <element signature="e#2833#2834#0" expanded="true" />
-            <element signature="e#2936#2937#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a4af4dc7-bd0c-48aa-941f-911dfcd371ec/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#187#1612#0" />
-            <element signature="e#366#367#0" expanded="true" />
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#754#755#0" expanded="true" />
-            <element signature="e#904#905#0" expanded="true" />
-            <element signature="e#1010#1011#0" expanded="true" />
-            <element signature="e#1182#1183#0" expanded="true" />
-            <element signature="e#1332#1333#0" expanded="true" />
-            <element signature="e#1476#1477#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -581,29 +455,20 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.1319327731092437" x="290.06914893617034" y="227.3645137342242" />
+          <settings layout="Hierarchic Group" zoom="1.1319327731092437" x="290.0" y="227.0" />
           <SelectedNodes />
           <Categories>
             <Category>Key columns</Category>
             <Category>Columns</Category>
           </Categories>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="99" column="13" lean-forward="true" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="119">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#131#132#0" expanded="true" />
             <element signature="e#199#200#0" expanded="true" />
@@ -618,53 +483,141 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a4af4dc7-bd0c-48aa-941f-911dfcd371ec/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/CNH.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="209" selection-start-line="209" selection-end-line="209" />
+        <state relative-caret-position="-15">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#Situacao#0;class#Carro#0" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#345#346#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#496#497#0" expanded="true" />
-            <element signature="e#561#562#0" expanded="true" />
-            <element signature="e#650#651#0" expanded="true" />
-            <element signature="e#708#709#0" expanded="true" />
-            <element signature="e#804#805#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
-            <element signature="e#917#918#0" expanded="true" />
-            <element signature="e#999#1000#0" expanded="true" />
-            <element signature="e#1091#1092#0" expanded="true" />
-            <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#1202#1203#0" expanded="true" />
-            <element signature="e#1267#1268#0" expanded="true" />
-            <element signature="e#1310#1311#0" expanded="true" />
-            <element signature="e#1368#1369#0" expanded="true" />
-            <element signature="e#1464#1465#0" expanded="true" />
-            <element signature="e#1543#1544#0" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1697#1698#0" expanded="true" />
-            <element signature="e#1786#1787#0" expanded="true" />
-            <element signature="e#1851#1852#0" expanded="true" />
-            <element signature="e#1940#1941#0" expanded="true" />
-            <element signature="e#1998#1999#0" expanded="true" />
-            <element signature="e#2047#2048#0" expanded="true" />
-            <element signature="e#1173#1174#0" expanded="true" />
-            <element signature="e#1199#1200#0" expanded="true" />
-            <element signature="e#2503#2504#0" expanded="true" />
-            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#284#285#0" expanded="true" />
+            <element signature="e#328#329#0" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#433#434#0" expanded="true" />
+            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#559#560#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/EnderecoSede.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Reserva.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="81" column="34" lean-forward="true" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#277#278#0" expanded="true" />
+            <element signature="e#366#367#0" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#476#477#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="true" />
+            <element signature="e#665#666#0" expanded="true" />
+            <element signature="e#754#755#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#904#905#0" expanded="true" />
+            <element signature="e#961#962#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#1095#1096#0" expanded="true" />
+            <element signature="e#1182#1183#0" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="true" />
+            <element signature="e#1332#1333#0" expanded="true" />
+            <element signature="e#1389#1390#0" expanded="true" />
+            <element signature="e#1476#1477#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/enums/TipoLugradouro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Sede.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-141">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/enums/ClassesCarro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Cliente.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        <state relative-caret-position="308">
+          <caret line="80" column="46" lean-forward="true" selection-start-line="80" selection-start-column="46" selection-end-line="80" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+            <element signature="e#928#929#0" expanded="true" />
+            <element signature="e#1185#1186#0" expanded="true" />
+            <element signature="e#1215#1216#0" expanded="true" />
+            <element signature="e#1926#1927#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/ClasseCarro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding>
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#266#267#0" expanded="true" />
+            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#1004#1005#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lab5/xyzrentalcars/entidades/Carro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="133" column="4" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#Situacao#0;class#Carro#0" />
+            <element signature="e#1124#1125#0" expanded="true" />
+            <element signature="e#1173#1174#0" expanded="true" />
+            <element signature="e#2853#2854#0" expanded="true" />
+            <element signature="e#2889#2890#0" expanded="true" />
+            <element signature="e#2962#2963#0" expanded="true" />
+            <element signature="e#3001#3002#0" expanded="true" />
+            <element signature="e#4316#4317#0" expanded="true" />
+            <element signature="e#4362#4363#0" expanded="true" />
+            <element signature="e#4420#4421#0" expanded="true" />
+            <element signature="e#4470#4471#0" expanded="true" />
           </folding>
         </state>
       </provider>

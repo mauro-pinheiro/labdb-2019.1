@@ -1,6 +1,7 @@
 package lab5.xyzrentalcars.entidades;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -99,9 +100,21 @@ public class Carro {
     @Enumerated(EnumType.STRING)
     private Situacao situacao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_classe_carro", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ClasseCarro classe;
+
+    @Column(name = "valor_diaria")
+    private BigDecimal valorDiaria;
+
+    @PrePersist
+    private void recebeValorDiaria(){
+        valorDiaria = classe.getValorDiaria();
+    }
+
+    @PostPersist
+    private void enviaValorDiaria(){
+        classe.setValorDiaria(valorDiaria);
+    }
 
     @ManyToOne
     @JoinColumn(name = "id_sede_origem", nullable = false)
@@ -180,6 +193,14 @@ public class Carro {
 
     public void setAtual(Sede atual) {
         this.atual = atual;
+    }
+
+    public BigDecimal getValorDiaria() {
+        return classe.getValorDiaria();
+    }
+
+    public void setValorDiaria(BigDecimal valorDiaria) {
+        classe.setValorDiaria(valorDiaria);
     }
 
     @Override

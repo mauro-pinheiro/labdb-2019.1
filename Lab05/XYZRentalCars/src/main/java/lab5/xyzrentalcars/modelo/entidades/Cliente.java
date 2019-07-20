@@ -1,7 +1,9 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.CNH;
-import lab5.xyzrentalcars.modelo.entidades.telefones.TelefoneCliente;
+import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
+import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,12 +11,13 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Cliente {
+public class Cliente implements EntidadeBase {
     private Integer id;
     private String nome;
     private String cpf;
     private CNH cnh;
-    private Set<TelefoneCliente> telefones = new HashSet<>();
+    private Set<Telefone> telefones = new HashSet<>();
+    private Set<Endereco> enderecos = new HashSet<>();
     private Set<Reserva> historicoReservas = new HashSet<>();
 
     @Id
@@ -54,13 +57,26 @@ public class Cliente {
         this.cnh = cnh;
     }
 
-    @OneToMany(mappedBy = "cliente")
-    public Set<TelefoneCliente> getTelefones() {
+    @ElementCollection
+    @CollectionTable(name = "cliente_telefone",
+            joinColumns = @JoinColumn(name = "id_cliente"))
+    public Set<Telefone> getTelefones() {
         return telefones;
     }
 
-    public void setTelefones(Set<TelefoneCliente> telefones) {
+    public void setTelefones(Set<Telefone> telefones) {
         this.telefones = telefones;
+    }
+
+    @ElementCollection
+    @CollectionTable(name = "cliente_enderecos",
+            joinColumns = @JoinColumn(name = "id_cliente", nullable = false))
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     @OneToMany(mappedBy = "cliente")

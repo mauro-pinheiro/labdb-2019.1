@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Carro {
+public class Carro implements EntidadeBase {
     private Integer id;
     private String placa;
     private String modelo;

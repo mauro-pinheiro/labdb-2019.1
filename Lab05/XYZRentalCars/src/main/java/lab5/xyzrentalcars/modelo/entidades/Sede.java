@@ -1,7 +1,8 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
-import lab5.xyzrentalcars.modelo.entidades.telefones.TelefoneSede;
+import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,11 +11,11 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Sede {
+public class Sede implements EntidadeBase {
     private Integer id;
     private String nome;
     private Endereco endereco;
-    private Set<TelefoneSede> telefone = new HashSet<>();
+    private Set<Telefone> telefone = new HashSet<>();
     private String nomeGerente;
     private BigDecimal multaSedeDiferente;
     private Set<Reserva> historicoLocacao = new HashSet<>();
@@ -50,12 +51,14 @@ public class Sede {
         this.endereco = endereco;
     }
 
-    @OneToMany(mappedBy = "sede")
-    public Set<TelefoneSede> getTelefone() {
+    @ElementCollection
+    @CollectionTable(name = "sede_telefone",
+            joinColumns = @JoinColumn(name = "id_sede"))
+    public Set<Telefone> getTelefone() {
         return telefone;
     }
 
-    private void setTelefone(Set<TelefoneSede> telefone) {
+    private void setTelefone(Set<Telefone> telefone) {
         this.telefone = telefone;
     }
 

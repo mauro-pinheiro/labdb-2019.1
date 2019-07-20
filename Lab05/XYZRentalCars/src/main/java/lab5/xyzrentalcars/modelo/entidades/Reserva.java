@@ -1,12 +1,14 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.modelo.EntidadeBase;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-public class Reserva {
+public class Reserva implements EntidadeBase {
     private Integer id;
     private String numero;
     private Integer diarias;

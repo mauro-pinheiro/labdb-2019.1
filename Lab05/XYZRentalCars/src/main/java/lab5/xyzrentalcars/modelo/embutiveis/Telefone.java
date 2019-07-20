@@ -1,24 +1,12 @@
-package lab5.xyzrentalcars.modelo.entidades;
+package lab5.xyzrentalcars.modelo.embutiveis;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Embeddable
 public abstract class Telefone {
-    private Integer id;
     private String codigoArea;
     private String numero;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    private void setId(Integer id) {
-        this.id = id;
-    }
 
     @Column(name = "codigo_area", columnDefinition = "char(2)", nullable = false)
     public String getCodigoArea() {
@@ -43,11 +31,12 @@ public abstract class Telefone {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Telefone telefone = (Telefone) o;
-        return Objects.equals(id, telefone.id);
+        return Objects.equals(codigoArea, telefone.codigoArea) &&
+                Objects.equals(numero, telefone.numero);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(codigoArea, numero);
     }
 }

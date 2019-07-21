@@ -4,14 +4,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class Manager {
+public class ManagerFactory {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("rentalcars");
 
     public static EntityManager getEntityManager(){
         return factory.createEntityManager();
     }
 
-    public void close(){
+    public static void close(){
         factory.close();
     }
 }

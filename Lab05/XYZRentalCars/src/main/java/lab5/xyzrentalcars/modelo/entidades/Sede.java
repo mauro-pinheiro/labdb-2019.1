@@ -43,6 +43,17 @@ public class Sede implements EntidadeBase {
     }
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "tipoLugradouro",
+                    column = @Column(name = "end_tipo_lugradouro", length = 20, nullable = false)),
+            @AttributeOverride(name = "nome", column = @Column(name = "end_name", length = 60, nullable = false)),
+            @AttributeOverride(name = "numero", column = @Column(name = "end_numero", length = 8)),
+            @AttributeOverride(name = "complemento", column = @Column(name = "end_complemento", length = 60)),
+            @AttributeOverride(name = "bairro", column = @Column(name = "end_bairro", length = 30, nullable = false)),
+            @AttributeOverride(name = "cidade", column = @Column(name = "end_cidade", length = 20)),
+            @AttributeOverride(name = "estado", column = @Column(name = "end_estado", length = 20)),
+            @AttributeOverride(name = "cep", column = @Column(name = "end_cep", length = 10))
+    })
     public Endereco getEndereco() {
         return endereco;
     }
@@ -52,17 +63,17 @@ public class Sede implements EntidadeBase {
     }
 
     @ElementCollection
-    @CollectionTable(name = "sede_telefone",
+    @CollectionTable(name = "sede_telefones",
             joinColumns = @JoinColumn(name = "id_sede"))
-    public Set<Telefone> getTelefone() {
+    public Set<Telefone> getTelefones() {
         return telefone;
     }
 
-    private void setTelefone(Set<Telefone> telefone) {
+    public void setTelefones(Set<Telefone> telefone) {
         this.telefone = telefone;
     }
 
-    @Column(name = "nome_gerente", length = 40, nullable = false)
+    @Column(name = "nome_gerente", length = 40)
     public String getNomeGerente() {
         return nomeGerente;
     }
@@ -71,7 +82,7 @@ public class Sede implements EntidadeBase {
         this.nomeGerente = nomeGerente;
     }
 
-    @Column(name = "multa_sede_diferente", nullable = false)
+    @Column(name = "multa_sede_diferente")
     public BigDecimal getMultaSedeDiferente() {
         return multaSedeDiferente;
     }
@@ -98,7 +109,7 @@ public class Sede implements EntidadeBase {
         this.historicoDevolucao = historicoDevolucao;
     }
 
-    @OneToMany(mappedBy = "sedeOriginal")
+    @OneToMany(mappedBy = "sedeDeOrigem")
     public Set<Carro> getCarrosOriginadosDaSede() {
         return carrosOriginadosDaSede;
     }

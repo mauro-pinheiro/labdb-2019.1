@@ -4,11 +4,22 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Embeddable
-public abstract class Telefone {
+public class Telefone {
     private String codigoArea;
     private String numero;
 
-    @Column(name = "codigo_area", columnDefinition = "char(2)", nullable = false)
+    public Telefone(){}
+
+    public Telefone(String numero) {
+        this.numero = numero;
+    }
+
+    public Telefone(String codigoArea, String numero) {
+        this.codigoArea = codigoArea;
+        this.numero = numero;
+    }
+
+    @Column(name = "codigo_area", columnDefinition = "char(2)")
     public String getCodigoArea() {
         return codigoArea;
     }

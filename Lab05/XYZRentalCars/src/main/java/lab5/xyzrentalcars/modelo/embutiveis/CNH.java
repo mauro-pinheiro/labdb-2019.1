@@ -10,7 +10,20 @@ public class CNH {
     private LocalDate validade;
     private String categoria;
 
-    @Column(length = 10, name = "numero_cnh", nullable = false)
+    public CNH(){}
+
+    public CNH(String numero, LocalDate validade) {
+        this.numero = numero;
+        this.validade = validade;
+    }
+
+    public CNH(String numero, LocalDate validade, String categoria) {
+        this.numero = numero;
+        this.validade = validade;
+        this.categoria = categoria;
+    }
+
+    @Column(length = 10, nullable = false)
     public String getNumero() {
         return numero;
     }
@@ -19,7 +32,7 @@ public class CNH {
         this.numero = numero;
     }
 
-    @Column(name = "validade_cnh", nullable = false)
+    @Column(nullable = false)
     public LocalDate getValidade() {
         return validade;
     }
@@ -28,12 +41,16 @@ public class CNH {
         this.validade = validade;
     }
 
-    @Column(name = "categoria_cnh", nullable = false)
+    @Column(length = 20)
     public String getCategoria() {
         return categoria;
     }
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public boolean vencida(){
+        return LocalDate.now().isAfter(validade);
     }
 }

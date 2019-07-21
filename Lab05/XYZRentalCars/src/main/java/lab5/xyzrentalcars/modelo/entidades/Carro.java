@@ -21,8 +21,16 @@ public class Carro implements EntidadeBase {
     private Situacao situacao;
     private ClasseCarro classe;
     private Set<Reserva> historicoReservas = new HashSet<>();
-    private Sede sedeOriginal;
+    private Sede sedeDeOrigem;
     private Sede sedeAtual;
+
+    public Carro(){}
+
+    public Carro(Situacao situacao, ClasseCarro classe, Sede sedeOriginal) {
+        this.situacao = situacao;
+        this.classe = classe;
+        this.sedeDeOrigem = sedeOriginal;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +42,7 @@ public class Carro implements EntidadeBase {
         this.id = id;
     }
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10)
     public String getPlaca() {
         return placa;
     }
@@ -43,7 +51,7 @@ public class Carro implements EntidadeBase {
         this.placa = placa;
     }
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30)
     public String getModelo() {
         return modelo;
     }
@@ -52,7 +60,7 @@ public class Carro implements EntidadeBase {
         this.modelo = modelo;
     }
 
-    @Column(columnDefinition = "YEAR(4)", nullable = false)
+    @Column(columnDefinition = "YEAR(4)")
     public Short getAno() {
         return ano;
     }
@@ -61,7 +69,7 @@ public class Carro implements EntidadeBase {
         this.ano = ano;
     }
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     public String getCor() {
         return cor;
     }
@@ -70,7 +78,6 @@ public class Carro implements EntidadeBase {
         this.cor = cor;
     }
 
-    @Column(nullable = false)
     public Integer getQuilometragem() {
         return quilometragem;
     }
@@ -79,7 +86,7 @@ public class Carro implements EntidadeBase {
         this.quilometragem = quilometragem;
     }
 
-    @Column(columnDefinition = "TEXT", nullable = true)
+    @Column(columnDefinition = "Text")
     public String getDescricao() {
         return descricao;
     }
@@ -89,6 +96,7 @@ public class Carro implements EntidadeBase {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public Situacao getSituacao() {
         return situacao;
     }
@@ -98,6 +106,7 @@ public class Carro implements EntidadeBase {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public ClasseCarro getClasse() {
         return classe;
     }
@@ -106,7 +115,7 @@ public class Carro implements EntidadeBase {
         this.classe = classe;
     }
 
-    @Column(name = "valor_diaria", nullable = false)
+    @Column(name = "valor_diaria")
     public BigDecimal getValorDiaria() {
         return classe.getValorDiaria();
     }
@@ -126,21 +135,23 @@ public class Carro implements EntidadeBase {
 
     @ManyToOne
     @JoinColumn(name = "id_sede_de_origem", nullable = false)
-    public Sede getSedeOriginal() {
-        return sedeOriginal;
+    public Sede getSedeDeOrigem() {
+        return sedeDeOrigem;
     }
 
-    private void setSedeOriginal(Sede original) {
-        this.sedeOriginal = original;
+    public void setSedeDeOrigem(Sede original) {
+        original.getCarrosOriginadosDaSede().add(this);
+        this.sedeDeOrigem = original;
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_sede_atual", nullable = true)
+    @JoinColumn(name = "id_sede_atual")
     public Sede getSedeAtual() {
         return sedeAtual;
     }
 
     public void setSedeAtual(Sede atual) {
+        atual.getCarrosAtualmenteNaSede().add(this);
         this.sedeAtual = atual;
     }
 
@@ -157,9 +168,24 @@ public class Carro implements EntidadeBase {
         return Objects.hash(id);
     }
 
-    private enum Situacao {
+    public enum Situacao {
         Disponivel,
         Alugado,
-        ForaOrigem
+        ForaDaSedeDeOrigem
+    }
+
+    @Transient
+    public boolean isDisponivel(){
+        return situacao == Situacao.Disponivel;
+    }
+
+    @Transient
+    public boolean isAlugado(){
+        return situacao == Situacao.Alugado;
+    }
+
+    @Transient
+    public boolean isForaDaSedeOrigem(){
+        return situacao == Situacao.ForaDaSedeDeOrigem;
     }
 }

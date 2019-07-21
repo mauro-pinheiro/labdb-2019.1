@@ -23,6 +23,17 @@ public class Reserva implements EntidadeBase {
     private Sede sedeLocacao;
     private Sede sedeDevolucao;
 
+    @PrePersist
+    public void antes(){
+        BigDecimal valorDiarias = Objects.requireNonNull(this.getCarro()).getValorDiaria();
+        BigDecimal diarias = new BigDecimal(Objects.requireNonNull(this.getDiarias()));
+        BigDecimal multa = this.getMulta();
+        BigDecimal valorTotal = Objects.requireNonNull(valorDiarias)
+                .multiply(Objects.requireNonNull(diarias))
+                .add(Objects.requireNonNull(multa));
+        this.setValorTotal(valorTotal);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
@@ -33,7 +44,7 @@ public class Reserva implements EntidadeBase {
         this.id = id;
     }
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10)
     public String getNumero() {
         return numero;
     }
@@ -60,7 +71,7 @@ public class Reserva implements EntidadeBase {
         this.dataLocacao = locacao;
     }
 
-    @Column(name = "data_retorno", nullable = false)
+    @Column(name = "data_retorno")
     public LocalDate getDataRetorno() {
         return dataRetorno;
     }
@@ -69,7 +80,7 @@ public class Reserva implements EntidadeBase {
         this.dataRetorno = retorno;
     }
 
-    @Column(name = "quilometros_rodados", nullable = false)
+    @Column(name = "quilometros_rodados")
     public Integer getKmRodados() {
         return kmRodados;
     }
@@ -88,6 +99,7 @@ public class Reserva implements EntidadeBase {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public Situcao getSituacao() {
         return situacao;
     }
@@ -111,7 +123,7 @@ public class Reserva implements EntidadeBase {
         return cliente;
     }
 
-    private void setCliente(Cliente cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -121,7 +133,7 @@ public class Reserva implements EntidadeBase {
         return carro;
     }
 
-    private void setCarro(Carro carro) {
+    public void setCarro(Carro carro) {
         this.carro = carro;
     }
 
@@ -131,12 +143,12 @@ public class Reserva implements EntidadeBase {
         return sedeLocacao;
     }
 
-    private void setSedeLocacao(Sede sedeLocacao) {
+    public void setSedeLocacao(Sede sedeLocacao) {
         this.sedeLocacao = sedeLocacao;
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_sede_devolucao", nullable = true)
+    @JoinColumn(name = "id_sede_devolucao")
     public Sede getSedeDevolucao() {
         return sedeDevolucao;
     }
@@ -158,9 +170,24 @@ public class Reserva implements EntidadeBase {
         return Objects.hash(id);
     }
 
-    private enum Situcao {
+    public enum Situcao {
         Ativa,
         Atrazada,
         Finalizada
+    }
+
+    @Transient
+    public boolean isAtiva(){
+        return situacao == Situcao.Ativa;
+    }
+
+    @Transient
+    public boolean isAtrazada(){
+        return situacao == Situcao.Atrazada;
+    }
+
+    @Transient
+    public boolean isFinalizada(){
+        return situacao == Situcao.Finalizada;
     }
 }

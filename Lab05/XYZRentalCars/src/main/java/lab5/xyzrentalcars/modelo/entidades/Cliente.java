@@ -6,7 +6,7 @@ import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,9 +16,9 @@ public class Cliente implements EntidadeBase {
     private String nome;
     private String cpf;
     private CNH cnh;
-    private Set<Telefone> telefones = new HashSet<>();
-    private Set<Endereco> enderecos = new HashSet<>();
-    private Set<Reserva> historicoReservas = new HashSet<>();
+    private Set<Telefone> telefones = new LinkedHashSet<>();
+    private Set<Endereco> enderecos = new LinkedHashSet<>();
+    private Set<Reserva> historicoReservas = new LinkedHashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +39,7 @@ public class Cliente implements EntidadeBase {
         this.nome = nome;
     }
 
-    @Column(columnDefinition = "Char(11)", nullable = false)
+    @Column(columnDefinition = "Char(11)", nullable = false, unique = true)
     public String getCpf() {
         return cpf;
     }
@@ -49,6 +49,11 @@ public class Cliente implements EntidadeBase {
     }
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "numero", column = @Column(name = "numero_cnh", length = 60, nullable = false)),
+            @AttributeOverride(name = "validade", column = @Column(name = "validade_cnh", nullable = false)),
+            @AttributeOverride(name = "categoria", column = @Column(name = "categoria_cnh", length = 20))
+    })
     public CNH getCnh() {
         return cnh;
     }
@@ -58,7 +63,7 @@ public class Cliente implements EntidadeBase {
     }
 
     @ElementCollection
-    @CollectionTable(name = "cliente_telefone",
+    @CollectionTable(name = "cliente_telefones",
             joinColumns = @JoinColumn(name = "id_cliente"))
     public Set<Telefone> getTelefones() {
         return telefones;
@@ -99,5 +104,9 @@ public class Cliente implements EntidadeBase {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public boolean cnhVencida(){
+        return cnh.vencida();
     }
 }

@@ -1,10 +1,13 @@
 package lab5.xyzrentalcars.modelo.embutiveis;
 
+import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
+
 import javax.persistence.*;
 
 @Embeddable
 public class Endereco {
-    private Lugradouro lugradouro;
+    private TipoLugradouro tipoLugradouro;
+    private String nome;
     private String numero;
     private String complemento;
     private String bairro;
@@ -12,16 +15,26 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    @Embedded
-    public Lugradouro getLugradouro() {
-        return lugradouro;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20, name = "tipo_lugradouro", nullable = false)
+    public TipoLugradouro getTipoLugradouro() {
+        return tipoLugradouro;
     }
 
-    public void setLugradouro(Lugradouro lugradouro) {
-        this.lugradouro = lugradouro;
+    public void setTipoLugradouro(TipoLugradouro tipo) {
+        this.tipoLugradouro = tipo;
     }
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 60, nullable = false)
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Column(length = 15)
     public String getNumero() {
         return numero;
     }
@@ -30,7 +43,7 @@ public class Endereco {
         this.numero = numero;
     }
 
-    @Column(length = 60, nullable = false)
+    @Column(length = 60)
     public String getComplemento() {
         return complemento;
     }
@@ -48,7 +61,7 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15)
     public String getCidade() {
         return cidade;
     }
@@ -57,7 +70,7 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15)
     public String getEstado() {
         return estado;
     }
@@ -66,7 +79,7 @@ public class Endereco {
         this.estado = estado;
     }
 
-    @Column(columnDefinition = "char(8)", nullable = false)
+    @Column(columnDefinition = "char(8)")
     public String getCep() {
         return cep;
     }

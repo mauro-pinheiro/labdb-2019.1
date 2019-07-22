@@ -1,7 +1,7 @@
 package lab5.xyzrentalcars.repositorio;
 
-import lab5.xyzrentalcars.builders.*;
 import lab5.xyzrentalcars.exceptions.TemReservaNaoFinalizadaException;
+import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 import lab5.xyzrentalcars.modelo.entidades.Carro;
 import lab5.xyzrentalcars.modelo.entidades.Cliente;
@@ -46,11 +46,11 @@ public class ReservaRepositoryTest {
     @Test
     public void deveRealizarReservaDeCarroLocalizadoEmOutrSede(){
         SedeRepository sedeRepository = new SedeRepository(manager);
-        Sede sede1 = SedeBuilder.umaSede()
+        Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")
@@ -58,11 +58,11 @@ public class ReservaRepositoryTest {
                         .constroi())
                 .comTelefones(new Telefone("11","1111111111"))
                 .constroi();
-        Sede sede2 = SedeBuilder.umaSede()
+        Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
                 .comGerente("Mauro")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")
@@ -74,17 +74,16 @@ public class ReservaRepositoryTest {
         sedeRepository.salvaOuAtualiza(sede1);
         sedeRepository.salvaOuAtualiza(sede2);
 
-        Carro carro = CarroBuilder.umCarro()
-                .naSituacao(Carro.Situacao.Disponivel)
-                .atualmenteNa(sede1)
-                .comClasse(ClasseCarro.Compacto)
+        Carro carro = Carro.Builder.umCarro()
+                .atualmenteNaSede(sede1)
+                .daClasse(ClasseCarro.Compacto)
                 .comSedeDeOrigem(sede2)
                 .constroi();
 
         CarroRepository carroRepository = new CarroRepository(manager);
         carroRepository.salvaOuAtualiza(carro);
 
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -92,7 +91,7 @@ public class ReservaRepositoryTest {
                 .constroi();
         new ClienteRepository(manager).salvaOuAtualiza(cliente);
 
-        Reserva reserva = ReservaBuilder.umReserva()
+        Reserva reserva = Reserva.Builder.umReserva()
                 .paraCliente(cliente).doCarro(carro)
                 .comSedeDeLocacao(sede2)
                 .naSituacao(Reserva.Situcao.Ativa)
@@ -109,11 +108,11 @@ public class ReservaRepositoryTest {
     @Test(expected = TemReservaNaoFinalizadaException.class)
     public void clienteNaoDeveRealizarReservaSeTiverReservaNaoFinalizada(){
         SedeRepository sedeRepository = new SedeRepository(manager);
-        Sede sede1 = SedeBuilder.umaSede()
+        Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")
@@ -121,11 +120,11 @@ public class ReservaRepositoryTest {
                         .constroi())
                 .comTelefones(new Telefone("11","1111111111"))
                 .constroi();
-        Sede sede2 = SedeBuilder.umaSede()
+        Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
                 .comGerente("Mauro")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")
@@ -137,16 +136,14 @@ public class ReservaRepositoryTest {
         sedeRepository.salvaOuAtualiza(sede1);
         sedeRepository.salvaOuAtualiza(sede2);
 
-        Carro carro1 = CarroBuilder.umCarro()
-                .naSituacao(Carro.Situacao.Disponivel)
-                .atualmenteNa(sede1)
-                .comClasse(ClasseCarro.Compacto)
+        Carro carro1 = Carro.Builder.umCarro()
+                .atualmenteNaSede(sede1)
+                .daClasse(ClasseCarro.Compacto)
                 .comSedeDeOrigem(sede2)
                 .constroi();
-        Carro carro2 = CarroBuilder.umCarro()
-                .naSituacao(Carro.Situacao.Disponivel)
-                .atualmenteNa(sede1)
-                .comClasse(ClasseCarro.Luxo)
+        Carro carro2 = Carro.Builder.umCarro()
+                .atualmenteNaSede(sede1)
+                .daClasse(ClasseCarro.Luxo)
                 .comSedeDeOrigem(sede2)
                 .constroi();
 
@@ -154,7 +151,7 @@ public class ReservaRepositoryTest {
         carroRepository.salvaOuAtualiza(carro1);
         carroRepository.salvaOuAtualiza(carro2);
 
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -162,7 +159,7 @@ public class ReservaRepositoryTest {
                 .constroi();
         new ClienteRepository(manager).salvaOuAtualiza(cliente);
 
-        Reserva reserva1 = ReservaBuilder.umReserva()
+        Reserva reserva1 = Reserva.Builder.umReserva()
                 .paraCliente(cliente).doCarro(carro1)
                 .comSedeDeLocacao(sede2)
                 .naSituacao(Reserva.Situcao.Ativa)
@@ -171,7 +168,7 @@ public class ReservaRepositoryTest {
                 .comDataLocacao(LocalDate.now())
                 .constroi();
 
-        Reserva reserva2 = ReservaBuilder.umReserva()
+        Reserva reserva2 = Reserva.Builder.umReserva()
                 .paraCliente(cliente).doCarro(carro2)
                 .comSedeDeLocacao(sede2)
                 .naSituacao(Reserva.Situcao.Ativa)
@@ -187,11 +184,11 @@ public class ReservaRepositoryTest {
     @Test
     public void deveEfetuarReservaParaClientesSemPendencias(){
         SedeRepository sedeRepository = new SedeRepository(manager);
-        Sede sede1 = SedeBuilder.umaSede()
+        Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")
@@ -199,11 +196,11 @@ public class ReservaRepositoryTest {
                         .constroi())
                 .comTelefones(new Telefone("11","1111111111"))
                 .constroi();
-        Sede sede2 = SedeBuilder.umaSede()
+        Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
                 .comGerente("Mauro")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")
@@ -215,16 +212,14 @@ public class ReservaRepositoryTest {
         sedeRepository.salvaOuAtualiza(sede1);
         sedeRepository.salvaOuAtualiza(sede2);
 
-        Carro carro1 = CarroBuilder.umCarro()
-                .naSituacao(Carro.Situacao.Disponivel)
-                .atualmenteNa(sede1)
-                .comClasse(ClasseCarro.Compacto)
+        Carro carro1 = Carro.Builder.umCarro()
+                .atualmenteNaSede(sede1)
+                .daClasse(ClasseCarro.Compacto)
                 .comSedeDeOrigem(sede2)
                 .constroi();
-        Carro carro2 = CarroBuilder.umCarro()
-                .naSituacao(Carro.Situacao.Disponivel)
-                .atualmenteNa(sede1)
-                .comClasse(ClasseCarro.Luxo)
+        Carro carro2 = Carro.Builder.umCarro()
+                .atualmenteNaSede(sede1)
+                .daClasse(ClasseCarro.Luxo)
                 .comSedeDeOrigem(sede2)
                 .constroi();
 
@@ -232,7 +227,7 @@ public class ReservaRepositoryTest {
         carroRepository.salvaOuAtualiza(carro1);
         carroRepository.salvaOuAtualiza(carro2);
 
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -240,7 +235,7 @@ public class ReservaRepositoryTest {
                 .constroi();
         new ClienteRepository(manager).salvaOuAtualiza(cliente);
 
-        Reserva reserva1 = ReservaBuilder.umReserva()
+        Reserva reserva1 = Reserva.Builder.umReserva()
                 .paraCliente(cliente).doCarro(carro1)
                 .comSedeDeLocacao(sede2)
                 .naSituacao(Reserva.Situcao.Finalizada)
@@ -249,7 +244,7 @@ public class ReservaRepositoryTest {
                 .comDataLocacao(LocalDate.now())
                 .constroi();
 
-        Reserva reserva2 = ReservaBuilder.umReserva()
+        Reserva reserva2 = Reserva.Builder.umReserva()
                 .paraCliente(cliente).doCarro(carro2)
                 .comSedeDeLocacao(sede2)
                 .naSituacao(Reserva.Situcao.Ativa)

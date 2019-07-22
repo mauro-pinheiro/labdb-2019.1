@@ -12,6 +12,49 @@ import java.util.Set;
 
 @Entity
 public class Sede implements EntidadeBase {
+    public static class Builder {
+        private Sede sede;
+
+        private Builder(){}
+
+        public static Builder umaSede(){
+            Builder builder = new Builder();
+            builder.sede = new Sede();
+            return builder;
+        }
+
+        public Builder comNome(String nome){
+            sede.setNome(nome);
+            return this;
+        }
+
+        public Builder comEndereco(Endereco endereco){
+            sede.setEndereco(endereco);
+            return this;
+        }
+
+        public Builder comTelefones(Telefone ...telefones){
+            sede.setTelefones(Set.of(telefones));
+            return this;
+        }
+
+        public Builder comGerente(String nome){
+            sede.setNomeGerente(nome);
+            return this;
+        }
+
+        public Builder comMultaPorSedeDiferente(double multa){
+            sede.setMultaSedeDiferente(new BigDecimal(multa));
+            return this;
+        }
+
+        public Sede constroi() {
+            Objects.requireNonNull(sede.getNome(), "Nome nao pode ser nulo");
+            Objects.requireNonNull(sede.getEndereco(), "Endereço nao pode ser nulo");
+            return sede;
+        }
+    }
+
     private Integer id;
     private String nome;
     private Endereco endereco;
@@ -29,7 +72,7 @@ public class Sede implements EntidadeBase {
         return id;
     }
 
-    private void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

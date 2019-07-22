@@ -1,7 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
-import lab5.xyzrentalcars.builders.EnderecoBuilder;
-import lab5.xyzrentalcars.builders.SedeBuilder;
+import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 import org.junit.Test;
 
@@ -12,11 +11,11 @@ import static org.junit.Assert.*;
 public class SedeTest {
     @Test
     public void criaUmaSedeUsandoOBuilder(){
-        Sede sede = SedeBuilder.umaSede()
+        Sede sede = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
                 .comMultaPorSedeDiferente(10.90)
-                .comEndereco(EnderecoBuilder
+                .comEndereco(Endereco.Builder
                         .umEndereco()
                         .naRua("Tres")
                         .noNumero("13")

@@ -6,12 +6,76 @@ import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Cliente implements EntidadeBase {
+    public static class Builder {
+        private Cliente cliente;
+
+        private Builder(){}
+
+        public static Builder umCliente(){
+            Builder builder = new Builder();
+            builder.cliente = new Cliente();
+            return builder;
+        }
+
+        public Builder comNome(String nome){
+            cliente.setNome(nome);
+            return this;
+        }
+
+        public Builder comCPF(String cpf){
+            cliente.setCpf(cpf);
+            return this;
+        }
+
+        public Builder comNumeroCNH(String numero){
+            if(Objects.isNull(cliente.getCnh())){
+                cliente.setCnh(new CNH());
+            }
+            cliente.getCnh().setNumero(numero);
+            return this;
+        }
+
+        public Builder comValidadeCNH(LocalDate validade){
+            if(Objects.isNull(cliente.getCnh())){
+                cliente.setCnh(new CNH());
+            }
+            cliente.getCnh().setValidade(validade);
+            return this;
+        }
+
+        public Builder comCategoriaCNH(String categoria){
+            if(Objects.isNull(cliente.getCnh())){
+                cliente.setCnh(new CNH());
+            }
+            cliente.getCnh().setCategoria(categoria);
+            return this;
+        }
+
+        public Builder comTelefones(Telefone ...telefones){
+            cliente.setTelefones(Set.of(telefones));
+            return this;
+        }
+
+        public Builder comEnderecos(Endereco ...enderecos){
+            cliente.setEnderecos(Set.of(enderecos));
+            return this;
+        }
+
+        public Cliente constroi() {
+            Objects.requireNonNull(cliente.getCnh(),"CNH nao pode ser nula");
+            Objects.requireNonNull(cliente.getNome(), "Nome nao pode ser nulo");
+            Objects.requireNonNull(cliente.getCpf(), "CPFs nao pode ser nulo");
+            return cliente;
+        }
+    }
+
     private Integer id;
     private String nome;
     private String cpf;

@@ -1,9 +1,5 @@
 package lab5.xyzrentalcars.repositorio;
 
-import lab5.xyzrentalcars.builders.CarroBuilder;
-import lab5.xyzrentalcars.builders.EnderecoBuilder;
-import lab5.xyzrentalcars.builders.SedeBuilder;
-import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 import lab5.xyzrentalcars.modelo.entidades.Carro;
 import lab5.xyzrentalcars.modelo.entidades.Sede;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
@@ -44,8 +40,10 @@ public class CarroRepositoryTest {
     }
 
     @Test
-    public void deveInserirUmCarro(){
-
+    public void recuperarUmCarroComSitucaoDiferenteDeDisponivel(){
+        Carro carro = Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .constroi();
     }
 
     @Test
@@ -53,29 +51,24 @@ public class CarroRepositoryTest {
         Sede sede = new SedeRepository(manager).buscaPorNome("Sede 2").get(0);
 
         Carro carros[] = {
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.SubCompacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.SubCompacto)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Luxo)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Luxo)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .constroi()
         };
@@ -103,29 +96,24 @@ public class CarroRepositoryTest {
         Sede sede = new SedeRepository(manager).buscaPorNome("Sede 1").get(0);
 
         Carro carros[] = {
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Luxo)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Luxo)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.SubCompacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.SubCompacto)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Luxo)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Luxo)
                         .comSedeDeOrigem(sede)
                         .constroi(),
-                CarroBuilder.umCarro()
-                        .comClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .constroi()
         };

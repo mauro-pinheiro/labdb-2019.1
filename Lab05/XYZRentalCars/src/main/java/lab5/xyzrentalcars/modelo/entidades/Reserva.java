@@ -10,6 +10,89 @@ import java.util.Objects;
 
 @Entity
 public class Reserva implements EntidadeBase {
+    public enum Situcao {
+        Ativa,
+        Atrazada,
+        Finalizada
+    }
+
+    public static class Builder {
+        private Reserva reserva;
+
+        private Builder(){}
+
+        public static Builder umReserva(){
+            Builder builder = new Builder();
+            builder.reserva = new Reserva();
+            return builder;
+        }
+
+        public Builder comNumero(String numero){
+            reserva.setNumero(numero);
+            return this;
+        }
+
+        public Builder comDiarias(Integer diarias){
+            reserva.setDiarias(diarias);
+            return this;
+        }
+
+        public Builder comDataLocacao(LocalDate locacao){
+            reserva.setDataLocacao(locacao);
+            return this;
+        }
+
+        public Builder comDataRetorno(LocalDate retorno){
+            reserva.setDataRetorno(retorno);
+            return this;
+        }
+
+        public Builder comKmRodados(Integer km){
+            reserva.setKmRodados(km);
+            return this;
+        }
+
+        public Builder comMulta(BigDecimal multa){
+            reserva.setMulta(multa);
+            return this;
+        }
+
+        public Builder naSituacao(Reserva.Situcao situacao){
+            reserva.setSituacao(situacao);
+            return this;
+        }
+
+        public Builder paraCliente(Cliente cliente){
+            reserva.setCliente(cliente);
+            return this;
+        }
+
+        public Builder doCarro(Carro carro){
+            reserva.setCarro(carro);
+            return this;
+        }
+
+        public Builder comSedeDeLocacao(Sede sede){
+            reserva.setSedeLocacao(sede);
+            return this;
+        }
+
+        public Builder comSedeDeDevolucao(Sede sede){
+            reserva.setSedeDevolucao(sede);
+            return this;
+        }
+
+        public Reserva constroi() {
+            Objects.requireNonNull(reserva.getDataLocacao(), "Data de locacao nao pode ser nula");
+            Objects.requireNonNull(reserva.getDiarias(), "Quantidade de diarias nao pode ser nula");
+            Objects.requireNonNull(reserva.getMulta(), "Multa nao pode ser nula");
+            Objects.requireNonNull(reserva.getSituacao(), "Data de locacao nao pode ser nula");
+            Objects.requireNonNull(reserva.getCarro(), "Carro nao pode ser nula");
+            Objects.requireNonNull(reserva.getCliente(), "Cliente nao pode ser nula");
+            return reserva;
+        }
+    }
+
     private Integer id;
     private String numero;
     private Integer diarias;
@@ -144,7 +227,7 @@ public class Reserva implements EntidadeBase {
     public void setCarro(Carro carro) {
         this.carro = carro;
         if(Objects.nonNull(carro)){
-            carro.getHistoricoReservas().add(this);
+            carro.aluga(this);
         }
     }
 
@@ -185,12 +268,6 @@ public class Reserva implements EntidadeBase {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public enum Situcao {
-        Ativa,
-        Atrazada,
-        Finalizada
     }
 
     @Transient

@@ -3,9 +3,83 @@ package lab5.xyzrentalcars.modelo.embutiveis;
 import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Embeddable
 public class Endereco {
+    public static class Builder {
+        private Endereco endereco;
+
+        private Builder(){}
+
+        public static Builder umEndereco(){
+            Builder builder = new Builder();
+            builder.endereco = new Endereco();
+            return builder;
+        }
+
+        public Builder naRua(String nome){
+            endereco.setTipoLugradouro(TipoLugradouro.Rua);
+            endereco.setNome(nome);
+            return this;
+        }
+
+        public Builder naEstrada(String nome){
+            endereco.setTipoLugradouro(TipoLugradouro.Estrada);
+            endereco.setNome(nome);
+            return this;
+        }
+
+        public Builder naAvenida(String nome){
+            endereco.setTipoLugradouro(TipoLugradouro.Avenida);
+            endereco.setNome(nome);
+            return this;
+        }
+
+        public Builder naAlameda(String nome){
+            endereco.setTipoLugradouro(TipoLugradouro.Alameda);
+            endereco.setNome(nome);
+            return this;
+        }
+
+        public Builder noNumero(String numero){
+            endereco.setNumero(numero);
+            return this;
+        }
+
+        public Builder comComplemento(String complemento){
+            endereco.setComplemento(complemento);
+            return this;
+        }
+
+        public Builder noBairro(String bairro){
+            endereco.setBairro(bairro);
+            return this;
+        }
+
+        public Builder naCidade(String cidade){
+            endereco.setCidade(cidade);
+            return this;
+        }
+
+        public Builder noEstado(String estado){
+            endereco.setEstado(estado);
+            return this;
+        }
+
+        public Builder comCEP(String cep){
+            endereco.setCep(cep);
+            return this;
+        }
+
+        public Endereco constroi() {
+            Objects.requireNonNull(endereco.getTipoLugradouro(),"Tipo Lugradouro nao pode ser nulo");
+            Objects.requireNonNull(endereco.getNome(),"Nome Lugradouro nao pode ser nulo");
+            Objects.requireNonNull(endereco.getBairro(),"Bairro nao pode ser nulo");
+            return endereco;
+        }
+    }
+
     private TipoLugradouro tipoLugradouro;
     private String nome;
     private String numero;

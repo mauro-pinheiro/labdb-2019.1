@@ -1,6 +1,5 @@
 package lab5.xyzrentalcars.repositorio;
 
-import lab5.xyzrentalcars.builders.ClienteBuilder;
 import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.entidades.Cliente;
 import org.junit.*;
@@ -42,7 +41,7 @@ public class ClienteRepositoryTest {
 
     @Test
     public void deveSalvarUmNovoCliente(){
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -55,7 +54,7 @@ public class ClienteRepositoryTest {
 
     @Test
     public void deveBuscarClientePorId(){
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -72,7 +71,7 @@ public class ClienteRepositoryTest {
 
     @Test
     public void deveExcluirCliente(){
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -91,7 +90,7 @@ public class ClienteRepositoryTest {
 
     @Test
     public void deveAlteraCliente(){
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")
@@ -112,7 +111,7 @@ public class ClienteRepositoryTest {
 
     @Test
     public void deveAtualizarCnhDoCliente(){
-        Cliente cliente = ClienteBuilder.umCliente()
+        Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
                 .comNumeroCNH("123")

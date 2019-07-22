@@ -183,4 +183,85 @@ public class ReservaRepositoryTest {
         reservaRepository.salvaOuAtualiza(reserva1);
         reservaRepository.salvaOuAtualiza(reserva2);
     }
+
+    @Test
+    public void deveEfetuarReservaParaClientesSemPendencias(){
+        SedeRepository sedeRepository = new SedeRepository(manager);
+        Sede sede1 = SedeBuilder.umaSede()
+                .comNome("Sede 1")
+                .comGerente("Carlos")
+                .comMultaPorSedeDiferente(10.90)
+                .comEndereco(EnderecoBuilder
+                        .umEndereco()
+                        .naRua("Tres")
+                        .noNumero("13")
+                        .noBairro("Ipem Turu")
+                        .constroi())
+                .comTelefones(new Telefone("11","1111111111"))
+                .constroi();
+        Sede sede2 = SedeBuilder.umaSede()
+                .comNome("Sede 2")
+                .comGerente("Mauro")
+                .comMultaPorSedeDiferente(10.90)
+                .comEndereco(EnderecoBuilder
+                        .umEndereco()
+                        .naRua("Tres")
+                        .noNumero("13")
+                        .noBairro("Ipem Turu")
+                        .constroi())
+                .comTelefones(new Telefone("11","1111111111"))
+                .constroi();
+
+        sedeRepository.salvaOuAtualiza(sede1);
+        sedeRepository.salvaOuAtualiza(sede2);
+
+        Carro carro1 = CarroBuilder.umCarro()
+                .naSituacao(Carro.Situacao.Disponivel)
+                .atualmenteNa(sede1)
+                .comClasse(ClasseCarro.Compacto)
+                .comSedeDeOrigem(sede2)
+                .constroi();
+        Carro carro2 = CarroBuilder.umCarro()
+                .naSituacao(Carro.Situacao.Disponivel)
+                .atualmenteNa(sede1)
+                .comClasse(ClasseCarro.Luxo)
+                .comSedeDeOrigem(sede2)
+                .constroi();
+
+        CarroRepository carroRepository = new CarroRepository(manager);
+        carroRepository.salvaOuAtualiza(carro1);
+        carroRepository.salvaOuAtualiza(carro2);
+
+        Cliente cliente = ClienteBuilder.umCliente()
+                .comNome("Mauro")
+                .comCPF("1234")
+                .comNumeroCNH("123")
+                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .constroi();
+        new ClienteRepository(manager).salvaOuAtualiza(cliente);
+
+        Reserva reserva1 = ReservaBuilder.umReserva()
+                .paraCliente(cliente).doCarro(carro1)
+                .comSedeDeLocacao(sede2)
+                .naSituacao(Reserva.Situcao.Finalizada)
+                .comDiarias(10)
+                .comMulta(new BigDecimal(2.5))
+                .comDataLocacao(LocalDate.now())
+                .constroi();
+
+        Reserva reserva2 = ReservaBuilder.umReserva()
+                .paraCliente(cliente).doCarro(carro2)
+                .comSedeDeLocacao(sede2)
+                .naSituacao(Reserva.Situcao.Ativa)
+                .comDiarias(10)
+                .comMulta(new BigDecimal(2.5))
+                .comDataLocacao(LocalDate.now())
+                .constroi();
+
+        reservaRepository.salvaOuAtualiza(reserva1);
+        reservaRepository.salvaOuAtualiza(reserva2);
+
+        Assert.assertEquals(reserva1.getSituacao(), Reserva.Situcao.Finalizada);
+        Assert.assertNotNull(reserva2);
+    }
 }

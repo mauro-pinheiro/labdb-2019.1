@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.exceptions.TemReservaNaoFinalizadaException;
 import lab5.xyzrentalcars.modelo.EntidadeBase;
 
 import javax.persistence.*;
@@ -124,7 +125,14 @@ public class Reserva implements EntidadeBase {
     }
 
     public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+        if(Objects.nonNull(cliente)){
+            if(cliente.temReservaNaoFinalizada()){
+                throw new TemReservaNaoFinalizadaException();
+            } else {
+                this.cliente = cliente;
+                this.cliente.getHistoricoReservas().add(this);
+            }
+        }
     }
 
     @ManyToOne
@@ -135,6 +143,9 @@ public class Reserva implements EntidadeBase {
 
     public void setCarro(Carro carro) {
         this.carro = carro;
+        if(Objects.nonNull(carro)){
+            carro.getHistoricoReservas().add(this);
+        }
     }
 
     @ManyToOne
@@ -145,6 +156,9 @@ public class Reserva implements EntidadeBase {
 
     public void setSedeLocacao(Sede sedeLocacao) {
         this.sedeLocacao = sedeLocacao;
+        if(Objects.nonNull(sedeLocacao)){
+            sedeLocacao.getHistoricoLocacao().add(this);
+        }
     }
 
     @ManyToOne
@@ -155,6 +169,9 @@ public class Reserva implements EntidadeBase {
 
     public void setSedeDevolucao(Sede sedeDevolucao) {
         this.sedeDevolucao = sedeDevolucao;
+        if(Objects.nonNull(sedeDevolucao)){
+            sedeDevolucao.getHistoricoDevolucao().add(this);
+        }
     }
 
     @Override

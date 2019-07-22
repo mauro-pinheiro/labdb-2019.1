@@ -6,7 +6,7 @@ import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,13 +15,13 @@ public class Sede implements EntidadeBase {
     private Integer id;
     private String nome;
     private Endereco endereco;
-    private Set<Telefone> telefone = new HashSet<>();
+    private Set<Telefone> telefone = new LinkedHashSet<>();
     private String nomeGerente;
     private BigDecimal multaSedeDiferente;
-    private Set<Reserva> historicoLocacao = new HashSet<>();
-    private Set<Reserva> historicoDevolucao = new HashSet<>();
-    private Set<Carro> carrosOriginadosDaSede = new HashSet<>();
-    private Set<Carro> carrosAtualmenteNaSede = new HashSet<>();
+    private Set<Reserva> historicoLocacao = new LinkedHashSet<>();
+    private Set<Reserva> historicoDevolucao = new LinkedHashSet<>();
+    private Set<Carro> carrosOriginadosDaSede = new LinkedHashSet<>();
+    private Set<Carro> carrosAtualmenteNaSede = new LinkedHashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

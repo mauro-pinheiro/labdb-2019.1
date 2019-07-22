@@ -38,8 +38,8 @@ public class SedeBuilder implements Builder<Sede> {
         return this;
     }
 
-    public SedeBuilder comMultaPorSedeDiferente(BigDecimal multa){
-        sede.setMultaSedeDiferente(multa);
+    public SedeBuilder comMultaPorSedeDiferente(double multa){
+        sede.setMultaSedeDiferente(new BigDecimal(multa));
         return this;
     }
 

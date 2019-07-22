@@ -1,8 +1,11 @@
 package lab5.xyzrentalcars.repositorio;
 
 import lab5.xyzrentalcars.modelo.entidades.Carro;
+import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 public class CarroRepository {
     private final EntityManager manager;
@@ -23,5 +26,12 @@ public class CarroRepository {
 
     public void remove(Carro carro) {
         dao.remove(carro);
+    }
+
+    public List<Carro> buscaPorClasse(ClasseCarro classeCarro) {
+        Query query = manager.createQuery("from Carro where classe = :classe");
+        query.setParameter("classe", classeCarro);
+
+        return query.getResultList();
     }
 }

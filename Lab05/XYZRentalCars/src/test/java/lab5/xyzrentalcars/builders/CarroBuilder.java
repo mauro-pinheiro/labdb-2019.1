@@ -3,6 +3,9 @@ package lab5.xyzrentalcars.builders;
 import lab5.xyzrentalcars.modelo.entidades.Carro;
 import lab5.xyzrentalcars.modelo.entidades.Sede;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
+import lab5.xyzrentalcars.util.ManagerFactory;
+
+import java.util.Objects;
 
 public class CarroBuilder implements Builder<Carro> {
     private Carro carro;

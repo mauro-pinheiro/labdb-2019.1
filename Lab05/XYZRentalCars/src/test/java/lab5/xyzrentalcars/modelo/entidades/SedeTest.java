@@ -13,15 +13,18 @@ public class SedeTest {
     @Test
     public void criaUmaSedeUsandoOBuilder(){
         Sede sede = SedeBuilder.umaSede()
-                .comNome("Sede1")
-                .comGerente("Tomas")
-                .comMultaPorSedeDiferente(new BigDecimal(10))
-                .comTelefones(new Telefone("11","11111111"))
-                .comEndereco(EnderecoBuilder.umEndereco()
-                        .naRua("3")
+                .comNome("Sede 1")
+                .comGerente("Carlos")
+                .comMultaPorSedeDiferente(10.90)
+                .comEndereco(EnderecoBuilder
+                        .umEndereco()
+                        .naRua("Tres")
+                        .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
+                .comTelefones(new Telefone("11","1111111111"))
                 .constroi();
+
 
         assertNotNull(sede);
     }

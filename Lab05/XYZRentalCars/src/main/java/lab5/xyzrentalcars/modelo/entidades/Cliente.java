@@ -109,4 +109,10 @@ public class Cliente implements EntidadeBase {
     public boolean cnhVencida(){
         return cnh.vencida();
     }
+
+    public boolean temReservaNaoFinalizada(){
+        return historicoReservas.stream()
+                .filter(reserva -> !Objects.equals(reserva.getSituacao(), Reserva.Situcao.Finalizada))
+                .count() > 0;
+    }
 }

@@ -140,8 +140,10 @@ public class Carro implements EntidadeBase {
     }
 
     public void setSedeDeOrigem(Sede original) {
-        original.getCarrosOriginadosDaSede().add(this);
-        this.sedeDeOrigem = original;
+        sedeDeOrigem = original;
+        if(Objects.nonNull(sedeDeOrigem)){
+            sedeDeOrigem.getCarrosOriginadosDaSede().add(this);
+        }
     }
 
     @ManyToOne
@@ -151,8 +153,10 @@ public class Carro implements EntidadeBase {
     }
 
     public void setSedeAtual(Sede atual) {
-        atual.getCarrosAtualmenteNaSede().add(this);
         this.sedeAtual = atual;
+        if(Objects.nonNull(sedeAtual)){
+            sedeAtual.getCarrosAtualmenteNaSede().add(this);
+        }
     }
 
     @Override

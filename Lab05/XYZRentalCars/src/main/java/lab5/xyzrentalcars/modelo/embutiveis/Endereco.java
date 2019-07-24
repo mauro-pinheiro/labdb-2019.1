@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.embutiveis;
 
+import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
 
 import javax.persistence.*;
@@ -18,70 +19,83 @@ public class Endereco {
             return builder;
         }
 
-        public Builder naRua(String nome){
-            endereco.setTipoLugradouro(TipoLugradouro.Rua);
-            endereco.setNome(nome);
-            return this;
-        }
-
-        public Builder naEstrada(String nome){
-            endereco.setTipoLugradouro(TipoLugradouro.Estrada);
-            endereco.setNome(nome);
-            return this;
-        }
-
-        public Builder naAvenida(String nome){
-            endereco.setTipoLugradouro(TipoLugradouro.Avenida);
-            endereco.setNome(nome);
-            return this;
-        }
-
-        public Builder naAlameda(String nome){
-            endereco.setTipoLugradouro(TipoLugradouro.Alameda);
-            endereco.setNome(nome);
-            return this;
+        public Builder comLugradouro(Lugradouro lugradouro){
+            if(Objects.isNull(endereco.getLugradouro())){
+                endereco.setLugradouro(lugradouro);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("tipo de lugradouro");
+            }
         }
 
         public Builder noNumero(String numero){
-            endereco.setNumero(numero);
-            return this;
+            if(Objects.isNull(endereco.getNumero())){
+                endereco.setNumero(numero);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("numero");
+            }
+
         }
 
         public Builder comComplemento(String complemento){
-            endereco.setComplemento(complemento);
-            return this;
+            if(Objects.isNull(endereco.getComplemento())){
+                endereco.setComplemento(complemento);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("complemento");
+            }
+
         }
 
         public Builder noBairro(String bairro){
-            endereco.setBairro(bairro);
-            return this;
+            if(Objects.isNull(endereco.getBairro())){
+                endereco.setBairro(bairro);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("bairro");
+            }
         }
 
         public Builder naCidade(String cidade){
-            endereco.setCidade(cidade);
-            return this;
+            if(Objects.isNull(endereco.getCidade())){
+                endereco.setCidade(cidade);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("cidade");
+            }
+
         }
 
         public Builder noEstado(String estado){
-            endereco.setEstado(estado);
-            return this;
+            if(Objects.isNull(endereco.getEstado())){
+                endereco.setEstado(estado);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("estado");
+            }
+
         }
 
         public Builder comCEP(String cep){
-            endereco.setCep(cep);
-            return this;
+            if(Objects.isNull(endereco.getCep())){
+                endereco.setCep(cep);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("cep");
+            }
+
         }
 
         public Endereco constroi() {
-            Objects.requireNonNull(endereco.getTipoLugradouro(),"Tipo Lugradouro nao pode ser nulo");
-            Objects.requireNonNull(endereco.getNome(),"Nome Lugradouro nao pode ser nulo");
-            Objects.requireNonNull(endereco.getBairro(),"Bairro nao pode ser nulo");
+            Objects.requireNonNull(endereco.getLugradouro(),"Nao pode contruir um endereço com lugradouro nulo");
+            Objects.requireNonNull(endereco.getBairro(),"Nao pode construir endereco com bairro nulo");
             return endereco;
         }
     }
 
-    private TipoLugradouro tipoLugradouro;
-    private String nome;
+    private Lugradouro lugradouro;
+
     private String numero;
     private String complemento;
     private String bairro;
@@ -89,23 +103,13 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20, name = "tipo_lugradouro", nullable = false)
-    public TipoLugradouro getTipoLugradouro() {
-        return tipoLugradouro;
+    @Embedded
+    public Lugradouro getLugradouro() {
+        return lugradouro;
     }
 
-    public void setTipoLugradouro(TipoLugradouro tipo) {
-        this.tipoLugradouro = tipo;
-    }
-
-    @Column(length = 60, nullable = false)
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setLugradouro(Lugradouro lugradouro) {
+        this.lugradouro = lugradouro;
     }
 
     @Column(length = 15)

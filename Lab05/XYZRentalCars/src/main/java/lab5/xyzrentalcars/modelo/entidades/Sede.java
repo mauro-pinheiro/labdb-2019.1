@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
@@ -23,29 +24,56 @@ public class Sede implements EntidadeBase {
             return builder;
         }
 
+        static Builder umaSede(int id){
+            Builder builder = new Builder();
+            builder.sede = new Sede();
+            builder.sede.setId(id);
+            return builder;
+        }
+
         public Builder comNome(String nome){
-            sede.setNome(nome);
-            return this;
+            if(Objects.isNull(sede.getNome())) {
+                sede.setNome(nome);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("nome");
+            }
         }
 
         public Builder comEndereco(Endereco endereco){
-            sede.setEndereco(endereco);
-            return this;
+            if(Objects.isNull(sede.getEndereco())) {
+                sede.setEndereco(endereco);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("endereco");
+            }
         }
 
         public Builder comTelefones(Telefone ...telefones){
-            sede.setTelefones(Set.of(telefones));
-            return this;
+            if(sede.getTelefones().isEmpty()) {
+                sede.setTelefones(Set.of(telefones));
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("telefones");
+            }
         }
 
         public Builder comGerente(String nome){
-            sede.setNomeGerente(nome);
-            return this;
+            if(Objects.isNull(sede.getNomeGerente())) {
+                sede.setNomeGerente(nome);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("nome do gerente");
+            }
         }
 
-        public Builder comMultaPorSedeDiferente(double multa){
-            sede.setMultaSedeDiferente(new BigDecimal(multa));
-            return this;
+        public Builder comMultaPorSedeDiferente(BigDecimal multa){
+            if(Objects.isNull(sede.getMultaSedeDiferente())) {
+                sede.setMultaSedeDiferente(multa);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("multa Por Sede Diferente");
+            }
         }
 
         public Sede constroi() {
@@ -87,9 +115,8 @@ public class Sede implements EntidadeBase {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "tipoLugradouro",
-                    column = @Column(name = "end_tipo_lugradouro", length = 20, nullable = false)),
-            @AttributeOverride(name = "nome", column = @Column(name = "end_name", length = 60, nullable = false)),
+            @AttributeOverride(name = "lugradouro.tipo", column = @Column(length = 20, nullable = false, name = "end_tipo_lugradouro")),
+            @AttributeOverride(name = "lugradouro.nome", column = @Column(length = 40, nullable = false, name = "end_name_lugradouro")),
             @AttributeOverride(name = "numero", column = @Column(name = "end_numero", length = 8)),
             @AttributeOverride(name = "complemento", column = @Column(name = "end_complemento", length = 60)),
             @AttributeOverride(name = "bairro", column = @Column(name = "end_bairro", length = 30, nullable = false)),

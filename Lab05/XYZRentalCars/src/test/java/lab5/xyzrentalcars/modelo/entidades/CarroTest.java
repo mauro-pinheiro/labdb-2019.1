@@ -1,21 +1,209 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
+import lab5.xyzrentalcars.modelo.embutiveis.Lugradouro;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
+import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
 public class CarroTest {
 
+    @Test(expected = NullPointerException.class)
+    public void naoDeveContruirUmCarroComSedeDeOrigemNula(){
+        Sede sede = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+        Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.Disponivel)
+                .atualmenteNaSede(sede)
+                .constroi();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void naoDeveContruirUmCarroComSituacaoNula(){
+        Sede sede = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+        Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                //.naSituacao(Carro.Situacao.Disponivel)
+                .comSedeDeOrigem(sede)
+                .atualmenteNaSede(sede)
+                .constroi();
+    }
+
+    @Test
+    public void deveContruirUmCarroUmCarroDisponivelComSedeDeOrigemIgualASedeAtual(){
+        Sede sede = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+        assertNotNull(Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.Disponivel)
+                .comSedeDeOrigem(sede)
+                .atualmenteNaSede(sede)
+                .constroi());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveConstruirUmCarroDisponivelComSedeAtualDiferenteDaSedeDeOrigem(){
+        Sede sede1 = Sede.Builder.umaSede(1)
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Sede sede2 = Sede.Builder.umaSede(2)
+                .comNome("Sede 2")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.Disponivel)
+                .comSedeDeOrigem(sede1)
+                .atualmenteNaSede(sede2)
+                .constroi();
+    }
+
+    @Test
+    public void deveContruirUmCarroUmCarroAlugadoComSedeAtualNula(){
+        Sede sede = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+        assertNotNull(Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.Alugado)
+                .comSedeDeOrigem(sede)
+                .atualmenteNaSede(null)
+                .constroi());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveContruirUmCarroAlugadoComSedeAtualDiferenteDeNull(){
+        Sede sede1 = Sede.Builder.umaSede(1)
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Sede sede2 = Sede.Builder.umaSede(2)
+                .comNome("Sede 2")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.Alugado)
+                .comSedeDeOrigem(sede1)
+                .atualmenteNaSede(sede2)
+                .constroi();
+    }
+
+    @Test
+    public void deveContruirUmCarroForaDaSedeDeOrigemComSedeAtualDeferenteDaSedeDeOrigemENaoNula(){
+        Sede sede1 = Sede.Builder.umaSede(1)
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Sede sede2 = Sede.Builder.umaSede(2)
+                .comNome("Sede 2")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Carro carro = Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.ForaDaSedeDeOrigem)
+                .comSedeDeOrigem(sede1)
+                .atualmenteNaSede(sede2)
+                .constroi();
+
+        assertNotNull(carro);
+        assertNotNull(carro.getSedeAtual());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveContruirUmCarroForaDaSedeDeOrigemComSedeAtualNula(){
+        Sede sede1 = Sede.Builder.umaSede(1)
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.ForaDaSedeDeOrigem)
+                .comSedeDeOrigem(sede1)
+                .atualmenteNaSede(null)
+                .constroi();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveContruirUmCarroForaDaSedeDeOrigemComSedeDeOrigemIgualASedeAtual(){
+        Sede sede1 = Sede.Builder.umaSede(1)
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.ForaDaSedeDeOrigem)
+                .comSedeDeOrigem(sede1)
+                .atualmenteNaSede(sede1)
+                .constroi();
+    }
+
     @Test
     public void deveCriarUmCarroForaDaSedeDeOrigem(){
         Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
@@ -23,9 +211,9 @@ public class CarroTest {
 
         Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
@@ -46,124 +234,34 @@ public class CarroTest {
     public void deveCriarCarroSeTodosAtributosNotNullForemAtrbuidos(){
         Sede sede = Sede.Builder.umaSede()
                 .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
 
         Carro carro = Carro.Builder.umCarro()
                 .comSedeDeOrigem(sede)
+                .atualmenteNaSede(sede)
                 .daClasse(ClasseCarro.Compacto)
                 .naSituacao(Carro.Situacao.Disponivel)
                 .daCor("Preto")
                 .constroi();
 
-        Assert.assertNotNull(carro);
+        assertNotNull(carro);
+        assertNotNull(carro.getClasse());
+        assertNotNull(carro.getSedeDeOrigem());
+        assertNotNull(carro.getSituacao());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void naoDeveCriarCarroSemClasse(){
-        Sede sede = Sede.Builder.umaSede()
-                .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
-                .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
-                        .noBairro("Turu")
-                        .constroi())
-                .constroi();
-
-        Carro carro = Carro.Builder.umCarro()
-                .comSedeDeOrigem(sede)
-                //.daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
-                .daCor("Preto")
-                .constroi();
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void naoDeveCriaCarroSemOrigem(){
-        Carro carro = Carro.Builder.umCarro()
-                //.comSedeDeOrigem(sede)
-                .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
-                .daCor("Preto")
-                .constroi();
-    }
-
-
-    @Test
-    public void atribuiSituacaoDisponivelCasoNaoAtribuida(){
-        Sede sede = Sede.Builder.umaSede()
-                .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
-                .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
-                        .noBairro("Turu")
-                        .constroi())
-                .constroi();
-
-        Carro carro = Carro.Builder.umCarro()
-                .comSedeDeOrigem(sede)
-                .daClasse(ClasseCarro.Compacto)
-                //.naSituacao(Carro.Situacao.Disponivel)
-                .daCor("Preto")
-                .constroi();
-
-        Assert.assertEquals(carro.getSituacao(), Carro.Situacao.Disponivel);
-    }
-
-    @Test
-    public void sedeDeOrigemEAtualIguaisQuandoSituacaoEhDisponivel(){
-        Sede sede = Sede.Builder.umaSede()
-                .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
-                .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
-                        .noBairro("Turu")
-                        .constroi())
-                .constroi();
-
-        Carro carro = Carro.Builder.umCarro()
-                .comSedeDeOrigem(sede)
-                .daClasse(ClasseCarro.Compacto)
-                //.naSituacao(Carro.Situacao.Disponivel)
-                .daCor("Preto")
-                .constroi();
-
-        Assert.assertEquals(carro.getSedeDeOrigem(), carro.getSedeAtual());
-    }
-
-    @Test
-    public void seAlugadoSedeAtualEhNula(){
-        Sede sede = Sede.Builder.umaSede()
-                .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
-                .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
-                        .noBairro("Turu")
-                        .constroi())
-                .constroi();
-
-        Carro carro = Carro.Builder.umCarro()
-                .comSedeDeOrigem(sede)
-                .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Alugado)
-                .daCor("Preto")
-                .constroi();
-
-        Assert.assertNull(carro.getSedeAtual());
-    }
-
 
     @Test
     public void trasferiSucesso(){
         Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
@@ -171,9 +269,9 @@ public class CarroTest {
 
         Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
@@ -195,19 +293,18 @@ public class CarroTest {
 
     @Test(expected = IllegalStateException.class)
     public void transferiFalhou(){
-        Sede sede1 = Sede.Builder.umaSede()
+        Sede sede1 = Sede.Builder.umaSede(1)
                 .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
-        sede1.setId(1);
 
         Carro carro = Carro.Builder.umCarro()
                 .comSedeDeOrigem(sede1)
-                //.atualmenteNaSede(sede2)
+                .atualmenteNaSede(sede1)
                 .daClasse(ClasseCarro.Compacto)
                 .naSituacao(Carro.Situacao.Disponivel)
                 .daCor("Preto")
@@ -218,19 +315,18 @@ public class CarroTest {
 
     @Test
     public void alugaSucesso(){
-        Sede sede1 = Sede.Builder.umaSede()
+        Sede sede1 = Sede.Builder.umaSede(1)
                 .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
-        sede1.setId(1);
 
         Carro carro = Carro.Builder.umCarro()
                 .comSedeDeOrigem(sede1)
-                //.atualmenteNaSede(sede2)
+                .atualmenteNaSede(sede1)
                 .daClasse(ClasseCarro.Compacto)
                 .naSituacao(Carro.Situacao.Disponivel)
                 .daCor("Preto")
@@ -247,9 +343,9 @@ public class CarroTest {
     public void alugaFalha(){
         Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
-                .comMultaPorSedeDiferente(10)
+                .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
-                        .naRua("3")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
                         .noBairro("Turu")
                         .constroi())
                 .constroi();

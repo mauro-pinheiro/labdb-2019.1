@@ -10,7 +10,7 @@ public class CNH {
     private LocalDate validade;
     private String categoria;
 
-    public CNH(){}
+    protected CNH(){}
 
     public CNH(String numero, LocalDate validade) {
         this.numero = numero;

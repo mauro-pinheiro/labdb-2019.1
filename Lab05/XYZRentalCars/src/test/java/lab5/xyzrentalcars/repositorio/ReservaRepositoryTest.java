@@ -1,13 +1,15 @@
 package lab5.xyzrentalcars.repositorio;
 
-import lab5.xyzrentalcars.exceptions.TemReservaNaoFinalizadaException;
+import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
+import lab5.xyzrentalcars.modelo.embutiveis.Lugradouro;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 import lab5.xyzrentalcars.modelo.entidades.Carro;
 import lab5.xyzrentalcars.modelo.entidades.Cliente;
 import lab5.xyzrentalcars.modelo.entidades.Reserva;
 import lab5.xyzrentalcars.modelo.entidades.Sede;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
+import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
 import org.junit.*;
 
 import javax.persistence.EntityManager;
@@ -49,10 +51,10 @@ public class ReservaRepositoryTest {
         Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
-                .comMultaPorSedeDiferente(10.90)
+                .comMultaPorSedeDiferente(new BigDecimal(10.9))
                 .comEndereco(Endereco.Builder
                         .umEndereco()
-                        .naRua("Tres")
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua,"3"))
                         .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
@@ -61,10 +63,9 @@ public class ReservaRepositoryTest {
         Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
                 .comGerente("Mauro")
-                .comMultaPorSedeDiferente(10.90)
-                .comEndereco(Endereco.Builder
-                        .umEndereco()
-                        .naRua("Tres")
+                .comMultaPorSedeDiferente(new BigDecimal(10.9))
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua,"3"))
                         .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
@@ -86,8 +87,7 @@ public class ReservaRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         new ClienteRepository(manager).salvaOuAtualiza(cliente);
 
@@ -105,16 +105,15 @@ public class ReservaRepositoryTest {
         Assert.assertNotNull(reserva);
     }
 
-    @Test(expected = TemReservaNaoFinalizadaException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void clienteNaoDeveRealizarReservaSeTiverReservaNaoFinalizada(){
         SedeRepository sedeRepository = new SedeRepository(manager);
         Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
-                .comMultaPorSedeDiferente(10.90)
-                .comEndereco(Endereco.Builder
-                        .umEndereco()
-                        .naRua("Tres")
+                .comMultaPorSedeDiferente(new BigDecimal(10.9))
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua,"3"))
                         .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
@@ -123,10 +122,9 @@ public class ReservaRepositoryTest {
         Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
                 .comGerente("Mauro")
-                .comMultaPorSedeDiferente(10.90)
-                .comEndereco(Endereco.Builder
-                        .umEndereco()
-                        .naRua("Tres")
+                .comMultaPorSedeDiferente(new BigDecimal(10.9))
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua,"3"))
                         .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
@@ -154,8 +152,7 @@ public class ReservaRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         new ClienteRepository(manager).salvaOuAtualiza(cliente);
 
@@ -187,10 +184,9 @@ public class ReservaRepositoryTest {
         Sede sede1 = Sede.Builder.umaSede()
                 .comNome("Sede 1")
                 .comGerente("Carlos")
-                .comMultaPorSedeDiferente(10.90)
-                .comEndereco(Endereco.Builder
-                        .umEndereco()
-                        .naRua("Tres")
+                .comMultaPorSedeDiferente(new BigDecimal(10.9))
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua,"3"))
                         .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
@@ -199,10 +195,9 @@ public class ReservaRepositoryTest {
         Sede sede2 = Sede.Builder.umaSede()
                 .comNome("Sede 2")
                 .comGerente("Mauro")
-                .comMultaPorSedeDiferente(10.90)
-                .comEndereco(Endereco.Builder
-                        .umEndereco()
-                        .naRua("Tres")
+                .comMultaPorSedeDiferente(new BigDecimal(10.9))
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua,"3"))
                         .noNumero("13")
                         .noBairro("Ipem Turu")
                         .constroi())
@@ -230,8 +225,7 @@ public class ReservaRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         new ClienteRepository(manager).salvaOuAtualiza(cliente);
 

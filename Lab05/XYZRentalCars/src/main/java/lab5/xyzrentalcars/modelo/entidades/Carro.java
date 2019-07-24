@@ -74,7 +74,7 @@ public class Carro implements EntidadeBase {
 
             @Override
             Situacao aluga() {
-                return Alugado;
+                throw new IllegalStateException("Nao pode alugar carro fora da sede de origem");
             }
         };
 
@@ -194,21 +194,30 @@ public class Carro implements EntidadeBase {
         }
 
         public Carro constroi(){
-            Objects.requireNonNull(carro.getClasse(), "Classe do carro nao pode ser nula");
-            Objects.requireNonNull(carro. getSedeDeOrigem(), "Sede de origem do carro nao pode ser nula");
+            Objects.requireNonNull(carro.getClasse(), "Nao pode contruir um carro com classe nula");
+            Objects.requireNonNull(carro.getSedeDeOrigem(), "Nao pode construir um carro com sede de origem nula");
+            Objects.requireNonNull(carro.getSituacao(),"Nao pode construir um carro com situacao nula");
 
-            if(Objects.isNull(carro.getSituacao())){
-                carro.setSituacao(Situacao.Disponivel);
+            if(Objects.equals(Situacao.Disponivel, carro.getSituacao())
+                    && !Objects.equals(carro.getSedeAtual(), carro.getSedeDeOrigem()) ){
+                throw new IllegalArgumentException("Para a situacao ser "
+                        + Situacao.Disponivel.name()
+                        + " SedeAtual deve ser igual a SedeDeOrigem");
             }
-            if(Objects.equals(carro.getSituacao(), Situacao.Disponivel)){
-                carro.setSedeAtual(carro.getSedeDeOrigem());
+            else if(Objects.equals(Situacao.Alugado, carro.getSituacao())
+                    && Objects.nonNull(carro.getSedeAtual())){
+                throw new IllegalArgumentException("Para a situacao ser "
+                        + Situacao.Alugado.name()
+                        + " SedeAtual deve ser null");
             }
-            else if(Objects.equals(carro.getSituacao(), Situacao.Alugado)){
-                carro.setSedeAtual(null);
+            else if(Objects.equals(Situacao.ForaDaSedeDeOrigem, carro.getSituacao())
+                    && (Objects.isNull(carro.getSedeAtual())
+                    || Objects.equals(carro.getSedeAtual(), carro.getSedeDeOrigem()))){
+                throw new IllegalArgumentException("Para a situacao ser "
+                        + Situacao.ForaDaSedeDeOrigem.name()
+                        + "SedeAtual deve ser diferente de SedeDeOrigem");
             }
-            else if(Objects.equals(carro.getSedeAtual(),carro.getSedeDeOrigem())){
-                carro.setSituacao(Situacao.Disponivel);
-            }
+
             return carro;
         }
     }
@@ -380,7 +389,7 @@ public class Carro implements EntidadeBase {
         if(Objects.equals(sede, getSedeDeOrigem())){
             situacao = situacao.retornaNaOrigem();
         } else {
-            situacao = situacao.transferiParaOrigem();
+            situacao = situacao.retornaForaDaOrigem();
         }
         setSedeAtual(sede);
     }

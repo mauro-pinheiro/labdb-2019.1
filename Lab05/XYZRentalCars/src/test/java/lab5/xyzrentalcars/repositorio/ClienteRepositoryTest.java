@@ -44,8 +44,7 @@ public class ClienteRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
 
         clienteRepository.salvaOuAtualiza(cliente);
@@ -57,8 +56,7 @@ public class ClienteRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         clienteRepository.salvaOuAtualiza(cliente);
         manager.flush();
@@ -74,8 +72,7 @@ public class ClienteRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         clienteRepository.salvaOuAtualiza(cliente);
         int id = cliente.getId();
@@ -93,8 +90,7 @@ public class ClienteRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         clienteRepository.salvaOuAtualiza(cliente);
         int id = cliente.getId();
@@ -114,15 +110,12 @@ public class ClienteRepositoryTest {
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comNumeroCNH("123")
-                .comValidadeCNH(LocalDate.now().plusMonths(10))
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
                 .constroi();
         clienteRepository.salvaOuAtualiza(cliente);
         int id = cliente.getId();
 
-        CNH cnh = new CNH();
-        cnh.setNumero("4321");
-        cnh.setValidade(LocalDate.now().plusMonths(30));
+        CNH cnh = new CNH("4321", LocalDate.now().plusMonths(30));
 
         clienteRepository.atualizaCNH(cliente, cnh);
         manager.flush();

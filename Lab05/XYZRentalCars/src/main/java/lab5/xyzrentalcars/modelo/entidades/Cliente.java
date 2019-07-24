@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
@@ -25,47 +26,49 @@ public class Cliente implements EntidadeBase {
         }
 
         public Builder comNome(String nome){
-            cliente.setNome(nome);
-            return this;
+            if(Objects.isNull(cliente.getNome())) {
+                cliente.setNome(nome);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("nome");
+            }
         }
 
         public Builder comCPF(String cpf){
-            cliente.setCpf(cpf);
-            return this;
+            if(Objects.isNull(cliente.getCpf())) {
+                cliente.setCpf(cpf);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("cpf");
+            }
         }
 
-        public Builder comNumeroCNH(String numero){
+        public Builder comCNH(CNH cnh){
             if(Objects.isNull(cliente.getCnh())){
-                cliente.setCnh(new CNH());
+                cliente.setCnh(cnh);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("cnh");
             }
-            cliente.getCnh().setNumero(numero);
-            return this;
         }
 
-        public Builder comValidadeCNH(LocalDate validade){
-            if(Objects.isNull(cliente.getCnh())){
-                cliente.setCnh(new CNH());
-            }
-            cliente.getCnh().setValidade(validade);
-            return this;
-        }
-
-        public Builder comCategoriaCNH(String categoria){
-            if(Objects.isNull(cliente.getCnh())){
-                cliente.setCnh(new CNH());
-            }
-            cliente.getCnh().setCategoria(categoria);
-            return this;
-        }
 
         public Builder comTelefones(Telefone ...telefones){
-            cliente.setTelefones(Set.of(telefones));
-            return this;
+            if(cliente.getTelefones().isEmpty()) {
+                cliente.setTelefones(Set.of(telefones));
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("telefones");
+            }
         }
 
         public Builder comEnderecos(Endereco ...enderecos){
-            cliente.setEnderecos(Set.of(enderecos));
-            return this;
+            if(cliente.getEnderecos().isEmpty()) {
+                cliente.setEnderecos(Set.of(enderecos));
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("enderecos");
+            }
         }
 
         public Cliente constroi() {
@@ -170,7 +173,7 @@ public class Cliente implements EntidadeBase {
         return Objects.hash(id);
     }
 
-    public boolean cnhVencida(){
+    public boolean comCnhVencida(){
         return cnh.vencida();
     }
 

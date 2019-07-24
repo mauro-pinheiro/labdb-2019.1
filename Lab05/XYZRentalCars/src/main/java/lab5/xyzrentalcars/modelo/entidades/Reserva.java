@@ -1,6 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
-import lab5.xyzrentalcars.exceptions.TemReservaNaoFinalizadaException;
+import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.EntidadeBase;
 
 import javax.persistence.*;
@@ -27,68 +27,120 @@ public class Reserva implements EntidadeBase {
             return builder;
         }
 
+        public static Builder umReserva(int id){
+            Builder builder = new Builder();
+            builder.reserva = new Reserva();
+            builder.reserva.setId(id);
+            return builder;
+        }
+
         public Builder comNumero(String numero){
-            reserva.setNumero(numero);
-            return this;
+            if(Objects.isNull(reserva.getNumero())) {
+                reserva.setNumero(numero);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("numero");
+            }
         }
 
         public Builder comDiarias(Integer diarias){
-            reserva.setDiarias(diarias);
-            return this;
+            if(Objects.isNull(reserva.getDiarias())) {
+                reserva.setDiarias(diarias);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("diarias");
+            }
         }
 
         public Builder comDataLocacao(LocalDate locacao){
-            reserva.setDataLocacao(locacao);
-            return this;
+            if(Objects.isNull(reserva.getDataLocacao())) {
+                reserva.setDataLocacao(locacao);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("locacao");
+            }
         }
 
         public Builder comDataRetorno(LocalDate retorno){
-            reserva.setDataRetorno(retorno);
-            return this;
+            if(Objects.isNull(reserva.getDataRetorno())) {
+                reserva.setDataRetorno(retorno);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("retorno");
+            }
         }
 
         public Builder comKmRodados(Integer km){
-            reserva.setKmRodados(km);
-            return this;
+            if(Objects.isNull(reserva.getKmRodados())) {
+                reserva.setKmRodados(km);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("quilometros rodados");
+            }
         }
 
         public Builder comMulta(BigDecimal multa){
-            reserva.setMulta(multa);
-            return this;
+            if(Objects.isNull(reserva.getMulta())) {
+                reserva.setMulta(multa);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("multa");
+            }
         }
 
         public Builder naSituacao(Reserva.Situcao situacao){
-            reserva.setSituacao(situacao);
-            return this;
+            if(Objects.isNull(reserva.getSituacao())) {
+                reserva.setSituacao(situacao);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("situacao");
+            }
         }
 
         public Builder paraCliente(Cliente cliente){
-            reserva.setCliente(cliente);
-            return this;
+            if(Objects.isNull(reserva.getCliente())) {
+                reserva.setCliente(cliente);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("cliente");
+            }
         }
 
         public Builder doCarro(Carro carro){
-            reserva.setCarro(carro);
-            return this;
+            if(Objects.isNull(reserva.getCarro())) {
+                reserva.setCarro(carro);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("carro");
+            }
         }
 
         public Builder comSedeDeLocacao(Sede sede){
-            reserva.setSedeLocacao(sede);
-            return this;
+            if(Objects.isNull(reserva.getSedeLocacao())) {
+                reserva.setSedeLocacao(sede);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("sede de locação");
+            }
         }
 
         public Builder comSedeDeDevolucao(Sede sede){
-            reserva.setSedeDevolucao(sede);
-            return this;
+            if(Objects.isNull(reserva.getSedeDevolucao())) {
+                reserva.setSedeDevolucao(sede);
+                return this;
+            } else {
+                throw new InicializacaoDeAtributoRepetidaExceprion("sede de devolucao");
+            }
         }
 
         public Reserva constroi() {
-            Objects.requireNonNull(reserva.getDataLocacao(), "Data de locacao nao pode ser nula");
-            Objects.requireNonNull(reserva.getDiarias(), "Quantidade de diarias nao pode ser nula");
-            Objects.requireNonNull(reserva.getMulta(), "Multa nao pode ser nula");
-            Objects.requireNonNull(reserva.getSituacao(), "Data de locacao nao pode ser nula");
-            Objects.requireNonNull(reserva.getCarro(), "Carro nao pode ser nula");
-            Objects.requireNonNull(reserva.getCliente(), "Cliente nao pode ser nula");
+            Objects.requireNonNull(reserva.getSedeLocacao(), "Nao pode construir reserva com sede de locacao nula");
+            Objects.requireNonNull(reserva.getDataLocacao(), "Nao pode construir reserva com data de locacao nula");
+            Objects.requireNonNull(reserva.getDiarias(), "Nao pode construir reserva com qtde de diarias nula");
+            Objects.requireNonNull(reserva.getMulta(), "Nao pode construir reserva com multa nula");
+            Objects.requireNonNull(reserva.getSituacao(), "Nao pode construir reserva com situacao nula");
+            Objects.requireNonNull(reserva.getCarro(), "Nao pode construir reserva com carro nulo");
+            Objects.requireNonNull(reserva.getCliente(), "Nao pode construir reserva com cliente nulo");
             return reserva;
         }
     }
@@ -183,7 +235,7 @@ public class Reserva implements EntidadeBase {
     }
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(length = 20)
     public Situcao getSituacao() {
         return situacao;
     }
@@ -210,7 +262,9 @@ public class Reserva implements EntidadeBase {
     public void setCliente(Cliente cliente) {
         if(Objects.nonNull(cliente)){
             if(cliente.temReservaNaoFinalizada()){
-                throw new TemReservaNaoFinalizadaException();
+                throw new IllegalArgumentException("Cliente tem reserva nao finalizada.");
+            } else if(cliente.comCnhVencida()){
+                throw new IllegalArgumentException("Cliente esta com a cnh vencida");
             } else {
                 this.cliente = cliente;
                 this.cliente.getHistoricoReservas().add(this);
@@ -225,10 +279,8 @@ public class Reserva implements EntidadeBase {
     }
 
     public void setCarro(Carro carro) {
+        Objects.requireNonNull(carro).aluga(this);
         this.carro = carro;
-        if(Objects.nonNull(carro)){
-            carro.aluga(this);
-        }
     }
 
     @ManyToOne

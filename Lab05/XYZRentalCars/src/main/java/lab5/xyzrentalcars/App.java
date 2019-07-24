@@ -16,15 +16,6 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        EntityManager manager = ManagerFactory.getEntityManager();
-        manager.getTransaction().begin();
-        SedeRepository repository = new SedeRepository(manager);
-        Sede sede1 = repository.buscaPorNome("Sede 1").get(0);
-        repository.remove(sede1);
-
-        Sede sede2 = repository.buscaPorNome("Sede 2").get(0);
-        repository.remove(sede2);
-        manager.getTransaction().commit();
-        ManagerFactory.close();
+        ManagerFactory.getEntityManager();
     }
 }

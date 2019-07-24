@@ -341,7 +341,7 @@ public class CarroTest {
 
     @Test(expected = IllegalStateException.class)
     public void alugaFalha(){
-        Sede sede1 = Sede.Builder.umaSede()
+        Sede sede1 = Sede.Builder.umaSede(1)
                 .comNome("Sede 1")
                 .comMultaPorSedeDiferente(new BigDecimal(10))
                 .comGerente("Mauro").comEndereco(Endereco.Builder.umEndereco()
@@ -349,7 +349,6 @@ public class CarroTest {
                         .noBairro("Turu")
                         .constroi())
                 .constroi();
-        sede1.setId(1);
 
         Carro carro = Carro.Builder.umCarro()
                 .comSedeDeOrigem(sede1)

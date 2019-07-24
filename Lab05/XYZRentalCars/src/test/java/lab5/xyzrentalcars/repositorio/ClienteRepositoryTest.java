@@ -11,7 +11,6 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
-
 public class ClienteRepositoryTest {
     private static EntityManagerFactory factory;
     private EntityManager manager;
@@ -39,89 +38,26 @@ public class ClienteRepositoryTest {
         factory.close();
     }
 
+    //Teste 6
     @Test
-    public void deveSalvarUmNovoCliente(){
+    public void deveAtualizarCNHDoCliente(){
         Cliente cliente = Cliente.Builder.umCliente()
                 .comNome("Mauro")
                 .comCPF("1234")
-                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                .comCNH(new CNH("123",LocalDate.now().minusMonths(10)))
                 .constroi();
 
         clienteRepository.salvaOuAtualiza(cliente);
-        assertTrue(manager.contains(cliente));
-    }
 
-    @Test
-    public void deveBuscarClientePorId(){
-        Cliente cliente = Cliente.Builder.umCliente()
-                .comNome("Mauro")
-                .comCPF("1234")
-                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
-                .constroi();
+        CNH cnh = new CNH("1234", LocalDate.now().plusMonths(10));
+        cliente.setCnh(cnh);
+
         clienteRepository.salvaOuAtualiza(cliente);
+
         manager.flush();
-        manager.clear();
 
         Cliente clienteNoBanco = clienteRepository.buscaPorId(cliente.getId());
 
-        assertEquals(cliente, clienteNoBanco );
-    }
-
-    @Test
-    public void deveExcluirCliente(){
-        Cliente cliente = Cliente.Builder.umCliente()
-                .comNome("Mauro")
-                .comCPF("1234")
-                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
-                .constroi();
-        clienteRepository.salvaOuAtualiza(cliente);
-        int id = cliente.getId();
-        clienteRepository.remove(cliente);
-        manager.flush();
-        manager.clear();
-
-        Cliente clienteDoBanco = clienteRepository.buscaPorId(id);
-
-        assertNull(clienteDoBanco);
-    }
-
-    @Test
-    public void deveAlteraCliente(){
-        Cliente cliente = Cliente.Builder.umCliente()
-                .comNome("Mauro")
-                .comCPF("1234")
-                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
-                .constroi();
-        clienteRepository.salvaOuAtualiza(cliente);
-        int id = cliente.getId();
-
-        cliente.setNome("Mauro Sergio");
-
-        clienteRepository.salvaOuAtualiza(cliente);
-        manager.flush();
-
-        Cliente clienteDoBanco = clienteRepository.buscaPorId(id);
-
-        assertEquals(clienteDoBanco.getNome(), "Mauro Sergio");
-    }
-
-    @Test
-    public void deveAtualizarCnhDoCliente(){
-        Cliente cliente = Cliente.Builder.umCliente()
-                .comNome("Mauro")
-                .comCPF("1234")
-                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
-                .constroi();
-        clienteRepository.salvaOuAtualiza(cliente);
-        int id = cliente.getId();
-
-        CNH cnh = new CNH("4321", LocalDate.now().plusMonths(30));
-
-        clienteRepository.atualizaCNH(cliente, cnh);
-        manager.flush();
-
-        Cliente clienteDoBanco = clienteRepository.buscaPorId(id);
-
-        assertEquals(clienteDoBanco.getCnh(), cnh);
+        assertEquals(clienteNoBanco.getCnh(),cnh);
     }
 }

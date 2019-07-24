@@ -80,12 +80,8 @@ public class Reserva implements EntidadeBase {
         }
 
         public Builder comMulta(BigDecimal multa){
-            if(Objects.isNull(reserva.getMulta())) {
-                reserva.setMulta(multa);
-                return this;
-            } else {
-                throw new InicializacaoDeAtributoRepetidaExceprion("multa");
-            }
+            // TODO: Apagar
+            return this;
         }
 
         public Builder naSituacao(Reserva.Situcao situacao){
@@ -137,10 +133,13 @@ public class Reserva implements EntidadeBase {
             Objects.requireNonNull(reserva.getSedeLocacao(), "Nao pode construir reserva com sede de locacao nula");
             Objects.requireNonNull(reserva.getDataLocacao(), "Nao pode construir reserva com data de locacao nula");
             Objects.requireNonNull(reserva.getDiarias(), "Nao pode construir reserva com qtde de diarias nula");
-            Objects.requireNonNull(reserva.getMulta(), "Nao pode construir reserva com multa nula");
+            //Objects.requireNonNull(reserva.getMulta(), "Nao pode construir reserva com multa nula");
             Objects.requireNonNull(reserva.getSituacao(), "Nao pode construir reserva com situacao nula");
             Objects.requireNonNull(reserva.getCarro(), "Nao pode construir reserva com carro nulo");
             Objects.requireNonNull(reserva.getCliente(), "Nao pode construir reserva com cliente nulo");
+
+            reserva.multa = reserva.sedeLocacao.getMultaSedeDiferente();
+            reserva.setValorTotal(reserva.getCarro().getValorDiaria().multiply(new BigDecimal(reserva.diarias)));
             return reserva;
         }
     }
@@ -322,18 +321,11 @@ public class Reserva implements EntidadeBase {
         return Objects.hash(id);
     }
 
-    @Transient
-    public boolean isAtiva(){
-        return situacao == Situcao.Ativa;
-    }
-
-    @Transient
-    public boolean isAtrazada(){
-        return situacao == Situcao.Atrazada;
-    }
-
-    @Transient
-    public boolean isFinalizada(){
-        return situacao == Situcao.Finalizada;
+    public void finalizar(Sede sede ){
+        situacao = Situcao.Finalizada;
+        if(!Objects.equals(sede,sedeLocacao)){
+            this.valorTotal = valorTotal.add(multa);
+        }
+        carro.retorna(sede);
     }
 }

@@ -3,6 +3,7 @@ package lab5.xyzrentalcars.modelo.embutiveis;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Embeddable
 public class CNH {
@@ -52,5 +53,20 @@ public class CNH {
 
     public boolean vencida(){
         return LocalDate.now().isAfter(validade);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CNH cnh = (CNH) o;
+        return numero.equals(cnh.numero) &&
+                validade.equals(cnh.validade) &&
+                Objects.equals(categoria, cnh.categoria);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numero, validade, categoria);
     }
 }

@@ -157,7 +157,7 @@ public class Carro implements EntidadeBase {
             }
         }
 
-        Builder naSituacao(Situacao situacao){
+        public Builder naSituacao(Situacao situacao){
             if(Objects.isNull(carro.getSituacao())){
                 carro.setSituacao(situacao);
                 return this;

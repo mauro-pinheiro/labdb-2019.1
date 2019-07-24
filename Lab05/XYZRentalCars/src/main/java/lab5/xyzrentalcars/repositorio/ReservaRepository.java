@@ -1,8 +1,11 @@
 package lab5.xyzrentalcars.repositorio;
 
 import lab5.xyzrentalcars.modelo.entidades.Reserva;
+import lab5.xyzrentalcars.modelo.entidades.Sede;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 public class ReservaRepository {
     private final EntityManager manager;
@@ -24,4 +27,5 @@ public class ReservaRepository {
     public void remove(Reserva reserva) {
         dao.remove(reserva);
     }
+
 }

@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Sede implements EntidadeBase {
@@ -208,5 +209,11 @@ public class Sede implements EntidadeBase {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Set<Reserva> reservasEmAberto(){
+        return historicoLocacao.stream()
+                .filter(r -> r.getSituacao() != Reserva.Situcao.Finalizada)
+                .collect(Collectors.toSet());
     }
 }

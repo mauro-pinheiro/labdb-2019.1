@@ -314,7 +314,7 @@ public class CarroTest {
     }
 
     @Test
-    public void alugaSucesso(){
+    public void deveAlugarCarroDisponivel(){
         Sede sede1 = Sede.Builder.umaSede(1)
                 .comNome("Sede 1")
                 .comMultaPorSedeDiferente(new BigDecimal(10))
@@ -339,8 +339,9 @@ public class CarroTest {
         assertTrue(carro.getHistoricoReservas().size()>0);
     }
 
+    //Teste 7
     @Test(expected = IllegalStateException.class)
-    public void alugaFalha(){
+    public void naoDeveAlugarCarroAlugado(){
         Sede sede1 = Sede.Builder.umaSede(1)
                 .comNome("Sede 1")
                 .comMultaPorSedeDiferente(new BigDecimal(10))

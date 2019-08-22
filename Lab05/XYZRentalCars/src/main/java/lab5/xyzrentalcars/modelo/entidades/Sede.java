@@ -4,9 +4,11 @@ import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
+import lab5.xyzrentalcars.util.AuxMethods;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -214,6 +216,12 @@ public class Sede implements EntidadeBase {
     public Set<Reserva> reservasEmAberto(){
         return historicoLocacao.stream()
                 .filter(r -> r.getSituacao() != Reserva.Situcao.Finalizada)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Reserva> reservasFinalizadas(LocalDate inicio, LocalDate fim){
+        return historicoDevolucao.stream()
+                .filter(r -> AuxMethods.betweenDates(r.getDataRetorno(),inicio,fim))
                 .collect(Collectors.toSet());
     }
 }

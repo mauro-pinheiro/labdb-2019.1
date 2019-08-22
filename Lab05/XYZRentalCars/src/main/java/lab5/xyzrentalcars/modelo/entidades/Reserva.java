@@ -321,11 +321,22 @@ public class Reserva implements EntidadeBase {
         return Objects.hash(id);
     }
 
-    public void finalizar(Sede sede ){
+    public void finalizar(Sede sede){
         situacao = Situcao.Finalizada;
         if(!Objects.equals(sede,sedeLocacao)){
             this.valorTotal = valorTotal.add(multa);
         }
         carro.retorna(sede);
+        setDataRetorno(LocalDate.now());
+    }
+
+    public void finalizar(Sede sede, LocalDate date){
+        situacao = Situcao.Finalizada;
+        if(!Objects.equals(sede,sedeLocacao)){
+            this.valorTotal = valorTotal.add(multa);
+        }
+        carro.retorna(sede);
+        setDataRetorno(date);
+        sede.getHistoricoDevolucao().add(this);
     }
 }

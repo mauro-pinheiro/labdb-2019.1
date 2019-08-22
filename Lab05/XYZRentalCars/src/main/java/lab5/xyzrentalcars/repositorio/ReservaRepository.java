@@ -5,7 +5,10 @@ import lab5.xyzrentalcars.modelo.entidades.Sede;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ReservaRepository {
     private final EntityManager manager;

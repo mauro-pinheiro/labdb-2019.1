@@ -9,10 +9,12 @@ import lab5.xyzrentalcars.modelo.entidades.Reserva;
 import lab5.xyzrentalcars.modelo.entidades.Sede;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
 import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
+import lab5.xyzrentalcars.relatorio.Relatorio;
 import lab5.xyzrentalcars.repositorio.CarroRepository;
 import lab5.xyzrentalcars.repositorio.ClienteRepository;
 import lab5.xyzrentalcars.repositorio.ReservaRepository;
 import lab5.xyzrentalcars.repositorio.SedeRepository;
+import lab5.xyzrentalcars.util.AuxMethods;
 import org.junit.*;
 
 import javax.persistence.EntityManager;
@@ -20,9 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -225,6 +225,53 @@ public class Testes {
 
         Assert.assertEquals(qtdeLuxo, luxos.size());
         luxos.forEach(c -> Assert.assertEquals(c.getClasse(), ClasseCarro.Luxo));
+    }
+
+    //Teste 3
+    @Test
+    public void deveRealizarReservaParaCarroEmOutraSede(){
+        Sede sede1 = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Sede sede2 = Sede.Builder.umaSede()
+                .comNome("Sede 2")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Carro carro = Carro.Builder.umCarro()
+                .daClasse(ClasseCarro.Compacto)
+                .naSituacao(Carro.Situacao.Disponivel)
+                .comSedeDeOrigem(sede1)
+                .atualmenteNaSede(sede1)
+                .constroi();
+
+        Cliente cliente1 = Cliente.Builder.umCliente()
+                .comNome("Mauro")
+                .comCPF("1234")
+                .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                .constroi();
+
+        Reserva reserva1 = Reserva.Builder.umReserva(1)
+                .comSedeDeLocacao(sede2)
+                .comDataLocacao(LocalDate.now())
+                .comDiarias(10)
+                .comMulta(new BigDecimal(10))
+                .naSituacao(Reserva.Situcao.Ativa)
+                .paraCliente(cliente1)
+                .doCarro(carro)
+                .constroi();
+
+        assertEquals(carro.getSedeDeOrigem(), sede1);
+        assertNotNull(reserva1);
+        assertEquals(reserva1.getSedeLocacao(), sede2);
     }
 
     //Teste 4
@@ -677,5 +724,275 @@ public class Testes {
 
         Assert.assertEquals(reserva1.getValorTotal(), carro.getValorDiaria()
                 .multiply(new BigDecimal(reserva1.getDiarias())));
+    }
+
+    //Teste 13
+    @Test
+    public void deveSaberQualClasseDeCarroTeveMenosReservas(){
+        Sede sede = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Cliente clientes[] = new Cliente[]{
+                Cliente.Builder.umCliente()
+                        .comCPF("1")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Mauro")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("2")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Sergio")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("3")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Carlos")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("4")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("João")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("5")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Pedro")
+                        .constroi()
+        };
+
+        Carro carros[] = new Carro[]{
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.SubCompacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi()
+        };
+
+        Reserva reservas[] = new Reserva[]{
+                Reserva.Builder.umReserva(1)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2018,10,9))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[0])
+                        .doCarro(carros[0])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(2)
+                        .naSituacao(Reserva.Situcao.Atrazada)
+                        .comDataLocacao(LocalDate.of(2018,10,10))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[1])
+                        .doCarro(carros[1])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(3)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2018,11,11))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[2])
+                        .doCarro(carros[2])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(4)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2019,1,9))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[3])
+                        .doCarro(carros[3])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(5)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2019,2,3))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[4])
+                        .doCarro(carros[4])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi()
+        };
+
+        ClasseCarro expected = ClasseCarro.SubCompacto;
+        ClasseCarro minCarro = Relatorio.comMenosReservas(Arrays.asList(reservas));
+
+        assertEquals(expected,minCarro);
+    }
+
+    //Teste 14
+    @Test
+    public void deveRecuperarTadasAsReservasFinalizadasNumaSedeNumDeterminadoPeriodo(){
+        Sede sede = Sede.Builder.umaSede()
+                .comNome("Sede 1")
+                .comEndereco(Endereco.Builder.umEndereco()
+                        .comLugradouro(new Lugradouro(TipoLugradouro.Rua, "3"))
+                        .noBairro("Turu")
+                        .constroi())
+                .constroi();
+
+        Cliente clientes[] = new Cliente[]{
+                Cliente.Builder.umCliente()
+                        .comCPF("1")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Mauro")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("2")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Sergio")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("3")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Carlos")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("4")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("João")
+                        .constroi(),
+                Cliente.Builder.umCliente()
+                        .comCPF("5")
+                        .comCNH(new CNH("1234", LocalDate.now().plusMonths(10)))
+                        .comNome("Pedro")
+                        .constroi()
+        };
+
+        Carro carros[] = new Carro[]{
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi(),
+                Carro.Builder.umCarro()
+                        .daClasse(ClasseCarro.Compacto)
+                        .comSedeDeOrigem(sede)
+                        .atualmenteNaSede(sede)
+                        .naSituacao(Carro.Situacao.Disponivel)
+                        .constroi()
+        };
+
+        Reserva reservas[] = new Reserva[]{
+                Reserva.Builder.umReserva(1)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2018,10,9))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[0])
+                        .doCarro(carros[0])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(2)
+                        .naSituacao(Reserva.Situcao.Atrazada)
+                        .comDataLocacao(LocalDate.of(2018,10,10))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[1])
+                        .doCarro(carros[1])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(3)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2018,11,11))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[2])
+                        .doCarro(carros[2])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(4)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2019,1,9))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[3])
+                        .doCarro(carros[3])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi(),
+                Reserva.Builder.umReserva(5)
+                        .naSituacao(Reserva.Situcao.Ativa)
+                        .comDataLocacao(LocalDate.of(2019,2,3))
+                        .comSedeDeLocacao(sede)
+                        .paraCliente(clientes[4])
+                        .doCarro(carros[4])
+                        .comDiarias(10)
+                        .comMulta(new BigDecimal(10))
+                        .constroi()
+        };
+
+        reservas[1].finalizar(sede,LocalDate.of(2018,10,19));
+        reservas[3].finalizar(sede,LocalDate.of(2019,1,19));
+
+        LocalDate inicio = LocalDate.of(2018,1,1);
+        LocalDate fim = LocalDate.of(2018,12,31);
+
+        int qtdeFinalizadas = 0;
+        for (Reserva reserva : sede.getHistoricoDevolucao()) {
+            LocalDate date = reserva.getDataLocacao();
+            if(AuxMethods.betweenDates(date,inicio,fim)){
+                qtdeFinalizadas++;
+            }
+        }
+
+
+        Set<Reserva> finalizadas = sede.reservasFinalizadas(inicio, fim);
+
+        System.out.println(qtdeFinalizadas);
+        Assert.assertEquals(qtdeFinalizadas, finalizadas.size());
+        finalizadas.stream()
+                .map(r -> r.getSituacao())
+                .forEach(s -> Assert.assertEquals(s, Reserva.Situcao.Finalizada));
     }
 }

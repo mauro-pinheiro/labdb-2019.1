@@ -19,14 +19,16 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        //ManagerFactory.getEntityManager();
+        ManagerFactory.getEntityManager();
 
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", new Locale("pt", "BR"));
+
+        /*
         LocalDate date = LocalDate.of(2019,10,9);
         boolean b = AuxMethods.betweenDates(date,
                 LocalDate.of(2018,1,1),
                 LocalDate.of(2018,12,31));
         System.out.println(b);
-
+*/
     }
 }

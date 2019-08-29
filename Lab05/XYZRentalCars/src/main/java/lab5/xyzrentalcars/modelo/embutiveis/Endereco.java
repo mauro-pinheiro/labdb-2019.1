@@ -130,7 +130,7 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 60, nullable = false)
     public String getBairro() {
         return bairro;
     }
@@ -139,7 +139,7 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    @Column(length = 15)
+    @Column(length = 60)
     public String getCidade() {
         return cidade;
     }
@@ -148,7 +148,7 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    @Column(length = 15)
+    @Column(length = 60)
     public String getEstado() {
         return estado;
     }
@@ -157,7 +157,7 @@ public class Endereco {
         this.estado = estado;
     }
 
-    @Column(columnDefinition = "char(8)")
+    @Column(columnDefinition = "char(10)")
     public String getCep() {
         return cep;
     }

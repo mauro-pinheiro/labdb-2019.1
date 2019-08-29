@@ -119,12 +119,12 @@ public class Sede implements EntidadeBase {
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "lugradouro.tipo", column = @Column(length = 20, nullable = false, name = "end_tipo_lugradouro")),
-            @AttributeOverride(name = "lugradouro.nome", column = @Column(length = 40, nullable = false, name = "end_name_lugradouro")),
-            @AttributeOverride(name = "numero", column = @Column(name = "end_numero", length = 8)),
+            @AttributeOverride(name = "lugradouro.nome", column = @Column(length = 60, nullable = false, name = "end_nome_lugradouro")),
+            @AttributeOverride(name = "numero", column = @Column(name = "end_numero", length = 10)),
             @AttributeOverride(name = "complemento", column = @Column(name = "end_complemento", length = 60)),
-            @AttributeOverride(name = "bairro", column = @Column(name = "end_bairro", length = 30, nullable = false)),
-            @AttributeOverride(name = "cidade", column = @Column(name = "end_cidade", length = 20)),
-            @AttributeOverride(name = "estado", column = @Column(name = "end_estado", length = 20)),
+            @AttributeOverride(name = "bairro", column = @Column(name = "end_bairro", length = 60, nullable = false)),
+            @AttributeOverride(name = "cidade", column = @Column(name = "end_cidade", length = 60)),
+            @AttributeOverride(name = "estado", column = @Column(name = "end_estado", length = 60)),
             @AttributeOverride(name = "cep", column = @Column(name = "end_cep", length = 10))
     })
     public Endereco getEndereco() {

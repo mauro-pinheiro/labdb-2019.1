@@ -33,7 +33,7 @@ public class SedeRepository {
         dao.remove(sede);
     }
 
-    public List<Sede> buscaTodos(Class<Sede> clazz) {
+    public List<Sede> buscaTodos() {
         return dao.buscaTodos(Sede.class);
     }
 }

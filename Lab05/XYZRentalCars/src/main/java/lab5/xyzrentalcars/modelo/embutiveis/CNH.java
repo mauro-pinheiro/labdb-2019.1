@@ -1,12 +1,14 @@
 package lab5.xyzrentalcars.modelo.embutiveis;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Embeddable
-public class CNH {
+public class CNH extends Documentable {
     private String numero;
     private LocalDate validade;
     private String categoria;

@@ -1,10 +1,12 @@
 package lab5.xyzrentalcars.modelo.embutiveis;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Embeddable
-public class Telefone {
+public class Telefone extends Documentable {
     private String codigoArea;
     private String numero;
 

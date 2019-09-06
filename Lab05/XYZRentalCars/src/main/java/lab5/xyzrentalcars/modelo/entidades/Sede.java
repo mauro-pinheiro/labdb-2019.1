@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
@@ -14,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-public class Sede implements EntidadeBase {
+public class Sede extends Documentable implements EntidadeBase {
     public static class Builder {
         private Sede sede;
 

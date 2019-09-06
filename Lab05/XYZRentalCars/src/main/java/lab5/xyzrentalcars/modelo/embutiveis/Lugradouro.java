@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.embutiveis;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
 import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
 
 import javax.persistence.Column;
@@ -8,7 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Embeddable
-public class Lugradouro {
+public class Lugradouro extends Documentable {
     private TipoLugradouro tipo;
     private String nome;
 

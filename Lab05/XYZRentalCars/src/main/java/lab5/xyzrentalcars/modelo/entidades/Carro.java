@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Carro implements EntidadeBase {
+public class Carro extends Documentable implements EntidadeBase {
 
     public enum Situacao {
         Disponível {

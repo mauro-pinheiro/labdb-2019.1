@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
@@ -11,7 +12,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Cliente implements EntidadeBase {
+public class Cliente extends Documentable implements EntidadeBase {
     public static class Builder {
         private Cliente cliente;
 

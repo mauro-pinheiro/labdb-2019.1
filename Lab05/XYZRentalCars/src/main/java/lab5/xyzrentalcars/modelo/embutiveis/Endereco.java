@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.embutiveis;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 import lab5.xyzrentalcars.modelo.enums.TipoLugradouro;
 
@@ -7,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Embeddable
-public class Endereco {
+public class Endereco extends Documentable {
     public static class Builder {
         private Endereco endereco;
 

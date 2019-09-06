@@ -1,5 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
+import lab5.xyzrentalcars.app.mongo.Documentable;
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-public class Reserva implements EntidadeBase {
+public class Reserva extends Documentable implements EntidadeBase {
     public enum Situcao {
         Ativa,
         Atrazada,

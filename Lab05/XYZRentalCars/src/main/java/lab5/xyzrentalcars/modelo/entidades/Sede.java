@@ -1,7 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
-import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 import lab5.xyzrentalcars.util.AuxMethods;

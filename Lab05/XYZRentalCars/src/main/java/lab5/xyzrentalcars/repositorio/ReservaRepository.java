@@ -31,4 +31,7 @@ public class ReservaRepository {
         dao.remove(reserva);
     }
 
+    public List<Reserva> buscaTodos(Class<Reserva> clazz) {
+        return dao.buscaTodos(Reserva.class);
+    }
 }

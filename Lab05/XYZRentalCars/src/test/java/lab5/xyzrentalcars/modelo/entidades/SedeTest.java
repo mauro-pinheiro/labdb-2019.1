@@ -104,31 +104,31 @@ public class SedeTest {
                         .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .constroi(),
                 Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .constroi(),
                 Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .constroi(),
                 Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .constroi(),
                 Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .constroi()
         };
 

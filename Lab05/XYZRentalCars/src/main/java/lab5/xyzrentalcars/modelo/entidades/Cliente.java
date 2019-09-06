@@ -1,13 +1,11 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
-import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;
 import lab5.xyzrentalcars.modelo.embutiveis.Telefone;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;

@@ -37,7 +37,7 @@ public class ReservaTest {
                         .constroi())
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -71,7 +71,7 @@ public class ReservaTest {
                         .constroi())
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -99,7 +99,7 @@ public class ReservaTest {
                         .constroi())
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -127,7 +127,7 @@ public class ReservaTest {
                         .constroi())
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -145,7 +145,7 @@ public class ReservaTest {
                 .constroi();
         Carro carro = Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede)
                 .atualmenteNaSede(sede)
                 .constroi();
@@ -185,7 +185,7 @@ public class ReservaTest {
                 //.paraCliente(cliente)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -214,7 +214,7 @@ public class ReservaTest {
                         .constroi())
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -246,7 +246,7 @@ public class ReservaTest {
                 .paraCliente(cliente1)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -261,7 +261,7 @@ public class ReservaTest {
                 .paraCliente(cliente1)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -293,7 +293,7 @@ public class ReservaTest {
                 .paraCliente(cliente1)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -310,7 +310,7 @@ public class ReservaTest {
                 .paraCliente(cliente1)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -330,12 +330,12 @@ public class ReservaTest {
                 .constroi();
         Carro carro = Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede)
                 .atualmenteNaSede(sede)
                 .constroi();
 
-        assertEquals(carro.getSituacao(), Carro.Situacao.Disponivel);
+        assertEquals(carro.getSituacao(), Carro.Situacao.Disponível);
 
         Reserva reserva1 = Reserva.Builder.umReserva()
                 .comSedeDeLocacao(sede)
@@ -365,12 +365,12 @@ public class ReservaTest {
                 .constroi();
         Carro carro = Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede)
                 .atualmenteNaSede(sede)
                 .constroi();
 
-        assertEquals(carro.getSituacao(), Carro.Situacao.Disponivel);
+        assertEquals(carro.getSituacao(), Carro.Situacao.Disponível);
 
         Reserva reserva1 = Reserva.Builder.umReserva()
                 .comSedeDeLocacao(sede)
@@ -486,7 +486,7 @@ public class ReservaTest {
                 .paraCliente(cliente1)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -519,7 +519,7 @@ public class ReservaTest {
                 .paraCliente(cliente1)
                 .doCarro(Carro.Builder.umCarro()
                         .daClasse(ClasseCarro.Compacto)
-                        .naSituacao(Carro.Situacao.Disponivel)
+                        .naSituacao(Carro.Situacao.Disponível)
                         .comSedeDeOrigem(sede)
                         .atualmenteNaSede(sede)
                         .constroi())
@@ -550,7 +550,7 @@ public class ReservaTest {
 
         Carro carro = Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede1)
                 .atualmenteNaSede(sede1)
                 .constroi();
@@ -599,7 +599,7 @@ public class ReservaTest {
 
         Carro carro = Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede1)
                 .atualmenteNaSede(sede1)
                 .constroi();
@@ -650,7 +650,7 @@ public class ReservaTest {
 
         Carro carro = Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede1)
                 .atualmenteNaSede(sede1)
                 .constroi();

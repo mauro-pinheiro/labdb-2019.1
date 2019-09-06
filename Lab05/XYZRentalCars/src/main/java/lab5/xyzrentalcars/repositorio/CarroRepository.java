@@ -34,4 +34,8 @@ public class CarroRepository {
 
         return query.getResultList();
     }
+
+    public List<Carro> buscaTodos() {
+        return dao.buscaTodos(Carro.class);
+    }
 }

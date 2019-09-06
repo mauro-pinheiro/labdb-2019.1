@@ -1,4 +1,4 @@
-package lab5.xyzrentalcars;
+package lab5.xyzrentalcars.app.jpa;
 
 import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.embutiveis.Endereco;

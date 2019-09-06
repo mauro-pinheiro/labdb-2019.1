@@ -1,8 +1,10 @@
 package lab5.xyzrentalcars.repositorio;
 
-import lab5.xyzrentalcars.modelo.EntidadeBase;
+import lab5.xyzrentalcars.modelo.entidades.EntidadeBase;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 import java.util.Objects;
 
 public class DAOGenerico <T extends EntidadeBase>{
@@ -28,5 +30,11 @@ public class DAOGenerico <T extends EntidadeBase>{
     void remove(T t){
         manager.remove(t);
         manager.flush();
+    }
+
+    List<T> buscaTodos(Class<T> clazz){
+        Query query = manager.createQuery("from " + clazz.getSimpleName());
+
+        return query.getResultList();
     }
 }

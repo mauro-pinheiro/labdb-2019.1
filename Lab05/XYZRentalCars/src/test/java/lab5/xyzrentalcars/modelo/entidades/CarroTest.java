@@ -24,7 +24,7 @@ public class CarroTest {
                 .constroi();
         Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .atualmenteNaSede(sede)
                 .constroi();
     }
@@ -57,7 +57,7 @@ public class CarroTest {
                 .constroi();
         assertNotNull(Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede)
                 .atualmenteNaSede(sede)
                 .constroi());
@@ -83,7 +83,7 @@ public class CarroTest {
 
         Carro.Builder.umCarro()
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .comSedeDeOrigem(sede1)
                 .atualmenteNaSede(sede2)
                 .constroi();
@@ -245,7 +245,7 @@ public class CarroTest {
                 .comSedeDeOrigem(sede)
                 .atualmenteNaSede(sede)
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .daCor("Preto")
                 .constroi();
 
@@ -287,7 +287,7 @@ public class CarroTest {
 
         carro.transferi(sede1);
 
-        Assert.assertEquals(carro.getSituacao(), Carro.Situacao.Disponivel);
+        Assert.assertEquals(carro.getSituacao(), Carro.Situacao.Disponível);
         Assert.assertEquals(carro.getSedeAtual(), sede1);
     }
 
@@ -306,7 +306,7 @@ public class CarroTest {
                 .comSedeDeOrigem(sede1)
                 .atualmenteNaSede(sede1)
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .daCor("Preto")
                 .constroi();
 
@@ -328,7 +328,7 @@ public class CarroTest {
                 .comSedeDeOrigem(sede1)
                 .atualmenteNaSede(sede1)
                 .daClasse(ClasseCarro.Compacto)
-                .naSituacao(Carro.Situacao.Disponivel)
+                .naSituacao(Carro.Situacao.Disponível)
                 .daCor("Preto")
                 .constroi();
 

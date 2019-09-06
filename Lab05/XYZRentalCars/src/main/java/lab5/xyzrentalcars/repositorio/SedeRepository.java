@@ -32,4 +32,8 @@ public class SedeRepository {
     public void remove(Sede sede) {
         dao.remove(sede);
     }
+
+    public List<Sede> buscaTodos(Class<Sede> clazz) {
+        return dao.buscaTodos(Sede.class);
+    }
 }

@@ -1,7 +1,6 @@
 package lab5.xyzrentalcars.modelo.entidades;
 
 import lab5.xyzrentalcars.exceptions.InicializacaoDeAtributoRepetidaExceprion;
-import lab5.xyzrentalcars.modelo.EntidadeBase;
 import lab5.xyzrentalcars.modelo.enums.ClasseCarro;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ import java.util.Set;
 public class Carro implements EntidadeBase {
 
     public enum Situacao {
-        Disponivel{
+        Disponível {
             @Override
             Situacao retornaNaOrigem() {
                 throw new IllegalStateException("Nao pode retornar um carro disponivel");
@@ -38,7 +37,7 @@ public class Carro implements EntidadeBase {
         Alugado {
             @Override
             Situacao retornaNaOrigem() {
-                return Disponivel;
+                return Disponível;
             }
 
             @Override
@@ -69,7 +68,7 @@ public class Carro implements EntidadeBase {
 
             @Override
             Situacao transferiParaOrigem() {
-                return Disponivel;
+                return Disponível;
             }
 
             @Override
@@ -198,10 +197,10 @@ public class Carro implements EntidadeBase {
             Objects.requireNonNull(carro.getSedeDeOrigem(), "Nao pode construir um carro com sede de origem nula");
             Objects.requireNonNull(carro.getSituacao(),"Nao pode construir um carro com situacao nula");
 
-            if(Objects.equals(Situacao.Disponivel, carro.getSituacao())
+            if(Objects.equals(Situacao.Disponível, carro.getSituacao())
                     && !Objects.equals(carro.getSedeAtual(), carro.getSedeDeOrigem()) ){
                 throw new IllegalArgumentException("Para a situacao ser "
-                        + Situacao.Disponivel.name()
+                        + Situacao.Disponível.name()
                         + " SedeAtual deve ser igual a SedeDeOrigem");
             }
             else if(Objects.equals(Situacao.Alugado, carro.getSituacao())

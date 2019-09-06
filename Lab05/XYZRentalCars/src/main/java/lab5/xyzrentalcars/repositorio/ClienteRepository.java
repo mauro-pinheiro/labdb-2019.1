@@ -4,6 +4,7 @@ import lab5.xyzrentalcars.modelo.embutiveis.CNH;
 import lab5.xyzrentalcars.modelo.entidades.Cliente;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class ClienteRepository {
     private final EntityManager manager;
@@ -29,5 +30,9 @@ public class ClienteRepository {
 
     public void remove(Cliente cliente) {
         dao.remove(cliente);
+    }
+
+    public List<Cliente> buscaTodos() {
+        return dao.buscaTodos(Cliente.class);
     }
 }

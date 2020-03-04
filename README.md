@@ -19,6 +19,6 @@ Projetos de Lab BD
   - Pacote modelo contem as entidades do projeto
   - Racote relatorio contem classes que proporcionam geração de relatórios.
   - Pacote repositorio contem as classes que genenciam a intereção com o banco de dados pelo modelo de repositorio
-  -Pacote util contem classes uteis para a execulção as tarefas da aplicação
+  - Pacote util contem classes uteis para a execulção as tarefas da aplicação
   - Diretorio src/test contem os testes das funcionalidades do sistema
-  - Diretorio mysql fora do projeto contem a modelagem do banco de dados geredada pelo hibernate para validação.
+  - Diretorio mysql fora do projeto contem a modelagem do banco de dados geraada pelo hibernate para validação.

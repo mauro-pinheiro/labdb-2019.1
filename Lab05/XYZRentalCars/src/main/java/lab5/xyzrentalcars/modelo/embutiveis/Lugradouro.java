@@ -13,7 +13,9 @@ public class Lugradouro extends Documentable {
     private TipoLugradouro tipo;
     private String nome;
 
-    protected Lugradouro(){}
+    protected Lugradouro(){
+        setInstance(this);
+    }
 
     public Lugradouro(TipoLugradouro tipo, String nome) {
         this.tipo = tipo;

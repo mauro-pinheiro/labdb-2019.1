@@ -95,6 +95,10 @@ public class Endereco extends Documentable {
         }
     }
 
+    protected Endereco(){
+        setInstance(this);
+    }
+
     private Lugradouro lugradouro;
 
     private String numero;

@@ -78,6 +78,10 @@ public class Cliente extends Documentable implements EntidadeBase {
         }
     }
 
+    protected Cliente(){
+        setInstance(this);
+    }
+
     private Integer id;
     private String nome;
     private String cpf;

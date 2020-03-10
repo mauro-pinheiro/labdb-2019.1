@@ -13,7 +13,9 @@ public class CNH extends Documentable {
     private LocalDate validade;
     private String categoria;
 
-    protected CNH(){}
+    protected CNH(){
+        setInstance(this);
+    }
 
     public CNH(String numero, LocalDate validade) {
         this.numero = numero;

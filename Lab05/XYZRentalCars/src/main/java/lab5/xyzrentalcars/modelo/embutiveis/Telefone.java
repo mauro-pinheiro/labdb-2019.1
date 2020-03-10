@@ -10,7 +10,9 @@ public class Telefone extends Documentable {
     private String codigoArea;
     private String numero;
 
-    public Telefone(){}
+    public Telefone(){
+        setInstance(this);
+    }
 
     public Telefone(String numero) {
         this.numero = numero;

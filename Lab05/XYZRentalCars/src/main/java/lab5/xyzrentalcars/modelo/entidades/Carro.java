@@ -237,6 +237,7 @@ public class Carro extends Documentable implements EntidadeBase {
 
 
     protected Carro(){
+        setInstance(this);
     }
 
     @Id

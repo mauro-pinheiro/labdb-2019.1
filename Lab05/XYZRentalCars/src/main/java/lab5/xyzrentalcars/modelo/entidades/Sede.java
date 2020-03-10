@@ -86,10 +86,14 @@ public class Sede extends Documentable implements EntidadeBase {
         }
     }
 
+    protected Sede(){
+        setInstance(this);
+    }
+
     private Integer id;
     private String nome;
     private Endereco endereco;
-    private Set<Telefone> telefone = new LinkedHashSet<>();
+    private Set<Telefone> telefones = new LinkedHashSet<>();
     private String nomeGerente;
     private BigDecimal multaSedeDiferente;
     private Set<Reserva> historicoLocacao = new LinkedHashSet<>();
@@ -139,11 +143,11 @@ public class Sede extends Documentable implements EntidadeBase {
     @CollectionTable(name = "sede_telefones",
             joinColumns = @JoinColumn(name = "id_sede"))
     public Set<Telefone> getTelefones() {
-        return telefone;
+        return telefones;
     }
 
-    public void setTelefones(Set<Telefone> telefone) {
-        this.telefone = telefone;
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
     }
 
     @Column(name = "nome_gerente", length = 40)

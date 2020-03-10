@@ -1,7 +1,15 @@
 package lab5.xyzrentalcars.app.mongo;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import lab5.xyzrentalcars.modelo.entidades.Carro;
+import lab5.xyzrentalcars.modelo.entidades.EntidadeBase;
 import lab5.xyzrentalcars.util.AuxMethods;
+import lab5.xyzrentalcars.util.MongoConnectionFactory;
 import org.bson.Document;
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -38,7 +46,11 @@ public abstract class Documentable {
 
             if (value instanceof Documentable) {
                 try {
-                    doc.append(f.getName(), ((Documentable) value).toMongoDocument(f.getName()));
+                    if(value instanceof EntidadeBase){
+                        doc.append(f.getName(), ((Documentable) value).dbRefs());
+                    } else {
+                        doc.append(f.getName(), ((Documentable) value).toMongoDocument(f.getName()));
+                    }
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {
@@ -75,5 +87,28 @@ public abstract class Documentable {
             }
         }
         return doc;
+    }
+
+    private JSONObject dbRefs() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String ref = instance.getClass().getSimpleName();
+        String db = "rentalcarsdb";
+
+        MongoDatabase database = MongoConnectionFactory.getDatabase(db);
+        MongoCollection<Document> collection = database.getCollection(ref);
+        Method get;
+        Document doc;
+        if(instance instanceof Carro){
+            get = instance.getClass().getMethod("getPlaca");
+            doc = collection.find(Filters.eq("placa", get.invoke(instance))).first();
+        } else {
+            get = instance.getClass().getMethod("getNome");
+            doc = collection.find(Filters.eq("nome", get.invoke(instance))).first();
+        }
+
+        JSONObject reference = new JSONObject();
+        reference.put("$ref", ref);
+        reference.put("$id", "ObjectId("+doc.get("_id")+")");
+        reference.put("$db", db);
+        return reference;
     }
 }

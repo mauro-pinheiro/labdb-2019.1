@@ -144,6 +144,10 @@ public class Reserva extends Documentable implements EntidadeBase {
         }
     }
 
+    public Reserva(){
+        setInstance(this);
+    }
+
     private Integer id;
     private String numero;
     private Integer diarias;

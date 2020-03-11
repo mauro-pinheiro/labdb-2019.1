@@ -28,6 +28,7 @@ public class ToMongoExporter {
         MongoDatabase database = MongoConnectionFactory.getDatabase("rentalcarsdb");
 
         Arrays.stream(entidades).forEach(list -> {
+            System.out.println(list);
             MongoCollection<Document> collection = database.getCollection(list.get(0).getClass().getSimpleName());
             collection.insertMany(list.stream().map(e -> e.toMongoDocument()).collect(Collectors.toList()));
         });

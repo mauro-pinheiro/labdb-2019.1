@@ -78,10 +78,6 @@ public class Cliente extends Documentable implements EntidadeBase {
         }
     }
 
-    protected Cliente(){
-        setInstance(this);
-    }
-
     private Integer id;
     private String nome;
     private String cpf;
@@ -89,6 +85,10 @@ public class Cliente extends Documentable implements EntidadeBase {
     private Set<Telefone> telefones = new LinkedHashSet<>();
     private Set<Endereco> enderecos = new LinkedHashSet<>();
     private Set<Reserva> historicoReservas = new LinkedHashSet<>();
+
+    protected Cliente(){
+        setInstance(this);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

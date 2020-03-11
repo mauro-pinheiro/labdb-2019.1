@@ -86,10 +86,6 @@ public class Sede extends Documentable implements EntidadeBase {
         }
     }
 
-    protected Sede(){
-        setInstance(this);
-    }
-
     private Integer id;
     private String nome;
     private Endereco endereco;
@@ -100,6 +96,10 @@ public class Sede extends Documentable implements EntidadeBase {
     private Set<Reserva> historicoDevolucao = new LinkedHashSet<>();
     private Set<Carro> carrosOriginadosDaSede = new LinkedHashSet<>();
     private Set<Carro> carrosAtualmenteNaSede = new LinkedHashSet<>();
+
+    protected Sede(){
+        setInstance(this);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

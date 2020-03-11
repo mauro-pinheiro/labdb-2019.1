@@ -144,10 +144,6 @@ public class Reserva extends Documentable implements EntidadeBase {
         }
     }
 
-    public Reserva(){
-        setInstance(this);
-    }
-
     private Integer id;
     private String numero;
     private Integer diarias;
@@ -161,6 +157,10 @@ public class Reserva extends Documentable implements EntidadeBase {
     private Carro carro;
     private Sede sedeLocacao;
     private Sede sedeDevolucao;
+
+    public Reserva(){
+        setInstance(this);
+    }
 
     @PrePersist
     public void antes(){

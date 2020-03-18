@@ -1,24 +1,33 @@
 package lab5.xyzrentalcars.app.importacao;
 
+import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.CreateCollectionOptions;
+import com.mongodb.client.model.IndexOptions;
 import com.monitorjbl.xlsx.StreamingReader;
 import lab5.xyzrentalcars.util.MongoConnectionFactory;
 import org.apache.poi.ss.usermodel.*;
 import org.bson.Document;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 public class LeadImport {
     private final String file;
     private final boolean hasHeaderRow;
     private final List<String> headers = new ArrayList<>();
     private final JSONArray output = new JSONArray();
+
+    public LeadImport(boolean hasHeaderRow){
+        file = null;
+        this.hasHeaderRow = hasHeaderRow;
+    }
 
     public LeadImport(String file) {
         this.file = file;
@@ -46,33 +55,30 @@ public class LeadImport {
         return output;
     }
 
-    private void toJson() {
-        //List<Lead> listaLead = new ArrayList<>();
+    public void toMongo(String file){
+        var index = file.lastIndexOf("\\");
+        var db_sufix = file.substring(index + 1, index + 3);
+        MongoDatabase database = MongoConnectionFactory.getDatabase("base-leads");
+        MongoCollection<Document> collection = database.getCollection("leads-"+db_sufix);
 
-        try {
-            FileInputStream arquivo = new FileInputStream(
-                    getClass()
-                            .getClassLoader()
-                            .getResource(file)
-                            .getFile());
+        collection.createIndex(new Document("cpf", 1), new IndexOptions().unique(true));
 
-            Workbook workbook = WorkbookFactory.create(arquivo);
+        try(InputStream is = new FileInputStream(file);
+        Workbook workbook = StreamingReader.builder()
+                .rowCacheSize(100)
+                .bufferSize(1024)
+                .open(is)){
             Sheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> rowIterator = sheet.iterator();
-
-            while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
-                if (row.getCell(0).getRowIndex() == 1000) {
-                    break;
-                }
+            int numRows = sheet.getLastRowNum();
+            int rowIndex = 0;
+            System.out.println("Importando " + numRows + " linhas.");
+            for (Row row : sheet) {
                 Iterator<Cell> cellIterator = row.cellIterator();
-
-                //Lead lead = new Lead();
-                //listaLead.add(lead);
                 String key;
+                Document doc = new Document();
+                print(file, rowIndex, numRows);
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    System.out.printf("row: %d | col: %d\n", cell.getRowIndex(), cell.getColumnIndex());
                     if (hasHeaderRow && cell.getRowIndex() == 0) {
                         headers.add(cell.getStringCellValue());
                         continue;
@@ -81,91 +87,46 @@ public class LeadImport {
                     } else {
                         key = String.valueOf(cell.getColumnIndex());
                     }
-                    JSONObject output = new JSONObject();
+
                     switch (cell.getCellType()) {
                         case NUMERIC:
-                            output.put(key, cell.getNumericCellValue());
+                            doc.append(key, cell.getNumericCellValue());
                             break;
                         case STRING:
-                            output.put(key, cell.getStringCellValue());
+                            doc.append(key, cell.getStringCellValue().trim());
                             break;
                         case BLANK:
-                            output.put(key, "");
+                            doc.append(key, "");
                             break;
                         case ERROR:
-                            output.put(key, cell.getErrorCellValue());
+                            doc.append(key, cell.getErrorCellValue());
                             break;
                         case BOOLEAN:
-                            output.put(key, cell.getBooleanCellValue());
+                            doc.append(key, cell.getBooleanCellValue());
                             break;
                     }
-                    this.output.put(output);
                 }
+                try{
+                    collection.insertOne(doc);
+                }catch(MongoWriteException e){ }
+                rowIndex++;
             }
-            arquivo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void toMongo(){
-        MongoDatabase database = MongoConnectionFactory.getDatabase("base_demais_convenios");
-        MongoCollection collection = database.getCollection("base");
-        try(InputStream is = new FileInputStream(
-                        getClass()
-                                .getClassLoader()
-                                .getResource(file)
-                                .getFile());
-        Workbook workbook = StreamingReader.builder()
-                .rowCacheSize(100)
-                .bufferSize(4096)
-                .open(is)){
-            Sheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> rowIterator = sheet.iterator();
-
-            while (rowIterator.hasNext()) {
-                Row row = rowIterator.next();
-                Iterator<Cell> cellIterator = row.cellIterator();
-                String key;
-                Document doc = new Document();
-                while (cellIterator.hasNext()) {
-                    Cell cell = cellIterator.next();
-                    System.out.printf("row: %d | col: %d\n", cell.getRowIndex(), cell.getColumnIndex());
-                    if (hasHeaderRow && cell.getRowIndex() == 0) {
-                        headers.add(cell.getStringCellValue());
-                        continue;
-                    } else if (hasHeaderRow) {
-                        key = headers.get(cell.getColumnIndex());
-                    } else {
-                        key = String.valueOf(cell.getColumnIndex());
-                    }
-
-                    switch (cell.getCellType()) {
-                        case NUMERIC:
-                            doc.put(key, cell.getNumericCellValue());
-                            break;
-                        case STRING:
-                            doc.put(key, cell.getStringCellValue());
-                            break;
-                        case BLANK:
-                            doc.put(key, "");
-                            break;
-                        case ERROR:
-                            doc.put(key, cell.getErrorCellValue());
-                            break;
-                        case BOOLEAN:
-                            doc.put(key, cell.getBooleanCellValue());
-                            break;
-                    }
-                }
-                collection.insertOne(doc);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void print(String file, int index, int length){
+        String progressbar = "";
+        int progress = 100*index/length;
+        for(int i = 0; i < progress; i++){
+            progressbar += "=";
+        }
+        System.out.printf("%s: [%s>] %d%%", file, progressbar, progress);
+        if(progress < 100){
+            System.out.printf("\r");
+        } else {
+            System.out.printf("\n");
         }
     }
 }
